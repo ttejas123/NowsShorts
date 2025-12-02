@@ -31,8 +31,8 @@ class FeedState {
         items: [],
         isInitialLoading: false,
         isLoadingMore: false,
-        hasMore: true,
-        pageSize: 5, // initial batch size, tweak as needed
+        hasMore: true, 
+        pageSize: 5,   // can tune this
         error: null,
       );
 
@@ -59,8 +59,9 @@ class FeedController extends StateNotifier<FeedState> {
   FeedController(this._read) : super(FeedState.initial());
 
   final Reader _read;
+  final Random _rng = Random();
 
-  List<NewsItemEntity> get _allNews => _read(allNewsProvider);
+  List<NewsItemEntity> get _templates => _read(allNewsProvider);
 
   Future<void> loadInitial() async {
     if (state.isInitialLoading) return;
@@ -71,13 +72,15 @@ class FeedController extends StateNotifier<FeedState> {
     );
 
     try {
-      final all = _allNews;
-      final slice = all.take(state.pageSize).toList();
+      final batch = _generateBatch(
+        startIndex: 0,
+        count: state.pageSize,
+      );
 
       state = state.copyWith(
         isInitialLoading: false,
-        items: slice,
-        hasMore: slice.length < all.length,
+        items: batch,
+        hasMore: true, // infinite
       );
     } catch (e) {
       state = state.copyWith(
@@ -96,15 +99,16 @@ class FeedController extends StateNotifier<FeedState> {
     );
 
     try {
-      final all = _allNews;
-      final currentLength = state.items.length;
-      final nextEnd = min(currentLength + state.pageSize, all.length);
-      final more = all.sublist(currentLength, nextEnd);
+      final startIndex = state.items.length;
+      final batch = _generateBatch(
+        startIndex: startIndex,
+        count: state.pageSize,
+      );
 
       state = state.copyWith(
         isLoadingMore: false,
-        items: [...state.items, ...more],
-        hasMore: nextEnd < all.length,
+        items: [...state.items, ...batch],
+        hasMore: true, // keep allowing more for now (nextEnd < all.length)
       );
     } catch (e) {
       state = state.copyWith(
@@ -112,5 +116,50 @@ class FeedController extends StateNotifier<FeedState> {
         error: e,
       );
     }
+  }
+
+  /// Generate `count` news items based on templates.
+  /// startIndex is used to make IDs and timestamps different.
+  List<NewsItemEntity> _generateBatch({
+    required int startIndex,
+    required int count,
+  }) {
+    final templates = _templates;
+    final List<NewsItemEntity> generated = [];
+
+    final now = DateTime.now();
+
+    for (int i = 0; i < count; i++) {
+      final globalIndex = startIndex + i;
+
+      // pick a template in round-robin or random
+      final template = templates[globalIndex % templates.length];
+
+      // random-ish layout (you can keep original if you want)
+      final layoutTypes = NewsLayoutType.values;
+      final randomLayoutType =
+          layoutTypes[_rng.nextInt(layoutTypes.length)];
+
+      // random-ish minutes ago
+      final minutesAgo = globalIndex * 3 + _rng.nextInt(5);
+
+      final item = NewsItemEntity(
+        id: 'news_$globalIndex',
+        title: '${template.title} #$globalIndex',
+        subtitle: template.subtitle,
+        body: template.body,
+        imageUrl: template.imageUrl,
+        galleryUrls: template.galleryUrls,
+        source: template.source,
+        publishedAt: now.subtract(Duration(minutes: minutesAgo)),
+        layoutType: template.galleryUrls.length > 1
+            ? NewsLayoutType.gallery
+            : randomLayoutType,
+      );
+
+      generated.add(item);
+    }
+
+    return generated;
   }
 }

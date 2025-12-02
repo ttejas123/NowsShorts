@@ -25,7 +25,7 @@ class _FeedPageState extends ConsumerState<FeedPage> {
       ref.read(feedControllerProvider.notifier).loadInitial();
     });
 
-    // Infinite scroll trigger (bottom prefetch)
+    // Infinite scroll trigger (we’ll keep this, but it now works with snapping too)
     _scrollController.addListener(() {
       final position = _scrollController.position;
       if (position.pixels >= position.maxScrollExtent - 200) {
@@ -43,7 +43,6 @@ class _FeedPageState extends ConsumerState<FeedPage> {
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(feedControllerProvider);
-    final size = MediaQuery.of(context).size;
 
     if (state.isInitialLoading && state.items.isEmpty) {
       return const Scaffold(
@@ -62,25 +61,42 @@ class _FeedPageState extends ConsumerState<FeedPage> {
       );
     }
 
+    if (state.items.isEmpty) {
+      return const Scaffold(
+        body: Center(child: Text('No news yet')),
+      );
+    }
+
     return Scaffold(
       body: SafeArea(
-        child: ListView.builder(
-          controller: _scrollController,
-          physics: const PageScrollPhysics(), // snap like PageView
-          padding: EdgeInsets.zero,
-          itemExtent: size.height, // each item is full screen
-          itemCount: state.items.length + (state.isLoadingMore ? 1 : 0),
-          itemBuilder: (context, index) {
-            if (index == state.items.length && state.isLoadingMore) {
-              return const Center(child: CircularProgressIndicator());
-            }
+        // We want the itemExtent to match the actual SafeArea height.
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            final itemHeight = constraints.maxHeight; // visible viewport height
 
-            if (index >= state.items.length) {
-              return const SizedBox.shrink();
-            }
+            return ListView.builder(
+              controller: _scrollController,
+              physics: const PageScrollPhysics(), // snap like PageView
+              padding: EdgeInsets.zero,
+              itemExtent: itemHeight,
+              // how many items to keep offscreen (tune this for memory)
+              cacheExtent: itemHeight * 1.5, // roughly next + previous
+              itemCount:
+                  state.items.length + (state.isLoadingMore ? 1 : 0),
+              itemBuilder: (context, index) {
+                // Show loading indicator at end while loading more
+                if (index == state.items.length-2 && state.isLoadingMore) {
+                  return const Center(child: CircularProgressIndicator());
+                }
 
-            final item = state.items[index];
-            return NewsCard(item: item);
+                if (index >= state.items.length) {
+                  return const SizedBox.shrink();
+                }
+
+                final item = state.items[index];
+                return NewsCard(item: item);
+              },
+            );
           },
         ),
       ),
