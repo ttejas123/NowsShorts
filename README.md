@@ -110,9 +110,30 @@ A high-performance Flutter mobile application inspired by **Inshorts** and **Ins
 
 # 📂 **Folder Structure (Clean + Feature-Based)**
 
-<div class="section">
+<!-- ====== FOLDER STRUCTURE SECTION ====== -->
+<style>
+.fs-section {
+  border: 1px solid #e5e5e5;
+  padding: 16px;
+  border-radius: 12px;
+  margin: 24px 0;
+  background: #fafafa;
+  font-family: monospace;
+  white-space: pre;
+  overflow-x: auto;
+  font-size: 14px;
+  line-height: 20px;
+}
+.fs-title {
+  font-family: "Inter", sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+</style>
 
-```
+<div class="fs-section">
+<div class="fs-title">📂 Folder Structure</div>
 
 lib/
 │
@@ -147,15 +168,14 @@ lib/
 │       └── presentation/profile_page.dart
 │
 ├── data/
-│   └── models/               # Entity models
+│   └── models/               # Entity models (NewsItemEntity)
 │
 └── features/shell/           # Bottom nav + swipe container
-├── home_shell_page.dart
-└── navigation_providers.dart
-
-````
+    ├── home_shell_page.dart
+    └── navigation_providers.dart
 
 </div>
+
 
 ---
 
