@@ -1,8 +1,7 @@
+### **1. Folder structure and dependancy installation**
 ```md
 
 <!-- ====== FOLDER STRUCTURE SECTION ====== -->
-
-### 📂 Folder Structure
 
 lib/
 │
@@ -44,14 +43,9 @@ lib/
     └── navigation_providers.dart
 
 
-
----
-
-# ▶️ **How to Run the Project**
-
-<div class="section">
-
+````
 ### **1. Install dependencies**
+
 ```sh
 flutter pub get
 ````
@@ -76,7 +70,6 @@ build/app/outputs/flutter-apk/app-release.apk
 
 Transfer this to mobile → Install → Works offline too.
 
-</div>
 
 ---
 
