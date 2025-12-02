@@ -2,18 +2,6 @@
 
 A new Flutter project.
 
-
-Got you 🔥
-Here is a **complete README** written in **Markdown**, but styled using **HTML + CSS inside the README**, so it looks clean on GitHub and still renders properly.
-
-You can copy-paste this into your `README.md` directly.
-
----
-
-# ✅ **FULL README (COPY-PASTE READY)**
-
-*(Markdown + HTML + CSS for styling)*
-
 ```md
 <!-- ====== GLOBAL README STYLE ====== -->
 
