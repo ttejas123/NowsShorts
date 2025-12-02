@@ -1,6 +1,7 @@
 // import 'package:bl_inshort/features/discover/presentation/discover_page.dart';
 // import 'package:bl_inshort/features/feed/presentation/feed_page.dart';
 // import 'package:flutter/material.dart';
+import 'package:bl_inshort/features/notifications/presentation/notifications_page.dart';
 import 'package:go_router/go_router.dart';
 import 'package:bl_inshort/features/shell/home_shell_page.dart';
 
@@ -45,6 +46,10 @@ GoRouter buildRouter() {
         pageBuilder: (context, state) => const NoTransitionPage(
           child: HomeShellPage(),
         ),
+      ),
+      GoRoute(
+        path: '/notifications',
+        builder: (context, state) => const NotificationsPage(),
       ),
       // later: add story/detail routes here
       // GoRoute(

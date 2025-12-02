@@ -45,11 +45,17 @@ class DiscoverPage extends ConsumerWidget {
             ),
           ],
         ),
-        actions: const [
-          Padding(
-            padding: EdgeInsets.only(right: 12),
-            child: Icon(Icons.notifications_outlined),
+        actions: [
+          GestureDetector(
+              onTap: () {
+                context.go('/notifications');
+              },
+              child: Padding(
+                padding: EdgeInsets.only(right: 12),
+                child: Icon(Icons.notifications_outlined),
+              ),
           ),
+          
         ],
       ),
       body: CustomScrollView(
