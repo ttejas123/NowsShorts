@@ -69,15 +69,26 @@ class _FeedPageState extends ConsumerState<FeedPage> {
     }
 
     return Scaffold(
+      extendBodyBehindAppBar: true, // 👈 let body draw behind appbar
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () => context.go('/discover'),
+        // leading: IconButton(
+        //   icon: const Icon(Icons.arrow_back),
+        //   onPressed: () => context.go('/'),
+        //   color: Colors.white,
+        // ),
+        backgroundColor: Colors
+            .transparent, // 👈 transparent background (no solid bar)
+        elevation: 0,
+        scrolledUnderElevation: 0,
+        surfaceTintColor: Colors.transparent,
+        title: const Text(
+          'My Feed',
+          style: TextStyle(color: Colors.white),
         ),
-        // title: const Text('My Feed'),
+        centerTitle: true,
       ),
       body: SafeArea(
-        // We want the itemExtent to match the actual SafeArea height.
+        top: false, // 👈 we’re already handling via AppBar
         child: LayoutBuilder(
           builder: (context, constraints) {
             final itemHeight = constraints.maxHeight; // visible viewport height

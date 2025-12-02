@@ -7,32 +7,58 @@ import 'navigation_providers.dart';
 import 'package:bl_inshort/features/discover/presentation/discover_page.dart';
 import 'package:bl_inshort/features/feed/presentation/feed_page.dart';
 
-class HomeShellPage extends ConsumerWidget {
+class HomeShellPage extends ConsumerStatefulWidget {
   const HomeShellPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<HomeShellPage> createState() => _HomeShellPageState();
+}
+
+class _HomeShellPageState extends ConsumerState<HomeShellPage> {
+  late final PageController _pageController;
+
+  @override
+  void initState() {
+    super.initState();
+    final initialIndex = ref.read(bottomNavIndexProvider);
+    _pageController = PageController(initialPage: initialIndex);
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final currentIndex = ref.watch(bottomNavIndexProvider);
     final controller = ref.read(bottomNavIndexProvider.notifier);
 
-    // Use IndexedStack to preserve state of each tab
-    Widget body = IndexedStack(
-      index: currentIndex,
-      children: const [
-        DiscoverPage(),
-        FeedPage(),
-        SearchPage(),
-        ProfilePage(),
-      ],
-    );
-
     return Scaffold(
-      body: body,
+      body: PageView(
+        controller: _pageController,
+        onPageChanged: (index) {
+          // update bottom nav when user swipes
+          controller.state = index;
+        },
+        children: const [
+          DiscoverPage(),
+          FeedPage(),
+          SearchPage(),
+          ProfilePage(),
+        ],
+      ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
         type: BottomNavigationBarType.fixed,
         onTap: (index) {
           controller.state = index;
+          _pageController.animateToPage(
+            index,
+            duration: const Duration(milliseconds: 250),
+            curve: Curves.easeOut,
+          );
         },
         items: const [
           BottomNavigationBarItem(
