@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:bl_inshort/features/feed/providers.dart';
 
 import 'widgets/news_cards.dart';
+import 'package:go_router/go_router.dart';
 
 class FeedPage extends ConsumerStatefulWidget {
   const FeedPage({super.key});
@@ -68,13 +69,13 @@ class _FeedPageState extends ConsumerState<FeedPage> {
     }
 
     return Scaffold(
-      // appBar: AppBar(
-      //   leading: IconButton(
-      //     icon: const Icon(Icons.arrow_back),
-      //     onPressed: () => context.go('/discover'),
-      //   ),
-      //   title: const Text('My Feed'),
-      // ),
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () => context.go('/discover'),
+        ),
+        // title: const Text('My Feed'),
+      ),
       body: SafeArea(
         // We want the itemExtent to match the actual SafeArea height.
         child: LayoutBuilder(
