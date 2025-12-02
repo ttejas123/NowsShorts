@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'widgets/discover_poll_card.dart';
 import 'widgets/discover_category_grid.dart';
 import 'widgets/discover_topics_carousel.dart';
+import 'widgets/discover_notifications_list.dart';
 
 class DiscoverPage extends ConsumerWidget {
   const DiscoverPage({super.key});
@@ -96,6 +97,13 @@ class DiscoverPage extends ConsumerWidget {
           const SliverToBoxAdapter(
             child: SizedBox(height: 24),
           ),
+
+          const SliverToBoxAdapter(
+            child: DiscoverNotificationsList(),
+          ),
+          // const SliverToBoxAdapter(
+          //   child: SizedBox(height: 24),
+          // ),
         ],
       ),
     );

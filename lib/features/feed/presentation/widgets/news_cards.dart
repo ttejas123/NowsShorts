@@ -172,65 +172,142 @@ class _TextDominantCard extends StatelessWidget {
 }
 
 // 3) Gallery layout (horizontal slider)
-class _GalleryCard extends StatelessWidget {
+class _GalleryCard extends StatefulWidget {
   final NewsItemEntity item;
 
   const _GalleryCard({required this.item});
 
   @override
+  State<_GalleryCard> createState() => _GalleryCardState();
+}
+
+class _GalleryCardState extends State<_GalleryCard> {
+  late final PageController _pageController;
+  int _currentIndex = 0;
+
+  List<String> get _images => widget.item.galleryUrls;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController();
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final images = item.galleryUrls;
+    final images = _images;
 
     return Container(
       width: size.width,
       height: size.height,
       color: Colors.black,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Stack(
         children: [
-          Expanded(
-            child: PageView.builder(
-              itemCount: images.length,
-              itemBuilder: (context, index) {
-                final url = images[index];
-                return Padding(
-                  padding: const EdgeInsets.all(12),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: Image.network(
-                      url,
-                      fit: BoxFit.cover,
+          // main content
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: PageView.builder(
+                  controller: _pageController,
+                  itemCount: images.length,
+                  onPageChanged: (index) {
+                    setState(() {
+                      _currentIndex = index;
+                    });
+                  },
+                  itemBuilder: (context, index) {
+                    final url = images[index];
+                    return Padding(
+                      padding: const EdgeInsets.all(12),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: Image.network(
+                          url,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 16,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      widget.item.source.toUpperCase(),
+                      style: Theme.of(context)
+                          .textTheme
+                          .labelSmall
+                          ?.copyWith(color: Colors.white70),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      widget.item.title,
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleLarge
+                          ?.copyWith(color: Colors.white),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 32), // space for indicator overlay
+                        // 👇 bottom indicator (dots + "line"-style active)
+            ],
+          ),
+                Positioned(
+                  bottom: 20,
+                  left: 0,
+                  right: 0,
+                  child: Center(
+                    child: Container(
+                      padding:
+                          const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                      decoration: BoxDecoration(
+                        color: Colors.black.withOpacity(0.4),
+                        borderRadius: BorderRadius.circular(999),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          // dot + line indicator
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: List.generate(images.length, (index) {
+                              final isActive = index == _currentIndex;
+                              return AnimatedContainer(
+                                duration: const Duration(milliseconds: 200),
+                                margin: const EdgeInsets.symmetric(horizontal: 3),
+                                height: 6,
+                                width: isActive ? 16 : 6, // line vs dot
+                                decoration: BoxDecoration(
+                                  color: Colors.white.withOpacity(
+                                      isActive ? 0.95 : 0.5),
+                                  borderRadius: BorderRadius.circular(999),
+                                ),
+                              );
+                            }),
+                          ),
+                          const SizedBox(width: 8),
+                        ],
+                      ),
                     ),
                   ),
-                );
-              },
-            ),
-          ),
-          Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  item.source.toUpperCase(),
-                  style: Theme.of(context)
-                      .textTheme
-                      .labelSmall
-                      ?.copyWith(color: Colors.white70),
                 ),
-                const SizedBox(height: 8),
-                Text(
-                  item.title,
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleLarge
-                      ?.copyWith(color: Colors.white),
-                ),
-              ],
-            ),
-          ),
+
         ],
       ),
     );

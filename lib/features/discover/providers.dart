@@ -47,3 +47,50 @@ final discoverTopicsProvider = Provider<List<DiscoverTopic>>((ref) {
     DiscoverTopic(id: 'space', label: 'Space & Science'),
   ];
 });
+
+
+class DiscoverNotificationItem {
+  final String id;
+  final String title;
+  final String? imageUrl;
+  final DateTime createdAt;
+
+  const DiscoverNotificationItem({
+    required this.id,
+    required this.title,
+    required this.createdAt,
+    this.imageUrl,
+  });
+}
+
+final discoverNotificationsProvider =
+    Provider<List<DiscoverNotificationItem>>((ref) {
+  final now = DateTime.now();
+
+  return [
+    DiscoverNotificationItem(
+      id: 'n1',
+      title:
+          'Students record headmaster while he was kissing student in Mysuru school; sexual assault case filed',
+      createdAt: now.subtract(const Duration(minutes: 12)),
+      imageUrl:
+          'https://images.pexels.com/photos/256417/pexels-photo-256417.jpeg',
+    ),
+    DiscoverNotificationItem(
+      id: 'n2',
+      title:
+          'World no.1 Ash Barty becomes 1st Australian woman to win Australian Open singles\' title in 44 years',
+      createdAt: now.subtract(const Duration(minutes: 35)),
+      imageUrl:
+          'https://images.pexels.com/photos/1405355/pexels-photo-1405355.jpeg',
+    ),
+    DiscoverNotificationItem(
+      id: 'n3',
+      title:
+          'Kourtney Kardashian accused of photoshopping her buttocks; deletes pic from Instagram',
+      createdAt: now.subtract(const Duration(hours: 1, minutes: 5)),
+      imageUrl:
+          'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg',
+    ),
+  ];
+});
