@@ -68,6 +68,13 @@ class _FeedPageState extends ConsumerState<FeedPage> {
     }
 
     return Scaffold(
+      // appBar: AppBar(
+      //   leading: IconButton(
+      //     icon: const Icon(Icons.arrow_back),
+      //     onPressed: () => context.go('/discover'),
+      //   ),
+      //   title: const Text('My Feed'),
+      // ),
       body: SafeArea(
         // We want the itemExtent to match the actual SafeArea height.
         child: LayoutBuilder(

@@ -1,3 +1,4 @@
+import 'package:bl_inshort/app/routes.dart';
 import 'package:bl_inshort/app/theme.dart';
 import 'package:bl_inshort/features/feed/presentation/feed_page.dart';
 import 'package:flutter/material.dart';
@@ -7,10 +8,12 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    final router = buildRouter();
+    return MaterialApp.router(
       title: 'BL News',
+      debugShowCheckedModeBanner: false,
       theme: buildAppTheme(),
-      home: FeedPage(),
+      routerConfig: router,
     );
   }
 }
