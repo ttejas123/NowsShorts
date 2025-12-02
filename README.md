@@ -16,36 +16,6 @@ You can copy-paste this into your `README.md` directly.
 
 ```md
 <!-- ====== GLOBAL README STYLE ====== -->
-<style>
-h1, h2, h3 {
-  font-family: "Inter", sans-serif;
-  font-weight: 600;
-}
-.section {
-  border: 1px solid #e5e5e5;
-  padding: 16px;
-  border-radius: 12px;
-  margin: 24px 0;
-  background: #fafafa;
-}
-.code-block {
-  background: #1e1e1e;
-  color: #dcdcdc;
-  padding: 16px;
-  border-radius: 8px;
-  font-family: monospace;
-  font-size: 14px;
-  overflow-x: auto;
-}
-.tag {
-  background: #000;
-  color: #fff;
-  padding: 2px 8px;
-  border-radius: 6px;
-  font-size: 12px;
-  margin-right: 6px;
-}
-</style>
 
 # 📱 **ShortNews – Flutter News App (Inshorts-Style)**
 
@@ -111,29 +81,8 @@ A high-performance Flutter mobile application inspired by **Inshorts** and **Ins
 # 📂 **Folder Structure (Clean + Feature-Based)**
 
 <!-- ====== FOLDER STRUCTURE SECTION ====== -->
-<style>
-.fs-section {
-  border: 1px solid #e5e5e5;
-  padding: 16px;
-  border-radius: 12px;
-  margin: 24px 0;
-  background: #fafafa;
-  font-family: monospace;
-  white-space: pre;
-  overflow-x: auto;
-  font-size: 14px;
-  line-height: 20px;
-}
-.fs-title {
-  font-family: "Inter", sans-serif;
-  font-size: 22px;
-  font-weight: 600;
-  margin-bottom: 12px;
-}
-</style>
 
-<div class="fs-section">
-<div class="fs-title">📂 Folder Structure</div>
+### 📂 Folder Structure
 
 lib/
 │
@@ -174,7 +123,6 @@ lib/
     ├── home_shell_page.dart
     └── navigation_providers.dart
 
-</div>
 
 
 ---
