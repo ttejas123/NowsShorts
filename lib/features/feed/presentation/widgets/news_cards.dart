@@ -1,7 +1,10 @@
 // lib/features/feed/presentation/widgets/news_cards.dart
 
+import 'package:bl_inshort/features/feed/providers.dart';
+import 'package:bl_inshort/features/webview/presentation/webview_page.dart';
 import 'package:flutter/material.dart';
 import 'package:bl_inshort/data/models/news_item_entity.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class NewsCard extends StatelessWidget {
   final NewsItemEntity item;
@@ -19,6 +22,10 @@ class NewsCard extends StatelessWidget {
         return _GalleryCard(item: item);
       case NewsLayoutType.story:
         return _StoryCard(item: item);
+      case NewsLayoutType.htmlViewCard:
+        return _HTMLViewCard(item: item);
+      case NewsLayoutType.browserCard:
+        return _BrowserViewCard(item: item);
     }
   }
 }
@@ -380,6 +387,56 @@ class _StoryCard extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+// 5) html-style layout (full bleed image, center text)
+class _HTMLViewCard extends StatelessWidget {
+  final NewsItemEntity item;
+
+  const _HTMLViewCard({required this.item});
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    return Container(
+      width: size.width,
+      height: size.height,
+      color: Colors.black,
+      child: AdvancedWebView(
+        initialHtml: item.html,
+        title: item.title,
+        enableJavaScript: true,
+        showAppBar: false,
+        backgroundColor: Colors.white,
+        allowInlineMediaPlayback: true,
+      )
+    );
+  }
+}
+
+// 6) Webview-style layout
+class _BrowserViewCard extends StatelessWidget {
+  final NewsItemEntity item;
+
+  const _BrowserViewCard({required this.item});
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    return Container(
+      width: size.width,
+      height: size.height,
+      color: Colors.black,
+      child: AdvancedWebView(
+        initialUrl: item.webUrl,
+        title: item.title,
+        enableJavaScript: false,
+        showAppBar: false,
+        backgroundColor: Colors.white,
+        allowInlineMediaPlayback: true,
+      )
     );
   }
 }

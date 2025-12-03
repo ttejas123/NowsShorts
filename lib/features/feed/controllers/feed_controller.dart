@@ -152,9 +152,10 @@ class FeedController extends StateNotifier<FeedState> {
         galleryUrls: template.galleryUrls,
         source: template.source,
         publishedAt: now.subtract(Duration(minutes: minutesAgo)),
-        layoutType: template.galleryUrls.length > 1
-            ? NewsLayoutType.gallery
-            : randomLayoutType,
+        html: template.html,
+        webUrl: template.webUrl,
+        // layoutType: (template.layoutType == NewsLayoutType.browserCard || template.layoutType == NewsLayoutType.htmlViewCard || template.layoutType == NewsLayoutType.gallery) ? template.layoutType : randomLayoutType,
+        layoutType: template.layoutType,
       );
 
       generated.add(item);

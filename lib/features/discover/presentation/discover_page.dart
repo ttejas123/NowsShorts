@@ -48,7 +48,8 @@ class DiscoverPage extends ConsumerWidget {
         actions: [
           GestureDetector(
               onTap: () {
-                context.go('/notifications');
+                // context.go('/notifications');
+                context.go('/webview/analytic');
               },
               child: Padding(
                 padding: EdgeInsets.only(right: 12),

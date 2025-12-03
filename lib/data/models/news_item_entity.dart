@@ -5,6 +5,8 @@ enum NewsLayoutType {
   textDominant,  // more text, image secondary
   gallery,       // horizontal image slider
   story,         // story-like full-bleed layout
+  htmlViewCard,   // card with static html preview
+  browserCard,   // card with link to external browser
 }
 
 class NewsItemEntity {
@@ -13,6 +15,8 @@ class NewsItemEntity {
   final String? subtitle;
   final String? body;
   final String? imageUrl;
+  final String? webUrl;
+  final String? html;
   final List<String> galleryUrls;
   final String source;
   final DateTime publishedAt;
@@ -25,6 +29,8 @@ class NewsItemEntity {
     required this.publishedAt,
     required this.layoutType,
     this.subtitle,
+    this.webUrl,
+    this.html,
     this.body,
     this.imageUrl,
     this.galleryUrls = const [],
