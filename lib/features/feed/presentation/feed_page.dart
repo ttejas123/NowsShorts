@@ -5,7 +5,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:bl_inshort/features/feed/providers.dart';
 
 import 'widgets/news_cards.dart';
-import 'package:go_router/go_router.dart';
 
 class FeedPage extends ConsumerStatefulWidget {
   const FeedPage({super.key});

@@ -1,10 +1,6 @@
-// lib/features/feed/presentation/widgets/news_cards.dart
-
-import 'package:bl_inshort/features/feed/providers.dart';
 import 'package:bl_inshort/features/webview/presentation/webview_page.dart';
 import 'package:flutter/material.dart';
 import 'package:bl_inshort/data/models/news_item_entity.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class NewsCard extends StatelessWidget {
   final NewsItemEntity item;
@@ -425,6 +421,7 @@ class _BrowserViewCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    print("_BrowserViewCard(item.webUrl) --- > ${item.webUrl}");
     return Container(
       width: size.width,
       height: size.height,
@@ -432,7 +429,7 @@ class _BrowserViewCard extends StatelessWidget {
       child: AdvancedWebView(
         initialUrl: item.webUrl,
         title: item.title,
-        enableJavaScript: false,
+        enableJavaScript: true,
         showAppBar: false,
         backgroundColor: Colors.white,
         allowInlineMediaPlayback: true,

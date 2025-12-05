@@ -137,8 +137,6 @@ class FeedController extends StateNotifier<FeedState> {
 
       // random-ish layout (you can keep original if you want)
       final layoutTypes = NewsLayoutType.values;
-      final randomLayoutType =
-          layoutTypes[_rng.nextInt(layoutTypes.length)];
 
       // random-ish minutes ago
       final minutesAgo = globalIndex * 3 + _rng.nextInt(5);

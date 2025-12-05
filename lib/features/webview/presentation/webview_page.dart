@@ -100,6 +100,7 @@ class _AdvancedWebViewState extends State<AdvancedWebView> {
         NavigationDelegate(
           onPageStarted: (url) {
             print('onPageStarted: $url');
+            if (!mounted) return;
             setState(() {
               _isLoading = true;
               _isError = false;
@@ -109,6 +110,7 @@ class _AdvancedWebViewState extends State<AdvancedWebView> {
             print('onPageFinished: $url');
             // Get title
             final title = await _controller.getTitle();
+            if (!mounted) return;
             setState(() {
               _pageTitle = title ?? widget.title;
               _isLoading = false;
@@ -125,45 +127,14 @@ class _AdvancedWebViewState extends State<AdvancedWebView> {
           },
           onWebResourceError: (err) {
             print('onWebResourceError: $err');
+            if (!mounted) return;
             setState(() {
               _isError = true;
               _errorMessage =
                   'Failed to load: ${err.errorCode} — ${err.description}';
               _isLoading = false;
             });
-          },
-          onNavigationRequest: (request) {
-
-            final url = request.url;
-            debugPrint('onNavigationRequest -> $url');
-
-            if (url == 'about:blank' || url.startsWith('about:blank')) {
-              debugPrint('Blocking about:blank navigation - opening original target externally');
-              // Use url_launcher to open original intended url if available.
-              // If your page tried window.open(target), it may not provide target; you may want to open widget.initialUrl instead.
-              debugPrint('onNavigationRequest -> ${widget.initialUrl}');
-              _openExternal(widget.initialUrl!);
-              
-              return NavigationDecision.prevent;
-            }
-            // 1) If caller provided onNavigationRequest callback, use it.
-            if (widget.onNavigationRequest != null) {
-              return widget.onNavigationRequest!(request);
-            }
-
-            // 2) Otherwise implement allowList if provided
-            if (widget.allowList != null && widget.allowList!.isNotEmpty) {
-              final uri = Uri.tryParse(request.url);
-              final host = uri?.host ?? '';
-              final allowed = widget.allowList!.any((d) => host.endsWith(d));
-              if (!allowed) {
-                return NavigationDecision.prevent;
-              }
-            }
-
-            // 3) default: allow
-            return NavigationDecision.navigate;
-          },
+          }
         ),
       );
 
@@ -186,8 +157,8 @@ class _AdvancedWebViewState extends State<AdvancedWebView> {
         //     // Some platform options (not required, shown for completeness)
         //     // headers: {'User-Agent': 'ShortNewsApp/1.0'},
         //     );
-                const String mobileUa = 'Mozilla/5.0 (Linux; Android 10; Mobile) AppleWebKit/537.36 '
-    '(KHTML, like Gecko) Chrome/116.0.0.0 Mobile Safari/537.36';
+        print("widget.initialUrl: ${widget.initialUrl}");
+        const String mobileUa = 'Mozilla/5.0 (Linux; Android 10; Mobile) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Mobile Safari/537.36';
         await _controller.loadRequest(
           Uri.parse(widget.initialUrl!),
           headers: {'User-Agent': mobileUa}
