@@ -143,6 +143,11 @@ class _AdvancedWebViewState extends State<AdvancedWebView> {
     WidgetsBinding.instance.addPostFrameCallback((_) => _loadInitial());
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   Future<void> _loadInitial() async {
     try {
       if (widget.initialHtml != null) {
