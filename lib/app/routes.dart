@@ -25,12 +25,23 @@ GoRouter buildRouter(WidgetRef ref) {
       GoRoute(
         path: '/webview/analytic',
         builder: (context, state) => AdvancedWebView(
-          initialUrl: "https://tejastemp1221.oneapp.dev",
+          initialUrl: "https://tejasflutter121124.oneapp.dev/",
           title: 'Campaign',
           injectCSS: '',
           injectJS: "",
           enableJavaScript: true,
           showAppBar: true,
+        )
+      ),
+      GoRoute(
+        path: '/search',
+        builder: (context, state) => AdvancedWebView(
+          initialUrl: "https://tejasflutter121132.oneapp.dev/",
+          title: '',
+          injectCSS: '',
+          injectJS: "",
+          enableJavaScript: true,
+          showAppBar: false,
         )
       ),
       // later: add story/detail routes here

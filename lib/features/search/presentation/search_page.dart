@@ -1,3 +1,4 @@
+import 'package:bl_inshort/features/webview/presentation/webview_page.dart';
 import 'package:flutter/material.dart';
 
 class SearchPage extends StatelessWidget {
@@ -6,12 +7,16 @@ class SearchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Search'),
-        elevation: 0,
-      ),
+      
       body: const Center(
-        child: Text('Search coming soon...'),
+        child: AdvancedWebView(
+            initialUrl: "https://tejasflutter121132.oneapp.dev/",
+            title: '',
+            injectCSS: '',
+            injectJS: "",
+            enableJavaScript: true,
+            showAppBar: false,
+        ),
       ),
     );
   }
