@@ -38,6 +38,7 @@ class _HomeShellPageState extends ConsumerState<HomeShellPage> {
     return Scaffold(
       body: PageView(
         controller: _pageController,
+        physics: const NeverScrollableScrollPhysics(), // 👈 disables swipe
         onPageChanged: (index) {
           // update bottom nav when user swipes
           controller.state = index;
