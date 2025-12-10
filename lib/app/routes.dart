@@ -25,10 +25,10 @@ GoRouter buildRouter(WidgetRef ref) {
       GoRoute(
         path: '/webview/analytic',
         builder: (context, state) => AdvancedWebView(
-          initialHtml: s,
+          initialUrl: "https://tejastemp1221.oneapp.dev",
           title: 'Campaign',
-          injectCSS: 'body { background: #fff; color: #111 } img { max-width:100% }',
-          injectJS: "console.log('campaign loaded')",
+          injectCSS: '',
+          injectJS: "",
           enableJavaScript: true,
           showAppBar: true,
         )

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:go_router/go_router.dart';
@@ -93,6 +94,7 @@ class _AdvancedWebViewState extends State<AdvancedWebView> {
     // if (Platform.isAndroid) WebView.platform = AndroidWebView();
 
     _controller = WebViewController()
+      ..setHorizontalScrollBarEnabled(true)
       ..setJavaScriptMode(
           widget.enableJavaScript ? JavaScriptMode.unrestricted : JavaScriptMode.disabled)
       ..setBackgroundColor(widget.backgroundColor ?? const Color(0x00000000))
@@ -166,7 +168,7 @@ class _AdvancedWebViewState extends State<AdvancedWebView> {
         const String mobileUa = 'Mozilla/5.0 (Linux; Android 10; Mobile) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Mobile Safari/537.36';
         await _controller.loadRequest(
           Uri.parse(widget.initialUrl!),
-          headers: {'User-Agent': mobileUa}
+          headers: {'User-Agent': mobileUa},
         );
       }
     } catch (e) {

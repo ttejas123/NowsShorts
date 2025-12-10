@@ -421,7 +421,6 @@ class _BrowserViewCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    print("_BrowserViewCard(item.webUrl) --- > ${item.webUrl}");
     return Container(
       width: size.width,
       height: size.height,

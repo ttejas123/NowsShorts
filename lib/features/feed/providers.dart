@@ -90,10 +90,10 @@ final allNewsProvider = Provider<List<NewsItemEntity>>((ref) {
       source: 'ShortNews Labs',
       publishedAt: now.subtract(const Duration(minutes: 10)),
       layoutType: NewsLayoutType.browserCard,
-      webUrl: 'https://analytic.brandlock.io'
+      webUrl: 'https://tejasflutter12112.oneapp.dev/'
     ),
     NewsItemEntity(
-      id: 'web_1',
+      id: 'web_2',
       title: 'Interactive Budget Breakdown 2025',
       subtitle: 'Tap to view charts, filters and details',
       body: null,
@@ -102,10 +102,22 @@ final allNewsProvider = Provider<List<NewsItemEntity>>((ref) {
       source: 'ShortNews Labs',
       publishedAt: now.subtract(const Duration(minutes: 10)),
       layoutType: NewsLayoutType.browserCard,
-      webUrl: 'https://www.google.com',
+      webUrl: 'https://tejasflutter12113.oneapp.dev/'
     ),
     NewsItemEntity(
-      id: 'web_1',
+      id: 'web_3',
+      title: 'Interactive Budget Breakdown 2025',
+      subtitle: 'Tap to view charts, filters and details',
+      body: null,
+      imageUrl:
+          'https://images.pexels.com/photos/669610/pexels-photo-669610.jpeg',
+      source: 'ShortNews Labs',
+      publishedAt: now.subtract(const Duration(minutes: 10)),
+      layoutType: NewsLayoutType.browserCard,
+      webUrl: 'https://tejasflutter12114.oneapp.dev/',
+    ),
+    NewsItemEntity(
+      id: 'web_4',
       title: 'Interactive Budget Breakdown 2025',
       subtitle: 'Tap to view charts, filters and details',
       body: null,
