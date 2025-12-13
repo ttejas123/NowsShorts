@@ -7,6 +7,7 @@ enum NewsLayoutType {
   story,         // story-like full-bleed layout
   htmlViewCard,   // card with static html preview
   browserCard,   // card with link to external browser
+  standardCard,   // card with link to external browser
 }
 
 class NewsItemEntity {
@@ -17,6 +18,7 @@ class NewsItemEntity {
   final String? imageUrl;
   final String? webUrl;
   final String? html;
+  final String? author;
   final List<String> galleryUrls;
   final String source;
   final DateTime publishedAt;
@@ -34,5 +36,6 @@ class NewsItemEntity {
     this.body,
     this.imageUrl,
     this.galleryUrls = const [],
+    this.author,
   });
 }

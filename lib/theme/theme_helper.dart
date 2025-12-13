@@ -18,18 +18,3 @@ ThemeMode toThemeMode(AppThemeMode mode) {
 }
 
 const themeKey = 'app_theme_mode';
-
-// Future<void> saveTheme(AppThemeMode mode) async {
-//   final prefs = await SharedPreferences.getInstance();
-//   await prefs.setString(themeKey, mode.name);
-// }
-
-// Future<AppThemeMode> loadTheme() async {
-//   final prefs = await SharedPreferences.getInstance();
-//   final value = prefs.getString(themeKey);
-
-//   return AppThemeMode.values.firstWhere(
-//     (e) => e.name == value,
-//     orElse: () => AppThemeMode.system,
-//   );
-// }
