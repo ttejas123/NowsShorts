@@ -2,12 +2,32 @@ import 'package:bl_inshort/app/routes.dart';
 import 'package:bl_inshort/app/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
-class App extends ConsumerWidget {
+class App extends ConsumerStatefulWidget {
   const App({ super.key });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<App> createState() => _AppState();
+}
+
+class _AppState extends ConsumerState<App> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    initialization();
+  }
+
+  void initialization() async {
+    // Perform any initialization tasks here
+    await Future.delayed(const Duration(seconds: 4)); // Simulate a delay
+    FlutterNativeSplash.remove();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final router = buildRouter(ref);
     return MaterialApp.router(
       title: 'BL News',
