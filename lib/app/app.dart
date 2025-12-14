@@ -23,7 +23,7 @@ class _AppState extends ConsumerState<App> {
 
   void initialization() async {
     // Perform any initialization tasks here
-    await Future.delayed(const Duration(seconds: 4)); // Simulate a delay
+    // await Future.delayed(const Duration(seconds: 4)); // Simulate a delay
     FlutterNativeSplash.remove();
   }
 

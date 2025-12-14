@@ -1,5 +1,6 @@
 import 'package:bl_inshort/features/feed/providers.dart';
 import 'package:bl_inshort/features/notifications/presentation/notifications_page.dart';
+import 'package:bl_inshort/features/settings/presentation/settings_page.dart';
 import 'package:bl_inshort/features/webview/presentation/webview_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -43,6 +44,10 @@ GoRouter buildRouter(WidgetRef ref) {
           enableJavaScript: true,
           showAppBar: false,
         )
+      ),
+      GoRoute(
+        path: '/settings',
+        builder: (context, state) => const SettingsPage()
       ),
       // later: add story/detail routes here
       // GoRoute(

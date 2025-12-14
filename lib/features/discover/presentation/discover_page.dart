@@ -6,6 +6,15 @@ import 'widgets/discover_category_grid.dart';
 import 'widgets/discover_topics_carousel.dart';
 import 'widgets/discover_notifications_list.dart';
 
+final List<String> insightImages = [
+  "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee",
+  "https://images.unsplash.com/photo-1526045612212-70caf35c14df",
+  "https://images.unsplash.com/photo-1544025162-d76694265947",
+  "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee",
+  "https://images.unsplash.com/photo-1526045612212-70caf35c14df",
+  "https://images.unsplash.com/photo-1544025162-d76694265947",
+];
+
 class DiscoverPage extends ConsumerWidget {
   const DiscoverPage({super.key});
 
@@ -16,7 +25,7 @@ class DiscoverPage extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: colors.surface,
+        backgroundColor: Colors.black,
         title: Row(
           children: [
             GestureDetector(
@@ -59,60 +68,505 @@ class DiscoverPage extends ConsumerWidget {
           
         ],
       ),
-      body: CustomScrollView(
-        slivers: [
-          SliverToBoxAdapter(
-            child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: TextField(
-                decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.search),
-                  hintText: 'Search (beta)',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(24),
-                  ),
-                  isDense: true,
-                  contentPadding:
-                      const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
-                ),
-              ),
-            ),
-          ),
-          const SliverToBoxAdapter(
-            child: DiscoverPollCard(),
-          ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: Text(
-                'Categories',
-                style: Theme.of(context).textTheme.titleMedium,
-              ),
-            ),
-          ),
-          const SliverToBoxAdapter(
-            child: DiscoverCategoryGrid(),
-          ),
-          const SliverToBoxAdapter(
-            child: SizedBox(height: 8),
-          ),
-          const SliverToBoxAdapter(
-            child: DiscoverTopicsCarousel(),
-          ),
-          const SliverToBoxAdapter(
-            child: SizedBox(height: 24),
-          ),
+      body: HomePage(),
+    );
+  }
+}
 
-          const SliverToBoxAdapter(
-            child: DiscoverNotificationsList(),
+
+
+
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.black,
+      // bottomNavigationBar: const _BottomNav(),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: const [
+              // SizedBox(height: 12),
+              _SearchBar(),
+              SizedBox(height: 14),
+              _PromoBanner(),
+              SizedBox(height: 22),
+              _CategoryRow(),
+              SizedBox(height: 26),
+              _Notifications(),
+              SizedBox(height: 26),
+              _Insights(),
+              SizedBox(height: 90),
+              InsightsSection(),
+              SizedBox(height: 26),
+              TopicsSection(),
+              SizedBox(height: 90),
+            ],
           ),
-          // const SliverToBoxAdapter(
-          //   child: SizedBox(height: 24),
-          // ),
+        ),
+      ),
+    );
+  }
+}
+
+class _SearchBar extends StatelessWidget {
+  const _SearchBar();
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Container(
+        height: 44,
+        decoration: BoxDecoration(
+          color: const Color(0xFF1C1C1C),
+          borderRadius: BorderRadius.circular(22),
+        ),
+        child: Row(
+          children: const [
+            SizedBox(width: 16),
+            Icon(Icons.search, color: Colors.grey, size: 20),
+            SizedBox(width: 12),
+            Text(
+              "Search for News, Topics",
+              style: TextStyle(
+                color: Colors.grey,
+                fontSize: 15,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+class _PromoBanner extends StatelessWidget {
+  const _PromoBanner();
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(12),
+        child: Container(
+          height: 140,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: NetworkImage(
+                "https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg",
+              ),
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
+class _CategoryRow extends StatelessWidget {
+  const _CategoryRow();
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 18),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: const [
+          _CategoryItem(Icons.feed, "My Feed"),
+          _CategoryItem(Icons.article, "All News"),
+          _CategoryItem(Icons.star, "Top Stories"),
+          _CategoryItem(Icons.local_fire_department, "Trending"),
         ],
       ),
     );
   }
 }
+
+class _CategoryItem extends StatelessWidget {
+  final IconData icon;
+  final String label;
+
+  const _CategoryItem(this.icon, this.label);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Icon(icon, size: 34, color: Colors.blue),
+        const SizedBox(height: 6),
+        Text(
+          label,
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 13,
+          ),
+        )
+      ],
+    );
+  }
+}
+
+
+class _Notifications extends StatelessWidget {
+  const _Notifications();
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _SectionHeader("Notifications"),
+        const SizedBox(height: 14),
+        const _NotificationTile(
+          title: "Actor Akhil Vishwanath dies by suicide aged 30",
+          image: "https://images.pexels.com/photos/1257860/pexels-photo-1257860.jpeg",
+        ),
+        const _NotificationTile(
+          title:
+              "She has lost 5 kg, is constantly crying: Husband of Goa club dancer after fire killed 25",
+          image: "https://images.pexels.com/photos/1257860/pexels-photo-1257860.jpeg",
+        ),
+        const _NotificationTile(
+          title:
+              "Police lathi charge fans protesting against mismanagement during Messi's event in Kolkata",
+          image: "https://images.pexels.com/photos/1257860/pexels-photo-1257860.jpeg",
+        ),
+      ],
+    );
+  }
+}
+
+
+class _NotificationTile extends StatelessWidget {
+  final String title;
+  final String image;
+
+  const _NotificationTile({
+    required this.title,
+    required this.image,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+      child: Row(
+        children: [
+          Expanded(
+            child: Text(
+              title,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 15,
+                height: 1.3,
+              ),
+            ),
+          ),
+          const SizedBox(width: 12),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(6),
+            child: Image.network(
+              image,
+              height: 46,
+              width: 46,
+              fit: BoxFit.cover,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+
+class _Insights extends StatelessWidget {
+  const _Insights();
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _SectionHeader("Insights"),
+        const SizedBox(height: 14),
+        SizedBox(
+          height: 120,
+          child: ListView.separated(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (_, i) => ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Image.network(
+                "https://images.pexels.com/photos/1434608/pexels-photo-1434608.jpeg",
+                width: 220,
+                fit: BoxFit.cover,
+              ),
+            ),
+            separatorBuilder: (_, __) => const SizedBox(width: 12),
+            itemCount: 3,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _BottomNav extends StatelessWidget {
+  const _BottomNav();
+
+  @override
+  Widget build(BuildContext context) {
+    return BottomNavigationBar(
+      backgroundColor: Colors.black,
+      selectedItemColor: Colors.white,
+      unselectedItemColor: Colors.grey,
+      currentIndex: 0,
+      items: const [
+        BottomNavigationBarItem(
+          icon: Icon(Icons.search),
+          label: "",
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.home),
+          label: "",
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.person),
+          label: "",
+        ),
+      ],
+    );
+  }
+}
+
+class _SectionHeader extends StatelessWidget {
+  final String title;
+
+  const _SectionHeader(this.title, {super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              const SizedBox(height: 6),
+              Container(
+                height: 2,
+                width: 28,
+                color: Color(0xFF1E88E5),
+              ),
+            ],
+          ),
+          const Text(
+            "VIEW ALL",
+            style: TextStyle(
+              color: Color(0xFF1E88E5),
+              fontSize: 13,
+              fontWeight: FontWeight.w600,
+              letterSpacing: 0.6,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class InsightsSection extends StatelessWidget {
+  const InsightsSection({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const _SectionHeader("Insights"),
+        const SizedBox(height: 14),
+        SizedBox(
+          height: 220, // exact visual height
+          child: ListView.separated(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            scrollDirection: Axis.horizontal,
+            itemCount: insightImages.length,
+            separatorBuilder: (_, __) => const SizedBox(width: 14),
+            itemBuilder: (context, index) {
+              return _InsightCard(imageUrl: insightImages[index]);
+            },
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _InsightCard extends StatelessWidget {
+  final String imageUrl;
+
+  const _InsightCard({required this.imageUrl});
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(14),
+      child: SizedBox(
+        width: 150,
+        height: 220,
+        child: Image.network(
+          imageUrl,
+          fit: BoxFit.cover,
+        ),
+      ),
+    );
+  }
+}
+
+class TopicsSection extends StatelessWidget {
+  const TopicsSection({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(height: 24),
+        const _SectionHeader("Topics"),
+        const SizedBox(height: 20),
+        SizedBox(
+          height: 110,
+          child: ListView.separated(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            scrollDirection: Axis.horizontal,
+            itemCount: topics.length,
+            separatorBuilder: (_, __) => const SizedBox(width: 18),
+            itemBuilder: (context, index) {
+              final topic = topics[index];
+              return _TopicItem(
+                imageUrl: topic.image,
+                title: topic.title,
+                isActive: topic.isActive,
+              );
+            },
+          ),
+        ),
+        const SizedBox(height: 10),
+        Center(
+          child: Container(
+            height: 4,
+            width: 26,
+            decoration: BoxDecoration(
+              color: const Color(0xFF1E88E5),
+              borderRadius: BorderRadius.circular(2),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _TopicItem extends StatelessWidget {
+  final String imageUrl;
+  final String title;
+  final bool isActive;
+
+  const _TopicItem({
+    required this.imageUrl,
+    required this.title,
+    required this.isActive,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Container(
+          height: isActive ? 72 : 56,
+          width: isActive ? 72 : 56,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(isActive ? 16 : 12),
+            border: isActive
+                ? Border.all(color: const Color(0xFF1E88E5), width: 2)
+                : null,
+            image: DecorationImage(
+              image: NetworkImage(imageUrl),
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+        const SizedBox(height: 8),
+        Text(
+          title,
+          style: TextStyle(
+            color: isActive ? const Color(0xFF1E88E5) : Colors.grey,
+            fontSize: 13,
+            fontWeight: isActive ? FontWeight.w600 : FontWeight.normal,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class TopicModel {
+  final String title;
+  final String image;
+  final bool isActive;
+
+  TopicModel({
+    required this.title,
+    required this.image,
+    this.isActive = false,
+  });
+}
+
+final List<TopicModel> topics = [
+  TopicModel(
+    title: "Israel-Hamas War",
+    image: "https://images.unsplash.com/photo-1509099836639-18ba1795216d",
+  ),
+  TopicModel(
+    title: "Finance",
+    image: "https://images.unsplash.com/photo-1604594849809-dfedbc827105",
+    isActive: true,
+  ),
+  TopicModel(
+    title: "Russia-Ukraine",
+    image: "https://images.unsplash.com/photo-1644088379091-d574269d422f",
+  ),
+  TopicModel(
+    title: "Israel-Hamas War",
+    image: "https://images.unsplash.com/photo-1509099836639-18ba1795216d",
+  ),
+  TopicModel(
+    title: "Finance",
+    image: "https://images.unsplash.com/photo-1604594849809-dfedbc827105",
+    isActive: true,
+  ),
+  TopicModel(
+    title: "Russia-Ukraine",
+    image: "https://images.unsplash.com/photo-1644088379091-d574269d422f",
+  ),
+];
