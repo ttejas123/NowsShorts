@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'widgets/discover_poll_card.dart';
-import 'widgets/discover_category_grid.dart';
-import 'widgets/discover_topics_carousel.dart';
-import 'widgets/discover_notifications_list.dart';
 
 final List<String> insightImages = [
   "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee",
