@@ -43,7 +43,7 @@ class DiscoverPage extends ConsumerWidget {
             const SizedBox(width: 12),
             GestureDetector(
               onTap: () {
-                context.go('/feed');
+                context.push('/feed');
               },
               child: Text(
                 'My Feed',
@@ -57,8 +57,7 @@ class DiscoverPage extends ConsumerWidget {
         actions: [
           GestureDetector(
               onTap: () {
-                // context.go('/notifications');
-                context.go('/webview/analytic');
+                context.push('/notifications');
               },
               child: Padding(
                 padding: EdgeInsets.only(right: 12),
@@ -225,7 +224,10 @@ class _Notifications extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _SectionHeader("Notifications"),
+        GestureDetector(
+                    onTap: () => context.push('/notifications'),
+                    child: _SectionHeader("Notifications"),
+        ),
         const SizedBox(height: 14),
         const _NotificationTile(
           title: "Actor Akhil Vishwanath dies by suicide aged 30",

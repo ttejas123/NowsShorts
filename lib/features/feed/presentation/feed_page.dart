@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:bl_inshort/features/feed/providers.dart';
-
+import 'package:go_router/go_router.dart';
 import 'widgets/news_cards.dart';
 
 class FeedPage extends ConsumerStatefulWidget {
@@ -70,11 +70,11 @@ class _FeedPageState extends ConsumerState<FeedPage> {
     return Scaffold(
       extendBodyBehindAppBar: true, // 👈 let body draw behind appbar
       appBar: AppBar(
-        // leading: IconButton(
-        //   icon: const Icon(Icons.arrow_back),
-        //   onPressed: () => context.go('/'),
-        //   color: Colors.white,
-        // ),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () => context.pop(),
+          color: Colors.white,
+        ),
         backgroundColor: Colors
             .transparent, // 👈 transparent background (no solid bar)
         elevation: 0,

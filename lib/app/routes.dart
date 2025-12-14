@@ -1,5 +1,9 @@
+import 'package:bl_inshort/features/feed/presentation/feed_page.dart';
 import 'package:bl_inshort/features/feed/providers.dart';
+import 'package:bl_inshort/features/feedback/presentation/feedback_page.dart';
+import 'package:bl_inshort/features/feedback/presentation/widgets/new_feedback_page.dart';
 import 'package:bl_inshort/features/notifications/presentation/notifications_page.dart';
+import 'package:bl_inshort/features/preferences/presentation/preferences_page.dart';
 import 'package:bl_inshort/features/settings/presentation/settings_page.dart';
 import 'package:bl_inshort/features/webview/presentation/webview_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -21,13 +25,9 @@ GoRouter buildRouter(WidgetRef ref) {
       ),
       GoRoute(
         path: '/notifications',
-        builder: (context, state) => const NotificationsPage(),
-      ),
-      GoRoute(
-        path: '/webview/analytic',
         builder: (context, state) => AdvancedWebView(
           initialUrl: "https://tejasflutter121124.oneapp.dev/",
-          title: 'Campaign',
+          title: 'Notifications',
           injectCSS: '',
           injectJS: "",
           enableJavaScript: true,
@@ -49,6 +49,23 @@ GoRouter buildRouter(WidgetRef ref) {
         path: '/settings',
         builder: (context, state) => const SettingsPage()
       ),
+      GoRoute(
+        path: '/preferences',
+        builder: (context, state) => const PreferencesPage()
+      ),
+      GoRoute(
+        path: '/feedback',
+        builder: (_, __) => const FeedbackPage(),
+      ),
+      GoRoute(
+        path: '/new-feedback',
+        builder: (_, __) => const NewFeedbackPage(),
+      ),
+      GoRoute(
+        path: '/feed',
+        builder: (_, __) => const FeedPage(),
+      ),
+
       // later: add story/detail routes here
       // GoRoute(
       //   path: '/story/:id',

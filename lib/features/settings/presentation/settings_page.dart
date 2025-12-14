@@ -20,7 +20,7 @@ class SettingsPage extends ConsumerWidget {
                 children: [
                   GestureDetector(
                       onTap: () {
-                        context.go('/');
+                        context.pop();
                       },
                       child: const Icon(Icons.arrow_back, color: Colors.white),
                   ),
@@ -61,15 +61,26 @@ class SettingsPage extends ConsumerWidget {
 
                   _Divider(),
 
-                  _SettingsRow(
-                    icon: Icons.notifications_none,
-                    title: 'Notifications',
+                  GestureDetector(
+                    onTap: () {
+                      context.push('/notifications');
+                    },
+                    child: _SettingsRow(
+                      icon: Icons.notifications_none,
+                      title: 'Notifications',
+                    ),
                   ),
+
                   _Divider(),
 
-                  _SettingsRow(
-                    icon: Icons.tune,
-                    title: 'Personalize Your Feed',
+                  GestureDetector(
+                    onTap: () {
+                      context.push('/preferences');
+                    },
+                    child: _SettingsRow(
+                      icon: Icons.tune,
+                      title: 'Personalize Your Feed',
+                    ),
                   ),
                   _Divider(),
 
@@ -99,7 +110,10 @@ class SettingsPage extends ConsumerWidget {
 
                   _PlainRow(title: 'Share app'),
                   _PlainRow(title: 'Rate app'),
-                  _PlainRow(title: 'Feedback'),
+                  GestureDetector(
+                    onTap: () => context.push('/notifications'),
+                    child: _PlainRow(title: 'Notifications')
+                  ),
                   _PlainRow(title: 'Terms & Conditions'),
                 ],
               ),

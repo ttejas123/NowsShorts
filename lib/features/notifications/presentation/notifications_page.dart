@@ -20,7 +20,7 @@ class NotificationsPage extends ConsumerWidget {
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: () => context.go('/'),
+          onPressed: () => context.pop(),
           color: Colors.black,
         ),
         title: const Text('Notifications'),

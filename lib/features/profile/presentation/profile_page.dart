@@ -20,35 +20,41 @@ class ProfilePage extends ConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   // Feedback pill
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 14,
-                      vertical: 6,
-                    ),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF2A2A2A),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: const Text(
-                      'Feedback',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 13,
-                        fontWeight: FontWeight.w500,
+                  GestureDetector(
+                      onTap: () {
+                        context.push('/feedback');
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 14,
+                          vertical: 6,
+                        ),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF2A2A2A),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: const Text(
+                          'Feedback',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
                       ),
-                    ),
                   ),
+                  
                   const SizedBox(width: 12),
 
                   GestureDetector(
-                    onTap: () {
-                      context.go('/settings');
-                    },
-                    child: const Icon(
-                    Icons.settings,
-                    color: Colors.white,
-                    size: 22,
-                  ),
+                      onTap: () {
+                        context.push('/settings');
+                      },
+                      child: const Icon(
+                      Icons.settings,
+                      color: Colors.white,
+                      size: 22,
+                    ),
                   ),
                 ],
               ),

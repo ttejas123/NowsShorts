@@ -46,7 +46,6 @@ class _HomeShellPageState extends ConsumerState<HomeShellPage> {
         children: const [
           DiscoverPage(),
           FeedPage(),
-          SearchPage(),
           ProfilePage(),
         ],
       ),
