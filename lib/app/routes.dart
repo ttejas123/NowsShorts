@@ -1,3 +1,4 @@
+import 'package:bl_inshort/features/discover/presentation/discover_page.dart';
 import 'package:bl_inshort/features/feed/presentation/feed_page.dart';
 import 'package:bl_inshort/features/feed/providers.dart';
 import 'package:bl_inshort/features/feedback/presentation/feedback_page.dart';
@@ -35,17 +36,6 @@ GoRouter buildRouter(WidgetRef ref) {
         )
       ),
       GoRoute(
-        path: '/search',
-        builder: (context, state) => AdvancedWebView(
-          initialUrl: "https://tejasflutter121132.oneapp.dev/",
-          title: '',
-          injectCSS: '',
-          injectJS: "",
-          enableJavaScript: true,
-          showAppBar: false,
-        )
-      ),
-      GoRoute(
         path: '/settings',
         builder: (context, state) => const SettingsPage()
       ),
@@ -64,6 +54,10 @@ GoRouter buildRouter(WidgetRef ref) {
       GoRoute(
         path: '/feed',
         builder: (_, __) => const FeedPage(),
+      ),
+      GoRoute(
+        path: '/search',
+        builder: (_, __) => const SearchPage(),
       ),
 
       // later: add story/detail routes here

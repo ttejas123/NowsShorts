@@ -72,38 +72,59 @@ class DiscoverPage extends ConsumerWidget {
   }
 }
 
-
-
-
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  bool _navigated = false;
+
+@override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      // bottomNavigationBar: const _BottomNav(),
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
-              // SizedBox(height: 12),
-              _SearchBar(),
-              SizedBox(height: 14),
-              _PromoBanner(),
-              SizedBox(height: 22),
-              _CategoryRow(),
-              SizedBox(height: 26),
-              _Notifications(),
-              SizedBox(height: 26),
-              _Insights(),
-              SizedBox(height: 90),
-              InsightsSection(),
-              SizedBox(height: 26),
-              TopicsSection(),
-              SizedBox(height: 90),
-            ],
+        child: NotificationListener<ScrollNotification>(
+          onNotification: (notification) {
+              if (notification is ScrollUpdateNotification) {
+                final metrics = notification.metrics;
+
+                if (!_navigated &&
+                    metrics.pixels <= 0 &&
+                    notification.scrollDelta! < -30) {
+                  _navigated = true;
+                  context.push('/search');
+                  Future.delayed(const Duration(milliseconds: 500), () {
+                    _navigated = false;
+                  });
+                }
+              }
+              return false;
+          },
+          child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [
+                _SearchBar(),
+                SizedBox(height: 14),
+                _PromoBanner(),
+                SizedBox(height: 22),
+                _CategoryRow(),
+                SizedBox(height: 26),
+                _Notifications(),
+                SizedBox(height: 26),
+                _Insights(),
+                SizedBox(height: 90),
+                InsightsSection(),
+                SizedBox(height: 26),
+                TopicsSection(),
+                SizedBox(height: 90),
+              ],
+            ),
           ),
         ),
       ),
@@ -118,6 +139,10 @@ class _SearchBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: GestureDetector(
+        onTap: () {
+          context.push('/search');
+        },
       child: Container(
         height: 44,
         decoration: BoxDecoration(
@@ -139,6 +164,9 @@ class _SearchBar extends StatelessWidget {
           ],
         ),
       ),
+      )
+
+
     );
   }
 }
@@ -572,3 +600,173 @@ final List<TopicModel> topics = [
     image: "https://images.unsplash.com/photo-1644088379091-d574269d422f",
   ),
 ];
+
+class SearchPage extends StatelessWidget {
+  const SearchPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.black,
+      resizeToAvoidBottomInset: true,
+      body: SafeArea(
+        child: Column(
+          children: [
+            const SizedBox(height: 8),
+
+            // 🔍 Search Bar + Cancel
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      height: 40,
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF1C1C1E),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Row(
+                        children: [
+                          const Icon(
+                            Icons.search,
+                            color: Colors.grey,
+                            size: 18,
+                          ),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: TextField(
+                              autofocus: true,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 15,
+                              ),
+                              cursorColor: Colors.blue,
+                              decoration: const InputDecoration(
+                                hintText: 'Search for News, Topics',
+                                hintStyle: TextStyle(
+                                  color: Colors.grey,
+                                  fontSize: 15,
+                                ),
+                                border: InputBorder.none,
+                                isDense: true,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  GestureDetector(
+                    onTap: () => context.pop(),
+                    child: const Text(
+                      'Cancel',
+                      style: TextStyle(
+                        color: Colors.blue,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            const SizedBox(height: 12),
+
+            // Divider
+            Container(
+              height: 0.6,
+              color: Colors.white.withOpacity(0.15),
+            ),
+
+            // Recent Searches Row
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16,
+                vertical: 12,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: const [
+                  Text(
+                    'Recent Searches',
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 14,
+                    ),
+                  ),
+                  Text(
+                    'Clear All',
+                    style: TextStyle(
+                      color: Colors.white70,
+                      fontSize: 14,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            // Empty State
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // 😴 Sleeping Face
+                  Stack(
+                    alignment: Alignment.topRight,
+                    children: [
+                      Container(
+                        width: 92,
+                        height: 92,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: const Color(0xFF4DA3FF),
+                            width: 3,
+                          ),
+                        ),
+                        child: const Center(
+                          child: Icon(
+                            Icons.face_retouching_natural,
+                            size: 40,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                      const Positioned(
+                        right: -4,
+                        top: -6,
+                        child: Text(
+                          'Z\nZ\nZ',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Color(0xFF4DA3FF),
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  const SizedBox(height: 18),
+
+                  const Text(
+                    'No Recent Searches',
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 15,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
