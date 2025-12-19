@@ -1,0 +1,145 @@
+{
+    "cursor": null,
+    "has_more": true,
+    "items": [
+      {
+        "id": 101,
+        "title": "1TB storage now fits on your fingertip",
+        "description": "Researchers have developed a silicon-based storage chip capable of holding 1TB of data in an area smaller than a fingernail.",
+        "slug": "1tb-storage-fits-on-fingertip",
+        "published_at": "2025-12-18T06:30:00Z",
+        "is_featured": true,
+        "engagement_score": 87.4,
+  
+        "status": {
+          "id": 1,
+          "name": "published",
+          "description": "Visible to all users"
+        },
+  
+        "content_type": {
+          "id": 1,
+          "name": "story",
+          "description": "Text-based news story"
+        },
+  
+        "author": {
+          "id": 12,
+          "name": "Amit Sharma",
+          "bio": "Technology journalist covering semiconductors and AI.",
+          "profile_picture": "https://example.com/authors/amit.jpg"
+        },
+  
+        "source": {
+          "id": 5,
+          "name": "Tech Chronicle",
+          "website": "https://techchronicle.com"
+        },
+  
+        "category": {
+          "id": 3,
+          "name": "Science",
+          "description": "Scientific discoveries and research"
+        },
+  
+        "tags": [
+          { "id": 11, "name": "Technology" },
+          { "id": 18, "name": "Semiconductors" },
+          { "id": 22, "name": "India" }
+        ],
+  
+        "language": {
+          "id": 1,
+          "name": "English",
+          "code": "en"
+        },
+  
+        "region": {
+          "id": 1,
+          "name": "India",
+          "code": "IN"
+        },
+  
+        "resources": [
+          {
+            "id": 201,
+            "name": "Cover Image",
+            "url": "https://picsum.photos/600/900"
+          },
+          {
+            "id": 202,
+            "name": "Chip Close-up",
+            "url": "https://picsum.photos/601/900"
+          }
+        ]
+      },
+  
+      {
+        "id": 102,
+        "title": "Maharashtra govt shows interest in semiconductor plants",
+        "description": "The Maharashtra government is exploring partnerships to set up semiconductor manufacturing units.",
+        "slug": "maharashtra-semiconductor-plants",
+        "published_at": "2025-12-17T18:10:00Z",
+        "is_featured": false,
+        "engagement_score": 63.9,
+  
+        "status": {
+          "id": 1,
+          "name": "published",
+          "description": "Visible to all users"
+        },
+  
+        "content_type": {
+          "id": 4,
+          "name": "opinion",
+          "description": "Opinion or analysis article"
+        },
+  
+        "author": {
+          "id": 21,
+          "name": "Rohit Kulkarni",
+          "bio": "Political analyst focused on Indian policy.",
+          "profile_picture": "https://example.com/authors/rohit.jpg"
+        },
+  
+        "source": {
+          "id": 9,
+          "name": "Economic Herald",
+          "website": "https://economicherald.in"
+        },
+  
+        "category": {
+          "id": 6,
+          "name": "Politics",
+          "description": "Political developments and governance"
+        },
+  
+        "tags": [
+          { "id": 22, "name": "India" },
+          { "id": 31, "name": "Manufacturing" },
+          { "id": 18, "name": "Semiconductors" }
+        ],
+  
+        "language": {
+          "id": 1,
+          "name": "English",
+          "code": "en"
+        },
+  
+        "region": {
+          "id": 1,
+          "name": "India",
+          "code": "IN"
+        },
+  
+        "resources": [
+          {
+            "id": 203,
+            "name": "Factory Image",
+            "url": "https://picsum.photos/602/900"
+          }
+        ]
+      }
+    ]
+  }
+  
