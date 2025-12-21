@@ -22,7 +22,9 @@
         "region": { "id": 1, "name": "India", "code": "IN" },
         "status": { "id": 1, "name": "published", "description": "Visible to all users" },
         "resources": [
-          { "id": 1, "name": "cover_image", "url": "https://images.pexels.com/photos/1181400/pexels-photo-1181400.jpeg", "content_type": { "id": 1, "name": "story", "description": "Text-based story" } }
+          { "id": 10, "name": "cover_image", "url": "https://images.pexels.com/photos/1550337/pexels-photo-1550337.jpeg", "content_type": { "id": 1, "name": "story", "description": "Text-based story" } },
+          { "id": 11, "name": "cover_image", "url": "https://images.pexels.com/photos/7991579/pexels-photo-7991579.jpeg", "content_type": { "id": 1, "name": "story", "description": "Text-based story" } },
+          { "id": 12, "name": "cover_image", "url": "https://images.pexels.com/photos/210607/pexels-photo-210607.jpeg", "content_type": { "id": 1, "name": "story", "description": "Text-based story" } }
         ]
       },
     
@@ -192,7 +194,9 @@
         "region": { "id": 1, "name": "India", "code": "IN" },
         "status": { "id": 1, "name": "published", "description": "Visible to all users" },
         "resources": [
-          { "id": 10, "name": "cover_image", "url": "https://images.pexels.com/photos/1550337/pexels-photo-1550337.jpeg", "content_type": { "id": 1, "name": "story", "description": "Text-based story" } }
+          { "id": 10, "name": "cover_image", "url": "https://images.pexels.com/photos/1550337/pexels-photo-1550337.jpeg", "content_type": { "id": 1, "name": "story", "description": "Text-based story" } },
+          { "id": 11, "name": "cover_image", "url": "https://images.pexels.com/photos/7991579/pexels-photo-7991579.jpeg", "content_type": { "id": 1, "name": "story", "description": "Text-based story" } },
+          { "id": 12, "name": "cover_image", "url": "https://images.pexels.com/photos/210607/pexels-photo-210607.jpeg", "content_type": { "id": 1, "name": "story", "description": "Text-based story" } }
         ]
       },
     

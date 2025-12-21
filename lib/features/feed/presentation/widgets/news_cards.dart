@@ -430,6 +430,7 @@ class RelatedImagesRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final visibleCount = resources.length.clamp(1, 3);
     return Container(
       // margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
       margin: const EdgeInsets.only(left: 10, right: 20, top: 0, bottom: 8),
@@ -473,11 +474,11 @@ class RelatedImagesRow extends StatelessWidget {
 
                   // 🔹 Overlapping images
                   SizedBox(
-                    width: 110,
+                    width: 44 + (visibleCount - 1) * 22,
                     height: 44,
                     child: Stack(
                       children: [
-                        ...resources.take(3).toList().asMap().entries.map((entry) {
+                        ...resources.take(visibleCount).toList().asMap().entries.map((entry) {
                           final idx = entry.key;
                           final resource = entry.value;
                           return _imageCircle(
@@ -494,24 +495,37 @@ class RelatedImagesRow extends StatelessWidget {
           ),
 
           // 🔹 Arrow button (HALF OUTSIDE – EXACT MATCH)
+
           Positioned(
             right: -18, // 🔥 critical: pushes it outside
             top: 12,
             bottom: 12,
-            child: Container(
-              width: 40,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                shape: BoxShape.circle,
-                border: Border.all(
-                  color: Color.fromARGB(255, 0, 0, 0),
-                  width: 3,
+            child: GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    fullscreenDialog: true,
+                    builder: (_) => RelatedImagesGallery(
+                      resources: resources,
+                    ),
+                  ),
+                );
+              },
+              child: Container(
+                width: 40,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: Color.fromARGB(255, 0, 0, 0),
+                    width: 3,
+                  ),
                 ),
-              ),
-              child: const Icon(
-                Icons.arrow_forward_ios,
-                size: 16,
-                color: Color(0xFF2F80ED),
+                child: const Icon(
+                  Icons.arrow_forward_ios,
+                  size: 16,
+                  color: Color(0xFF2F80ED),
+                ),
               ),
             ),
           ),
@@ -543,6 +557,144 @@ class RelatedImagesRow extends StatelessWidget {
   }
 }
 
+class RelatedImagesGallery extends StatefulWidget {
+  final List<ResourceEntity> resources;
+
+  const RelatedImagesGallery({
+    super.key,
+    required this.resources,
+  });
+
+  @override
+  State<RelatedImagesGallery> createState() => _RelatedImagesGalleryState();
+}
+
+class _RelatedImagesGalleryState extends State<RelatedImagesGallery> {
+  final PageController _pageController = PageController();
+  int _currentIndex = 0;
+  bool _controlsVisible = true;
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  void _toggleControls() {
+    setState(() {
+      _controlsVisible = !_controlsVisible;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: SafeArea(
+        child: Stack(
+          children: [
+            // ===============================
+            // MAIN IMAGE SLIDER
+            // ===============================
+            GestureDetector(
+              onTap: _toggleControls,
+              child: PageView.builder(
+                controller: _pageController,
+                itemCount: widget.resources.length,
+                onPageChanged: (index) {
+                  setState(() {
+                    _currentIndex = index;
+                  });
+                },
+                itemBuilder: (context, index) {
+                  return InteractiveViewer(
+                    minScale: 1.0,
+                    maxScale: 4.0,
+                    child: Center(
+                      child: Image.network(
+                        widget.resources[index].url,
+                        fit: BoxFit.contain,
+                        loadingBuilder: (context, child, progress) {
+                          if (progress == null) return child;
+                          return const Center(
+                            child: CircularProgressIndicator(
+                              color: Colors.white,
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+
+            // ===============================
+            // TOP BAR CONTROLS
+            // ===============================
+            AnimatedOpacity(
+              opacity: _controlsVisible ? 1 : 0,
+              duration: const Duration(milliseconds: 200),
+              child: Positioned(
+                top: 12,
+                left: 12,
+                right: 12,
+                child: Row(
+                  children: [
+                    IconButton(
+                      icon: const Icon(Icons.close, color: Colors.white),
+                      onPressed: () => Navigator.pop(context),
+                    ),
+                    const Spacer(),
+                    IconButton(
+                      icon: const Icon(Icons.share, color: Colors.white),
+                      onPressed: () {
+                        // TODO: integrate share logic
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
+            // ===============================
+            // PAGE INDICATOR
+            // ===============================
+            AnimatedOpacity(
+              opacity: _controlsVisible ? 1 : 0,
+              duration: const Duration(milliseconds: 200),
+              child: Positioned(
+                bottom: 24,
+                left: 0,
+                right: 0,
+                child: Center(
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 14,
+                      vertical: 6,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.black54,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Text(
+                      '${_currentIndex + 1} / ${widget.resources.length}',
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
 
 class StandardVisualCard extends StatelessWidget {
   final NewsEntity item;
@@ -551,6 +703,7 @@ class StandardVisualCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("item.resources.length =${item.resources.length}");
     return Container(
       // margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
       height: 560,
@@ -713,7 +866,7 @@ class StandardVisualCard extends StatelessWidget {
           Column(
             children: [
               // const SizedBox(height: 8),
-              item.resources.isNotEmpty
+              item.resources.isNotEmpty && item.resources.length > 1
                   ? RelatedImagesRow(resources: item.resources)
                   : Container(
                 height: 56,
