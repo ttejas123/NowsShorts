@@ -21,7 +21,7 @@ class DiscoverPage extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.black,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         title: Row(
           children: [
             GestureDetector(
@@ -82,7 +82,7 @@ class _HomePageState extends State<HomePage> {
 @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: NotificationListener<ScrollNotification>(
           onNotification: (notification) {
@@ -143,13 +143,13 @@ class _SearchBar extends StatelessWidget {
       child: Container(
         height: 44,
         decoration: BoxDecoration(
-          color: const Color(0xFF1C1C1C),
+          color: Theme.of(context).colorScheme.surfaceContainer,
           borderRadius: BorderRadius.circular(22),
         ),
         child: Row(
-          children: const [
+          children: [
             SizedBox(width: 16),
-            Icon(Icons.search, color: Colors.grey, size: 20),
+            Icon(Icons.search, color: Theme.of(context).colorScheme.onSurface, size: 20),
             SizedBox(width: 12),
             Text(
               "Search for News, Topics",
@@ -196,11 +196,11 @@ class _PromoBanner extends StatelessWidget {
 }
 
 
-class _CategoryRow extends StatelessWidget {
+class _CategoryRow extends ConsumerWidget {
   const _CategoryRow();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 18),
       child: Row(
@@ -216,22 +216,22 @@ class _CategoryRow extends StatelessWidget {
   }
 }
 
-class _CategoryItem extends StatelessWidget {
+class _CategoryItem extends ConsumerWidget {
   final IconData icon;
   final String label;
 
   const _CategoryItem(this.icon, this.label);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Column(
       children: [
         Icon(icon, size: 34, color: Colors.blue),
         const SizedBox(height: 6),
         Text(
           label,
-          style: const TextStyle(
-            color: Colors.white,
+          style: TextStyle(
+            color: Theme.of(context).colorScheme.onSurface,
             fontSize: 13,
           ),
         )
@@ -292,11 +292,7 @@ class _NotificationTile extends StatelessWidget {
           Expanded(
             child: Text(
               title,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 15,
-                height: 1.3,
-              ),
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(height: 1.3),
             ),
           ),
           const SizedBox(width: 12),
@@ -365,8 +361,8 @@ class _SectionHeader extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: const TextStyle(
-                  color: Colors.white,
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onSurface,
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
                 ),
@@ -576,7 +572,7 @@ class SearchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       resizeToAvoidBottomInset: true,
       body: SafeArea(
         child: Column(
@@ -593,31 +589,25 @@ class SearchPage extends StatelessWidget {
                       height: 40,
                       padding: const EdgeInsets.symmetric(horizontal: 12),
                       decoration: BoxDecoration(
-                        color: const Color(0xFF1C1C1E),
+                        color: Theme.of(context).colorScheme.surfaceContainer,
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Row(
                         children: [
-                          const Icon(
+                          Icon(
                             Icons.search,
-                            color: Colors.grey,
+                            color: Theme.of(context).colorScheme.onSurface,
                             size: 18,
                           ),
                           const SizedBox(width: 8),
                           Expanded(
                             child: TextField(
                               autofocus: true,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 15,
-                              ),
+                              style: Theme.of(context).textTheme.bodyMedium,
                               cursorColor: Colors.blue,
-                              decoration: const InputDecoration(
+                              decoration: InputDecoration(
                                 hintText: 'Search for News, Topics',
-                                hintStyle: TextStyle(
-                                  color: Colors.grey,
-                                  fontSize: 15,
-                                ),
+                                hintStyle: Theme.of(context).textTheme.bodyMedium,
                                 border: InputBorder.none,
                                 isDense: true,
                               ),
@@ -649,7 +639,7 @@ class SearchPage extends StatelessWidget {
             Container(
               height: 0.6,
               // ignore: deprecated_member_use
-              color: Colors.white.withOpacity(0.15),
+              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.15),
             ),
 
             // Recent Searches Row
@@ -660,7 +650,7 @@ class SearchPage extends StatelessWidget {
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
+                children: [
                   Text(
                     'Recent Searches',
                     style: TextStyle(
@@ -670,10 +660,7 @@ class SearchPage extends StatelessWidget {
                   ),
                   Text(
                     'Clear All',
-                    style: TextStyle(
-                      color: Colors.white70,
-                      fontSize: 14,
-                    ),
+                    style: Theme.of(context).textTheme.bodyMedium,
                   ),
                 ],
               ),
@@ -698,11 +685,11 @@ class SearchPage extends StatelessWidget {
                             width: 3,
                           ),
                         ),
-                        child: const Center(
+                        child: Center(
                           child: Icon(
                             Icons.face_retouching_natural,
                             size: 40,
-                            color: Colors.white,
+                            color: Theme.of(context).colorScheme.onSurface,
                           ),
                         ),
                       ),

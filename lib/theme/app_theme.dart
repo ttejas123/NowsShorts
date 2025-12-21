@@ -6,7 +6,24 @@ class AppTheme {
   static ThemeData lightTheme = ThemeData(
     useMaterial3: true,
     brightness: Brightness.light,
-    colorSchemeSeed: Colors.teal,
+    // colorSchemeSeed: Colors.teal,
+
+    colorScheme: ColorScheme(
+      brightness: Brightness.light,
+      primary: Colors.teal,
+      onPrimary: Colors.white,
+      secondary: Colors.tealAccent,
+      onSecondary: Colors.black,
+
+      background: AppColors.lightBackground,
+      onBackground: AppColors.lightTextPrimary,
+
+      surface: AppColors.lightCard,
+      onSurface: AppColors.lightTextPrimary,
+
+      error: Colors.red,
+      onError: Colors.white,
+    ),
 
     scaffoldBackgroundColor: AppColors.lightBackground,
 
@@ -27,9 +44,26 @@ class AppTheme {
   static ThemeData darkTheme = ThemeData(
     useMaterial3: true,
     brightness: Brightness.dark,
-    colorSchemeSeed: Colors.teal,
+    // colorSchemeSeed: Colors.teal,
 
     scaffoldBackgroundColor: AppColors.darkBackground,
+
+    colorScheme: ColorScheme(
+      brightness: Brightness.dark,
+      primary: Colors.teal,
+      onPrimary: Colors.black,
+      secondary: Colors.tealAccent,
+      onSecondary: Colors.black,
+
+      background: AppColors.darkBackground,
+      onBackground: AppColors.darkTextPrimary,
+
+      surface: AppColors.darkCard,
+      onSurface: AppColors.darkTextPrimary,
+
+      error: Colors.red,
+      onError: Colors.black,
+    ),
 
     textTheme: buildTextTheme(Brightness.dark),
 

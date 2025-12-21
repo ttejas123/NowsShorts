@@ -8,7 +8,7 @@ class ProfilePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: Column(
           children: [
@@ -29,13 +29,12 @@ class ProfilePage extends ConsumerWidget {
                           vertical: 6,
                         ),
                         decoration: BoxDecoration(
-                          color: const Color(0xFF2A2A2A),
+                          color: Theme.of(context).colorScheme.surfaceContainerHigh.withOpacity(0.8),
                           borderRadius: BorderRadius.circular(20),
                         ),
-                        child: const Text(
+                        child: Text(
                           'Feedback',
-                          style: TextStyle(
-                            color: Colors.white,
+                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                             fontSize: 13,
                             fontWeight: FontWeight.w500,
                           ),
@@ -49,9 +48,9 @@ class ProfilePage extends ConsumerWidget {
                       onTap: () {
                         context.push('/settings');
                       },
-                      child: const Icon(
+                      child: Icon(
                       Icons.settings,
-                      color: Colors.white,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
                       size: 22,
                     ),
                   ),
@@ -67,10 +66,10 @@ class ProfilePage extends ConsumerWidget {
               child: Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: const Color(0xFF1E1E1E),
+                  color: Theme.of(context).colorScheme.shadow.withOpacity(0.05),
                   borderRadius: BorderRadius.circular(16),
                   border: Border.all(
-                    color: const Color(0xFF2F2F2F),
+                    color: Theme.of(context).colorScheme.secondary.withOpacity(0.15),
                   ),
                 ),
                 child: Column(
@@ -122,21 +121,17 @@ class ProfilePage extends ConsumerWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Row(
+                   Row(
                     children: [
                       Icon(
                         Icons.bookmark_outline,
-                        color: Colors.white,
+                        color: Colors.blueAccent,
                         size: 18,
                       ),
                       SizedBox(width: 8),
                       Text(
                         'Saved',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                        ),
+                        style: Theme.of(context).textTheme.bodyMedium,
                       ),
                     ],
                   ),
@@ -144,7 +139,7 @@ class ProfilePage extends ConsumerWidget {
                   Container(
                     height: 2,
                     width: 56,
-                    color: Colors.white,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant.withOpacity(0.2),
                   ),
                 ],
               ),
@@ -205,8 +200,8 @@ class _FeatureRow extends StatelessWidget {
         Expanded(
           child: Text(
             text,
-            style: const TextStyle(
-              color: Color(0xFFE0E0E0),
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
               fontSize: 14,
               fontWeight: FontWeight.w400,
             ),

@@ -5,6 +5,7 @@
       {
         "id": 0,
         "title": "Government Announces New Start-up Incentive Policy",
+        "type": "News",
         "subtitle": "Boost for Early-Stage Entrepreneurs",
         "description": "The central government unveiled a new incentive policy offering tax relaxations, seed funding, and compliance support for early-stage startups across India.",
         "slug": "government-startup-incentive-policy",
@@ -31,6 +32,7 @@
       {
         "id": 1,
         "title": "Heavy Monsoon Rains Flood City Roads, Traffic at Standstill",
+        "type": "News",
         "subtitle": "Authorities Issue Red Alert",
         "description": "Overnight rainfall caused severe waterlogging across major intersections, disrupting daily commute and emergency services.",
         "slug": "monsoon-rains-city-traffic",
@@ -55,6 +57,7 @@
       {
         "id": 2,
         "title": "In Pictures: Northern Lights Dazzle Skies Across Europe",
+        "type": "News",
         "subtitle": "Rare Geomagnetic Storm",
         "description": "A powerful solar storm produced stunning auroras visible far beyond their usual range.",
         "slug": "aurora-lights-europe",
@@ -81,6 +84,7 @@
       {
         "id": 3,
         "title": "Tech Giants Report Strong Quarterly Earnings",
+        "type": "News",
         "subtitle": "AI and Cloud Drive Growth",
         "description": "Major technology firms reported better-than-expected earnings, driven by AI adoption and cloud services demand.",
         "slug": "tech-giants-q4-earnings",
@@ -105,6 +109,7 @@
       {
         "id": 4,
         "title": "Historic Win Seals Championship for Underdog Team",
+        "type": "News",
         "subtitle": "Fans Celebrate Across the City",
         "description": "In a dramatic final, the underdogs clinched the title, marking their first championship victory in decades.",
         "slug": "historic-sports-championship-win",
@@ -129,6 +134,7 @@
       {
         "id": 5,
         "title": "Doctors Warn Against Rising Lifestyle Diseases in Youth",
+        "type": "News",
         "subtitle": "Early Screening Advised",
         "description": "Medical experts report a sharp increase in diabetes and heart conditions among people under 35.",
         "slug": "lifestyle-diseases-youth",
@@ -153,6 +159,7 @@
       {
         "id": 6,
         "title": "New Electric SUV Launched with 600km Range",
+        "type": "News",
         "subtitle": "Auto Industry Pushes Green Mobility",
         "description": "The latest electric SUV promises extended range, fast charging, and advanced safety features.",
         "slug": "electric-suv-launch",
@@ -177,6 +184,7 @@
       {
         "id": 7,
         "title": "Election Commission Announces Poll Dates",
+        "type": "News",
         "subtitle": "Code of Conduct Comes into Effect",
         "description": "The Election Commission released the schedule for upcoming state elections, urging parties to follow guidelines strictly.",
         "slug": "election-dates-announced",
@@ -203,6 +211,7 @@
       {
         "id": 8,
         "title": "Film Festival Opens with Standing Ovation",
+        "type": "News",
         "subtitle": "Cinema from Around the World",
         "description": "The annual international film festival kicked off with premieres from acclaimed directors.",
         "slug": "film-festival-opening",
@@ -227,6 +236,7 @@
       {
         "id": 9,
         "title": "Stock Markets End Week on a High",
+        "type": "News",
         "subtitle": "Banking and IT Stocks Rally",
         "description": "Benchmark indices closed higher as investors reacted positively to global cues.",
         "slug": "markets-weekly-gains",
@@ -251,6 +261,7 @@
       {
         "id": 10,
         "title": "Space Agency Successfully Tests Reusable Rocket",
+        "type": "News",
         "subtitle": "Major Step Towards Cost Reduction",
         "description": "The successful test marks a significant milestone in reusable launch vehicle development.",
         "slug": "reusable-rocket-test",

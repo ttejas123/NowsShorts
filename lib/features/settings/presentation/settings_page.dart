@@ -1,4 +1,6 @@
 import 'package:bl_inshort/features/settings/presentation/widgets/language_selector_sheet.dart';
+import 'package:bl_inshort/features/settings/provider.dart';
+import 'package:bl_inshort/features/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -8,8 +10,14 @@ class SettingsPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final settings = ref.watch(settingsControllerProvider);
+    final selectedLanguage = settings.selectedLanguage;
+    final hdImagesEnabled = settings.hdImagesEnabled;
+    final autoplayEnabled = settings.autoplayEnabled;
+    final themeController = ref.watch(themeControllerProvider);
+    final isNightMode = themeController.mode == AppThemeMode.dark;
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: Column(
           children: [
@@ -22,7 +30,7 @@ class SettingsPage extends ConsumerWidget {
                       onTap: () {
                         context.pop();
                       },
-                      child: const Icon(Icons.arrow_back, color: Colors.white),
+                      child:Icon(Icons.arrow_back, color: Theme.of(context).iconTheme.color),
                   ),
                   const Spacer(),
                   const CircleAvatar(
@@ -46,15 +54,15 @@ class SettingsPage extends ConsumerWidget {
                       showDialog(
                         context: context,
                         // ignore: deprecated_member_use
-                        barrierColor: Colors.black.withOpacity(0.6),
+                        barrierColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
                         builder: (_) => const LanguageSelectorSheet(),
                       );
                     },
                     child: _SettingsRow(
                       icon: Icons.text_fields,
                       title: 'Language',
-                      trailing: const Text(
-                        'English ▼',
+                      trailing: Text(
+                        '${selectedLanguage?.label ?? 'English'} ▼',
                         style: TextStyle(color: Color(0xFF4EA3FF)),
                       ),
                     ),
@@ -88,7 +96,10 @@ class SettingsPage extends ConsumerWidget {
                   _SettingsToggleRow(
                     icon: Icons.change_history,
                     title: 'HD Image',
-                    value: false,
+                    value: hdImagesEnabled,
+                    onChanged: (value) {
+                      ref.read(settingsControllerProvider.notifier).setHdImages(value);
+                    },
                   ),
                   _Divider(),
 
@@ -96,14 +107,22 @@ class SettingsPage extends ConsumerWidget {
                     icon: Icons.nightlight_outlined,
                     title: 'Night Mode',
                     subtitle: 'For better readability at night',
-                    value: true,
+                    value: isNightMode,
+                    onChanged: (value) {
+                      ref.read(themeControllerProvider).setTheme(
+                        value ? AppThemeMode.dark : AppThemeMode.light,
+                      );
+                    },
                   ),
                   _Divider(),
 
                   _SettingsToggleRow(
                     icon: Icons.play_arrow,
                     title: 'Autoplay',
-                    value: false,
+                    value: autoplayEnabled,
+                    onChanged: (value) {
+                      ref.read(settingsControllerProvider.notifier).setAutoplay(value);
+                    },
                   ),
                   _Divider(),
 
@@ -148,10 +167,7 @@ class _SettingsRow extends StatelessWidget {
           Expanded(
             child: Text(
               title,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 15,
-              ),
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
           ),
           if (trailing != null) trailing!,
@@ -166,12 +182,14 @@ class _SettingsToggleRow extends StatelessWidget {
   final String title;
   final String? subtitle;
   final bool value;
+  final ValueChanged<bool> onChanged;
 
   const _SettingsToggleRow({
     required this.icon,
     required this.title,
     this.subtitle,
     required this.value,
+    required this.onChanged,
   });
 
   @override
@@ -188,17 +206,14 @@ class _SettingsToggleRow extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: const TextStyle(color: Colors.white, fontSize: 15),
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 if (subtitle != null)
                   Padding(
                     padding: const EdgeInsets.only(top: 4),
                     child: Text(
                       subtitle!,
-                      style: const TextStyle(
-                        color: Color(0xFF7A7A7A),
-                        fontSize: 12,
-                      ),
+                      style: Theme.of(context).textTheme.bodySmall,
                     ),
                   ),
               ],
@@ -206,7 +221,7 @@ class _SettingsToggleRow extends StatelessWidget {
           ),
           Switch(
             value: value,
-            onChanged: (_) {},
+            onChanged: onChanged,
             activeThumbColor: Colors.white,
             activeTrackColor: const Color(0xFF4EA3FF),
             inactiveThumbColor: Colors.white,
@@ -241,9 +256,9 @@ class _PlainRow extends StatelessWidget {
 class _Divider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return const Divider(
+    return Divider(
       height: 1,
-      color: Color(0xFF1F1F1F),
+      color: Theme.of(context).dividerTheme.color,
       thickness: 1,
     );
   }
