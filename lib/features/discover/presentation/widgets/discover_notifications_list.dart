@@ -55,7 +55,7 @@ class DiscoverNotificationsList extends ConsumerWidget {
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: items.length,
-                separatorBuilder: (_, __) => const Divider(height: 1),
+                separatorBuilder: (_, _) => const Divider(height: 1),
                 itemBuilder: (context, index) {
                   final item = items[index];
                   return _NotificationRow(item: item, colors: colors);
@@ -113,7 +113,7 @@ class _NotificationRow extends StatelessWidget {
                 width: 56,
                 height: 56,
                 decoration: BoxDecoration(
-                  color: colors.surfaceVariant,
+                  color: colors.surfaceContainerHighest,
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: const Icon(Icons.notifications_none),
@@ -133,6 +133,7 @@ class _NotificationRow extends StatelessWidget {
                   Text(
                     _timeAgo(item.createdAt),
                     style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                          // ignore: deprecated_member_use
                           color: colors.onSurface.withOpacity(0.6),
                         ),
                   ),

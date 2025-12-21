@@ -45,6 +45,7 @@ class SettingsPage extends ConsumerWidget {
                     onTap: () {
                       showDialog(
                         context: context,
+                        // ignore: deprecated_member_use
                         barrierColor: Colors.black.withOpacity(0.6),
                         builder: (_) => const LanguageSelectorSheet(),
                       );
@@ -206,7 +207,7 @@ class _SettingsToggleRow extends StatelessWidget {
           Switch(
             value: value,
             onChanged: (_) {},
-            activeColor: Colors.white,
+            activeThumbColor: Colors.white,
             activeTrackColor: const Color(0xFF4EA3FF),
             inactiveThumbColor: Colors.white,
             inactiveTrackColor: const Color(0xFF3A3A3A),

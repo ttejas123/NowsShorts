@@ -1,26 +1,10 @@
 // lib/features/webview/presentation/advanced_webview.dart
-import 'dart:async';
-import 'dart:convert';
-import 'dart:io';
+// ignore_for_file: deprecated_member_use
 
-import 'package:flutter/gestures.dart';
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:go_router/go_router.dart';
-import 'package:url_launcher/url_launcher.dart';
-
-Future<void> _openExternal(String url) async {
-  final uri = Uri.parse(url);
-
-  if (await canLaunchUrl(uri)) {
-    await launchUrl(
-      uri,
-      mode: LaunchMode.externalApplication,
-    );
-  } else {
-    debugPrint("Could not launch $url");
-  }
-}
 
 typedef NavigationRequestCallback = FutureOr<NavigationDecision> Function(
     NavigationRequest request);
@@ -101,7 +85,6 @@ class _AdvancedWebViewState extends State<AdvancedWebView> {
       ..setNavigationDelegate(
         NavigationDelegate(
           onPageStarted: (url) {
-            print('onPageStarted: $url');
             if (!mounted) return;
             setState(() {
               _isLoading = true;
@@ -109,7 +92,6 @@ class _AdvancedWebViewState extends State<AdvancedWebView> {
             });
           },
           onPageFinished: (url) async {
-            print('onPageFinished: $url');
             // Get title
             final title = await _controller.getTitle();
             if (!mounted) return;
@@ -128,7 +110,6 @@ class _AdvancedWebViewState extends State<AdvancedWebView> {
             }
           },
           onWebResourceError: (err) {
-            print('onWebResourceError: $err');
             if (!mounted) return;
             setState(() {
               _isError = true;
@@ -164,7 +145,6 @@ class _AdvancedWebViewState extends State<AdvancedWebView> {
         //     // Some platform options (not required, shown for completeness)
         //     // headers: {'User-Agent': 'ShortNewsApp/1.0'},
         //     );
-        print("widget.initialUrl: ${widget.initialUrl}");
         const String mobileUa = 'Mozilla/5.0 (Linux; Android 10; Mobile) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Mobile Safari/537.36';
         await _controller.loadRequest(
           Uri.parse(widget.initialUrl!),
@@ -187,7 +167,7 @@ class _AdvancedWebViewState extends State<AdvancedWebView> {
     (function() {
       var style = document.createElement('style');
       style.type = 'text/css';
-      style.appendChild(document.createTextNode('${escaped}'));
+      style.appendChild(document.createTextNode('$escaped'));
       document.head.appendChild(style);
     })();
     """;
@@ -202,7 +182,7 @@ class _AdvancedWebViewState extends State<AdvancedWebView> {
     buffer.writeln('<head>');
     buffer.writeln('<meta name="viewport" content="width=device-width, initial-scale=1">');
     if (css != null) {
-      buffer.writeln('<style>${css}</style>');
+      buffer.writeln('<style>$css</style>');
     }
     buffer.writeln('</head>');
     buffer.writeln('<body>');

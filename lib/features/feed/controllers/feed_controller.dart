@@ -1,17 +1,15 @@
 // lib/features/feed/controllers/feed_controller.dart
-
-import 'dart:math';
-
-import 'package:bl_inshort/data/models/news_item_entity.dart';
+import 'package:bl_inshort/data/repositories/feed_repository.dart';
 import 'package:flutter_riverpod/legacy.dart';
 import 'package:flutter_riverpod/misc.dart';
 
 import 'package:bl_inshort/features/feed/providers.dart';
+import 'package:bl_inshort/data/models/news/news_entity.dart';
 
 typedef Reader = T Function<T>(ProviderListenable<T>);
 
 class FeedState {
-  final List<NewsItemEntity> items;
+  final List<NewsEntity> items;
   final bool isInitialLoading;
   final bool isLoadingMore;
   final bool hasMore;
@@ -31,13 +29,13 @@ class FeedState {
         items: [],
         isInitialLoading: false,
         isLoadingMore: false,
-        hasMore: true, 
-        pageSize: 5,   // can tune this
+        hasMore: true,
+        pageSize: 5,
         error: null,
       );
 
   FeedState copyWith({
-    List<NewsItemEntity>? items,
+    List<NewsEntity>? items,
     bool? isInitialLoading,
     bool? isLoadingMore,
     bool? hasMore,
@@ -59,9 +57,8 @@ class FeedController extends StateNotifier<FeedState> {
   FeedController(this._read) : super(FeedState.initial());
 
   final Reader _read;
-  final Random _rng = Random();
 
-  List<NewsItemEntity> get _templates => _read(allNewsProvider);
+  FeedRepository get _repo => _read(feedRepositoryProvider);
 
   Future<void> loadInitial() async {
     if (state.isInitialLoading) return;
@@ -72,15 +69,12 @@ class FeedController extends StateNotifier<FeedState> {
     );
 
     try {
-      final batch = _generateBatch(
-        startIndex: 0,
-        count: state.pageSize,
-      );
+      final items = await _repo.fetchFeed();
 
       state = state.copyWith(
         isInitialLoading: false,
-        items: batch,
-        hasMore: true, // infinite
+        items: items,
+        hasMore: true, // still infinite for now
       );
     } catch (e) {
       state = state.copyWith(
@@ -99,16 +93,12 @@ class FeedController extends StateNotifier<FeedState> {
     );
 
     try {
-      final startIndex = state.items.length;
-      final batch = _generateBatch(
-        startIndex: startIndex,
-        count: state.pageSize,
-      );
+      final items = await _repo.fetchFeed();
 
       state = state.copyWith(
         isLoadingMore: false,
-        items: [...state.items, ...batch],
-        hasMore: true, // keep allowing more for now (nextEnd < all.length)
+        items: [...state.items, ...items],
+        hasMore: true,
       );
     } catch (e) {
       state = state.copyWith(
@@ -116,49 +106,5 @@ class FeedController extends StateNotifier<FeedState> {
         error: e,
       );
     }
-  }
-
-  /// Generate `count` news items based on templates.
-  /// startIndex is used to make IDs and timestamps different.
-  List<NewsItemEntity> _generateBatch({
-    required int startIndex,
-    required int count,
-  }) {
-    final templates = _templates;
-    final List<NewsItemEntity> generated = [];
-
-    final now = DateTime.now();
-
-    for (int i = 0; i < count; i++) {
-      final globalIndex = startIndex + i;
-
-      // pick a template in round-robin or random
-      final template = templates[globalIndex % templates.length];
-
-      // random-ish layout (you can keep original if you want)
-      final layoutTypes = NewsLayoutType.values;
-
-      // random-ish minutes ago
-      final minutesAgo = globalIndex * 3 + _rng.nextInt(5);
-
-      final item = NewsItemEntity(
-        id: 'news_$globalIndex',
-        title: '${template.title} #$globalIndex',
-        subtitle: template.subtitle,
-        body: template.body,
-        imageUrl: template.imageUrl,
-        galleryUrls: template.galleryUrls,
-        source: template.source,
-        publishedAt: now.subtract(Duration(minutes: minutesAgo)),
-        html: template.html,
-        webUrl: template.webUrl,
-        // layoutType: (template.layoutType == NewsLayoutType.browserCard || template.layoutType == NewsLayoutType.htmlViewCard || template.layoutType == NewsLayoutType.gallery) ? template.layoutType : randomLayoutType,
-        layoutType: template.layoutType,
-      );
-
-      generated.add(item);
-    }
-
-    return generated;
   }
 }

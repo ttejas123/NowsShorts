@@ -1,5 +1,3 @@
-import 'package:bl_inshort/data/models/news/author_entity.dart';
-
 class AuthorDto {
   final int id;
   final String name;

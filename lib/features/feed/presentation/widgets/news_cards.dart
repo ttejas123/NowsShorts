@@ -1,15 +1,19 @@
+// ignore_for_file: deprecated_member_use, duplicate_ignore
+
+import 'package:bl_inshort/data/dto/feed/news_dto.dart';
+import 'package:bl_inshort/data/models/news/news_entity.dart';
+import 'package:bl_inshort/data/models/news/resource_entity.dart';
 import 'package:bl_inshort/features/webview/presentation/webview_page.dart';
 import 'package:flutter/material.dart';
-import 'package:bl_inshort/data/models/news_item_entity.dart';
 
 class NewsCard extends StatelessWidget {
-  final NewsItemEntity item;
+  final NewsEntity item;
 
   const NewsCard({super.key, required this.item});
 
   @override
   Widget build(BuildContext context) {
-    switch (item.layoutType) {
+    switch (item.layout) {
       case NewsLayoutType.photoDominant:
         return _PhotoDominantCard(item: item);
       case NewsLayoutType.textDominant:
@@ -30,7 +34,7 @@ class NewsCard extends StatelessWidget {
 
 // 1) Photo-dominant layout (big image, text overlay/under)
 class _PhotoDominantCard extends StatelessWidget {
-  final NewsItemEntity item;
+  final NewsEntity item;
 
   const _PhotoDominantCard({required this.item});
 
@@ -45,13 +49,15 @@ class _PhotoDominantCard extends StatelessWidget {
       child: Stack(
         fit: StackFit.expand,
         children: [
-          if (item.imageUrl != null)
-            Image.network(item.imageUrl!, fit: BoxFit.cover),
+          if (item.resources.isNotEmpty)
+            Image.network(item.resources[0].url, fit: BoxFit.cover),
           Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
+                  // ignore: deprecated_member_use
                   Colors.black.withOpacity(0.7),
+                  // ignore: deprecated_member_use
                   Colors.black.withOpacity(0.0),
                 ],
                 begin: Alignment.bottomCenter,
@@ -68,7 +74,7 @@ class _PhotoDominantCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    item.source.toUpperCase(),
+                    item.source.name.toUpperCase(),
                     style: Theme.of(
                       context,
                     ).textTheme.labelSmall?.copyWith(color: Colors.white70),
@@ -80,10 +86,10 @@ class _PhotoDominantCard extends StatelessWidget {
                       context,
                     ).textTheme.headlineSmall?.copyWith(color: Colors.white),
                   ),
-                  if (item.subtitle != null) ...[
+                  if (item.subtitle.isNotEmpty) ...[
                     const SizedBox(height: 8),
                     Text(
-                      item.subtitle!,
+                      item.subtitle,
                       style: Theme.of(
                         context,
                       ).textTheme.bodyMedium?.copyWith(color: Colors.white70),
@@ -101,7 +107,7 @@ class _PhotoDominantCard extends StatelessWidget {
 
 // 2) Text-dominant layout (more like Inshorts)
 class _TextDominantCard extends StatelessWidget {
-  final NewsItemEntity item;
+  final NewsEntity item;
 
   const _TextDominantCard({required this.item});
 
@@ -118,33 +124,32 @@ class _TextDominantCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (item.imageUrl != null)
+            if (item.resources.isNotEmpty)
               ClipRRect(
                 borderRadius: BorderRadius.circular(16),
                 child: AspectRatio(
                   aspectRatio: 16 / 9,
-                  child: Image.network(item.imageUrl!, fit: BoxFit.cover),
+                  child: Image.network(item.resources[0].url, fit: BoxFit.cover),
                 ),
               ),
             const SizedBox(height: 16),
             Text(item.title, style: Theme.of(context).textTheme.headlineSmall),
-            if (item.subtitle != null) ...[
-              const SizedBox(height: 8),
-              Text(
-                item.subtitle!,
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
-            ],
+            ...[
+            const SizedBox(height: 8),
+            Text(
+              item.subtitle,
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
+          ],
             const SizedBox(height: 12),
-            if (item.body != null)
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Text(
-                    item.body!,
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  ),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Text(
+                  item.description,
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
               ),
+            ),
             const SizedBox(height: 8),
             Align(
               alignment: Alignment.bottomRight,
@@ -164,7 +169,7 @@ class _TextDominantCard extends StatelessWidget {
 
 // 3) Gallery layout (horizontal slider)
 class _GalleryCard extends StatefulWidget {
-  final NewsItemEntity item;
+  final NewsEntity item;
 
   const _GalleryCard({required this.item});
 
@@ -176,7 +181,10 @@ class _GalleryCardState extends State<_GalleryCard> {
   late final PageController _pageController;
   int _currentIndex = 0;
 
-  List<String> get _images => widget.item.galleryUrls;
+  List<String> get _images => widget.item.resources
+      .where((res) => res.contentType.name == 'image')
+      .map((res) => res.url)
+      .toList();
 
   @override
   void initState() {
@@ -235,7 +243,7 @@ class _GalleryCardState extends State<_GalleryCard> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      widget.item.source.toUpperCase(),
+                      widget.item.source.name.toUpperCase(),
                       style: Theme.of(
                         context,
                       ).textTheme.labelSmall?.copyWith(color: Colors.white70),
@@ -304,7 +312,7 @@ class _GalleryCardState extends State<_GalleryCard> {
 
 // 4) Story-style layout (full bleed image, center text)
 class _StoryCard extends StatelessWidget {
-  final NewsItemEntity item;
+  final NewsEntity item;
 
   const _StoryCard({required this.item});
 
@@ -319,8 +327,8 @@ class _StoryCard extends StatelessWidget {
       child: Stack(
         fit: StackFit.expand,
         children: [
-          if (item.imageUrl != null)
-            Image.network(item.imageUrl!, fit: BoxFit.cover),
+          if (item.resources.isNotEmpty)
+            Image.network(item.resources.first.url, fit: BoxFit.cover),
           Container(color: Colors.black.withOpacity(0.4)),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
@@ -329,7 +337,7 @@ class _StoryCard extends StatelessWidget {
                 Align(
                   alignment: Alignment.topLeft,
                   child: Text(
-                    item.source.toUpperCase(),
+                    item.source.name.toUpperCase(),
                     style: Theme.of(
                       context,
                     ).textTheme.labelSmall?.copyWith(color: Colors.white70),
@@ -344,10 +352,10 @@ class _StoryCard extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                if (item.subtitle != null) ...[
+                if (item.subtitle.isNotEmpty) ...[
                   const SizedBox(height: 12),
                   Text(
-                    item.subtitle!,
+                    item.subtitle,
                     textAlign: TextAlign.center,
                     style: Theme.of(
                       context,
@@ -366,7 +374,7 @@ class _StoryCard extends StatelessWidget {
 
 // 5) html-style layout (full bleed image, center text)
 class _HTMLViewCard extends StatelessWidget {
-  final NewsItemEntity item;
+  final NewsEntity item;
 
   const _HTMLViewCard({required this.item});
 
@@ -391,7 +399,7 @@ class _HTMLViewCard extends StatelessWidget {
 
 // 6) Webview-style layout
 class _BrowserViewCard extends StatelessWidget {
-  final NewsItemEntity item;
+  final NewsEntity item;
 
   const _BrowserViewCard({required this.item});
 
@@ -417,7 +425,8 @@ class _BrowserViewCard extends StatelessWidget {
 
 
 class RelatedImagesRow extends StatelessWidget {
-  const RelatedImagesRow({super.key});
+  final List<ResourceEntity> resources;
+  const RelatedImagesRow({super.key, required this.resources});
 
   @override
   Widget build(BuildContext context) {
@@ -468,21 +477,14 @@ class RelatedImagesRow extends StatelessWidget {
                     height: 44,
                     child: Stack(
                       children: [
-                        _imageCircle(
-                          left: 0,
-                          imageUrl:
-                              "https://images.unsplash.com/photo-1547347298-4074fc3086f0",
-                        ),
-                        _imageCircle(
-                          left: 22,
-                          imageUrl:
-                              "https://images.unsplash.com/photo-1521412644187-c49fa049e84d",
-                        ),
-                        _imageCircle(
-                          left: 44,
-                          imageUrl:
-                              "https://images.unsplash.com/photo-1508804185872-d7badad00f7d",
-                        ),
+                        ...resources.take(3).toList().asMap().entries.map((entry) {
+                          final idx = entry.key;
+                          final resource = entry.value;
+                          return _imageCircle(
+                            left: idx * 22,
+                            imageUrl: resource.url,
+                          );
+                        }),       
                       ],
                     ),
                   ),
@@ -543,7 +545,7 @@ class RelatedImagesRow extends StatelessWidget {
 
 
 class StandardVisualCard extends StatelessWidget {
-  final NewsItemEntity item;
+  final NewsEntity item;
 
   const StandardVisualCard({super.key, required this.item});
 
@@ -568,7 +570,7 @@ class StandardVisualCard extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Image.network(
-                        item.imageUrl!,
+                        item.resources.isNotEmpty ? item.resources[0].url : "",
                         fit: BoxFit.cover,
                         height: 400,
                       ),
@@ -640,6 +642,7 @@ class StandardVisualCard extends StatelessWidget {
                                 vertical: 4,
                               ),
                               decoration: BoxDecoration(
+                                // ignore: deprecated_member_use
                                 color: Colors.black.withOpacity(0.85),
                                 borderRadius: BorderRadius.circular(16),
                               ),
@@ -681,7 +684,7 @@ class StandardVisualCard extends StatelessWidget {
 
                         // 🔹 Body
                         Text(
-                          item.body ?? '',
+                          item.description,
                           maxLines: 6,
                           overflow: TextOverflow.ellipsis,
                           style: const TextStyle(
@@ -695,7 +698,7 @@ class StandardVisualCard extends StatelessWidget {
 
                         // 🔹 Meta
                         Text(
-                          "${item.publishedAt.toUtc().toLocal().toString().split(' ')[0]} | ${item.source} | ${item.author ?? 'Unknown Author'}",
+                          "${item.publishedAt.toUtc().toLocal().toString().split(' ')[0]} | ${item.source.name} | ${item.author.name}",
                           style: TextStyle(color: Colors.white54, fontSize: 12),
                         ),
                       ],
@@ -710,8 +713,8 @@ class StandardVisualCard extends StatelessWidget {
           Column(
             children: [
               // const SizedBox(height: 8),
-              item.galleryUrls.isNotEmpty
-                  ? RelatedImagesRow()
+              item.resources.isNotEmpty
+                  ? RelatedImagesRow(resources: item.resources)
                   : Container(
                 height: 56,
                 alignment: Alignment.centerLeft,

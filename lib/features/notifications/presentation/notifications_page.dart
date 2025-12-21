@@ -110,6 +110,7 @@ class _NotificationSectionWidget extends StatelessWidget {
               child: Text(
                 section.title,
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      // ignore: deprecated_member_use
                       color: colors.onSurface.withOpacity(0.8),
                       fontWeight: FontWeight.w600,
                     ),
@@ -164,11 +165,12 @@ class _NotificationTile extends StatelessWidget {
                 width: 48,
                 height: 48,
                 decoration: BoxDecoration(
-                  color: colors.surfaceVariant,
+                  color: colors.surfaceContainerHighest,
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Icon(
                   Icons.notifications_none,
+                  // ignore: deprecated_member_use
                   color: colors.onSurface.withOpacity(0.6),
                 ),
               ),
@@ -185,6 +187,7 @@ class _NotificationTile extends StatelessWidget {
                   Text(
                     _timeAgo(item.createdAt),
                     style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                          // ignore: deprecated_member_use
                           color: colors.onSurface.withOpacity(0.6),
                         ),
                   ),

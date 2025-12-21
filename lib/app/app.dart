@@ -16,7 +16,6 @@ class _AppState extends ConsumerState<App> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     initialization();
   }

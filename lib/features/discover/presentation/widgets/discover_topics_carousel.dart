@@ -26,7 +26,7 @@ class DiscoverTopicsCarousel extends ConsumerWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             scrollDirection: Axis.horizontal,
             itemCount: topics.length,
-            separatorBuilder: (_, __) => const SizedBox(width: 12),
+            separatorBuilder: (_, _) => const SizedBox(width: 12),
             itemBuilder: (context, index) {
               final topic = topics[index];
               return _TopicCard(label: topic.label);
@@ -50,7 +50,7 @@ class _TopicCard extends StatelessWidget {
     return Container(
       width: 140,
       decoration: BoxDecoration(
-        color: colors.surfaceVariant,
+        color: colors.surfaceContainerHighest,
         borderRadius: BorderRadius.circular(16),
       ),
       padding: const EdgeInsets.all(12),

@@ -2,7 +2,6 @@ import 'package:bl_inshort/features/discover/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:bl_inshort/app/routes.dart';
 
 class DiscoverCategoryGrid extends ConsumerWidget {
   const DiscoverCategoryGrid({super.key});
@@ -64,7 +63,7 @@ class _CategoryTile extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: colors.surfaceVariant,
+          color: colors.surfaceContainerHighest,
           borderRadius: BorderRadius.circular(16),
         ),
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),

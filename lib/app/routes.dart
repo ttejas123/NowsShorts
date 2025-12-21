@@ -1,9 +1,8 @@
 import 'package:bl_inshort/features/discover/presentation/discover_page.dart';
 import 'package:bl_inshort/features/feed/presentation/feed_page.dart';
-import 'package:bl_inshort/features/feed/providers.dart';
+// import 'package:bl_inshort/features/feed/presentation/feed_page.dart';
 import 'package:bl_inshort/features/feedback/presentation/feedback_page.dart';
 import 'package:bl_inshort/features/feedback/presentation/widgets/new_feedback_page.dart';
-import 'package:bl_inshort/features/notifications/presentation/notifications_page.dart';
 import 'package:bl_inshort/features/preferences/presentation/preferences_page.dart';
 import 'package:bl_inshort/features/settings/presentation/settings_page.dart';
 import 'package:bl_inshort/features/webview/presentation/webview_page.dart';
@@ -12,8 +11,6 @@ import 'package:go_router/go_router.dart';
 import 'package:bl_inshort/features/shell/home_shell_page.dart';
 
 GoRouter buildRouter(WidgetRef ref) {
-
-  final s = ref.watch(HtmlTemplateViewProvider);
 
   return GoRouter(
     initialLocation: '/',
@@ -45,19 +42,19 @@ GoRouter buildRouter(WidgetRef ref) {
       ),
       GoRoute(
         path: '/feedback',
-        builder: (_, __) => const FeedbackPage(),
+        builder: (_, _) => const FeedbackPage(),
       ),
       GoRoute(
         path: '/new-feedback',
-        builder: (_, __) => const NewFeedbackPage(),
+        builder: (_, _) => const NewFeedbackPage(),
       ),
       GoRoute(
         path: '/feed',
-        builder: (_, __) => const FeedPage(),
+        builder: (_, _) => const FeedPage(),
       ),
       GoRoute(
         path: '/search',
-        builder: (_, __) => const SearchPage(),
+        builder: (_, _) => const SearchPage(),
       ),
 
       // later: add story/detail routes here

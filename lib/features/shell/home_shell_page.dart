@@ -1,5 +1,4 @@
 import 'package:bl_inshort/features/profile/presentation/profile_page.dart';
-import 'package:bl_inshort/features/search/presentation/search_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

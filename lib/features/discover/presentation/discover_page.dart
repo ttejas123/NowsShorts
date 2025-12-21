@@ -44,6 +44,7 @@ class DiscoverPage extends ConsumerWidget {
               child: Text(
                 'My Feed',
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      // ignore: deprecated_member_use
                       color: colors.onSurface.withOpacity(0.5),
                     ),
               ),
@@ -338,37 +339,9 @@ class _Insights extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-            separatorBuilder: (_, __) => const SizedBox(width: 12),
+            separatorBuilder: (_, _) => const SizedBox(width: 12),
             itemCount: 3,
           ),
-        ),
-      ],
-    );
-  }
-}
-
-class _BottomNav extends StatelessWidget {
-  const _BottomNav();
-
-  @override
-  Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      backgroundColor: Colors.black,
-      selectedItemColor: Colors.white,
-      unselectedItemColor: Colors.grey,
-      currentIndex: 0,
-      items: const [
-        BottomNavigationBarItem(
-          icon: Icon(Icons.search),
-          label: "",
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          label: "",
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.person),
-          label: "",
         ),
       ],
     );
@@ -378,7 +351,7 @@ class _BottomNav extends StatelessWidget {
 class _SectionHeader extends StatelessWidget {
   final String title;
 
-  const _SectionHeader(this.title, {super.key});
+  const _SectionHeader(this.title);
 
   @override
   Widget build(BuildContext context) {
@@ -437,7 +410,7 @@ class InsightsSection extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             scrollDirection: Axis.horizontal,
             itemCount: insightImages.length,
-            separatorBuilder: (_, __) => const SizedBox(width: 14),
+            separatorBuilder: (_, _) => const SizedBox(width: 14),
             itemBuilder: (context, index) {
               return _InsightCard(imageUrl: insightImages[index]);
             },
@@ -486,7 +459,7 @@ class TopicsSection extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             scrollDirection: Axis.horizontal,
             itemCount: topics.length,
-            separatorBuilder: (_, __) => const SizedBox(width: 18),
+            separatorBuilder: (_, _) => const SizedBox(width: 18),
             itemBuilder: (context, index) {
               final topic = topics[index];
               return _TopicItem(
@@ -675,6 +648,7 @@ class SearchPage extends StatelessWidget {
             // Divider
             Container(
               height: 0.6,
+              // ignore: deprecated_member_use
               color: Colors.white.withOpacity(0.15),
             ),
 
