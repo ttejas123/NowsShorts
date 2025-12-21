@@ -7,7 +7,7 @@ import 'package:bl_inshort/data/dto/common/region_dto.dart';
 import 'package:bl_inshort/data/dto/common/status_dto.dart';
 import 'package:bl_inshort/data/dto/common/resource_dto.dart';
 
-enum NewsLayoutType {
+enum FeedLayoutType {
   photoDominant, // big image, small text
   textDominant,  // more text, image secondary
   gallery,       // horizontal image slider
@@ -16,10 +16,24 @@ enum NewsLayoutType {
   browserCard,   // card with link to external browser
   standardCard;   // card with link to external browser
 
-  static NewsLayoutType fromString(String value) {
-    return NewsLayoutType.values.firstWhere(
+  static FeedLayoutType fromString(String value) {
+    return FeedLayoutType.values.firstWhere(
       (e) => e.name == value,
-      orElse: () => NewsLayoutType.standardCard,
+      orElse: () => FeedLayoutType.standardCard,
+    );
+  }
+}
+
+enum ItemType {
+  News,
+  Advertisement,
+  SponsoredContent,
+  Announcement;
+
+  static ItemType fromString(String value) {
+    return ItemType.values.firstWhere(
+      (e) => e.name == value,
+      orElse: () => ItemType.News,
     );
   }
 }
@@ -35,6 +49,7 @@ class NewsDto {
   final double engagementScore;
   final String webUrl;
   final String html;
+  final ItemType type;
 
   final AuthorDto author;
   final SourceDto source;
@@ -43,11 +58,12 @@ class NewsDto {
   final LanguageDto language;
   final RegionDto region;
   final StatusDto status;
-  final NewsLayoutType layout;
+  final FeedLayoutType layout;
   final List<ResourceDto> resources;
 
   NewsDto({
     required this.id,
+    required this.type,
     required this.title,
     required this.subtitle,
     required this.description,
@@ -71,6 +87,7 @@ class NewsDto {
   factory NewsDto.fromJson(Map<String, dynamic> json) {
     return NewsDto(
       id: json['id'],
+      type: ItemType.fromString(json['type']),
       title: json['title'],
       subtitle: json['subtitle'],
       description: json['description'],
@@ -81,7 +98,7 @@ class NewsDto {
       isFeatured: json['is_featured'],
       engagementScore: (json['engagement_score'] as num).toDouble(),
       author: AuthorDto.fromJson(json['author']),
-      layout: NewsLayoutType.fromString(json['layout']),
+      layout: FeedLayoutType.fromString(json['layout']),
       source: SourceDto.fromJson(json['source']),
       category: CategoryDto.fromJson(json['category']),
       tags: (json['tags'] as List)

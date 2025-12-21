@@ -1,4 +1,4 @@
-import 'package:bl_inshort/data/dto/feed/news_dto.dart';
+import 'package:bl_inshort/data/dto/feed/feed_dto.dart';
 
 class FeedResponseDto {
   final String? cursor;

@@ -1,32 +1,32 @@
 // ignore_for_file: deprecated_member_use, duplicate_ignore
 
-import 'package:bl_inshort/data/dto/feed/news_dto.dart';
-import 'package:bl_inshort/data/models/news/news_entity.dart';
-import 'package:bl_inshort/data/models/news/resource_entity.dart';
+import 'package:bl_inshort/data/dto/feed/feed_dto.dart';
+import 'package:bl_inshort/data/models/feeds/feed_entity.dart';
+import 'package:bl_inshort/data/models/feeds/resource_entity.dart';
 import 'package:bl_inshort/features/webview/presentation/webview_page.dart';
 import 'package:flutter/material.dart';
 
-class NewsCard extends StatelessWidget {
-  final NewsEntity item;
+class FeedCard extends StatelessWidget {
+  final FeedEntity item;
 
-  const NewsCard({super.key, required this.item});
+  const FeedCard({super.key, required this.item});
 
   @override
   Widget build(BuildContext context) {
     switch (item.layout) {
-      case NewsLayoutType.photoDominant:
+      case FeedLayoutType.photoDominant:
         return _PhotoDominantCard(item: item);
-      case NewsLayoutType.textDominant:
+      case FeedLayoutType.textDominant:
         return _TextDominantCard(item: item);
-      case NewsLayoutType.gallery:
+      case FeedLayoutType.gallery:
         return _GalleryCard(item: item);
-      case NewsLayoutType.story:
+      case FeedLayoutType.story:
         return _StoryCard(item: item);
-      case NewsLayoutType.htmlViewCard:
+      case FeedLayoutType.htmlViewCard:
         return _HTMLViewCard(item: item);
-      case NewsLayoutType.browserCard:
+      case FeedLayoutType.browserCard:
         return _BrowserViewCard(item: item);
-      case NewsLayoutType.standardCard:
+      case FeedLayoutType.standardCard:
         return StandardVisualCard(item: item);
     }
   }
@@ -34,7 +34,7 @@ class NewsCard extends StatelessWidget {
 
 // 1) Photo-dominant layout (big image, text overlay/under)
 class _PhotoDominantCard extends StatelessWidget {
-  final NewsEntity item;
+  final FeedEntity item;
 
   const _PhotoDominantCard({required this.item});
 
@@ -107,7 +107,7 @@ class _PhotoDominantCard extends StatelessWidget {
 
 // 2) Text-dominant layout (more like Inshorts)
 class _TextDominantCard extends StatelessWidget {
-  final NewsEntity item;
+  final FeedEntity item;
 
   const _TextDominantCard({required this.item});
 
@@ -169,7 +169,7 @@ class _TextDominantCard extends StatelessWidget {
 
 // 3) Gallery layout (horizontal slider)
 class _GalleryCard extends StatefulWidget {
-  final NewsEntity item;
+  final FeedEntity item;
 
   const _GalleryCard({required this.item});
 
@@ -312,7 +312,7 @@ class _GalleryCardState extends State<_GalleryCard> {
 
 // 4) Story-style layout (full bleed image, center text)
 class _StoryCard extends StatelessWidget {
-  final NewsEntity item;
+  final FeedEntity item;
 
   const _StoryCard({required this.item});
 
@@ -374,7 +374,7 @@ class _StoryCard extends StatelessWidget {
 
 // 5) html-style layout (full bleed image, center text)
 class _HTMLViewCard extends StatelessWidget {
-  final NewsEntity item;
+  final FeedEntity item;
 
   const _HTMLViewCard({required this.item});
 
@@ -399,7 +399,7 @@ class _HTMLViewCard extends StatelessWidget {
 
 // 6) Webview-style layout
 class _BrowserViewCard extends StatelessWidget {
-  final NewsEntity item;
+  final FeedEntity item;
 
   const _BrowserViewCard({required this.item});
 
@@ -697,7 +697,7 @@ class _RelatedImagesGalleryState extends State<RelatedImagesGallery> {
 }
 
 class StandardVisualCard extends StatelessWidget {
-  final NewsEntity item;
+  final FeedEntity item;
 
   const StandardVisualCard({super.key, required this.item});
 

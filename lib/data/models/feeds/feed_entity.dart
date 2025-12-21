@@ -1,14 +1,14 @@
-import 'package:bl_inshort/data/dto/feed/news_dto.dart';
-import 'package:bl_inshort/data/models/news/author_entity.dart';
-import 'package:bl_inshort/data/models/news/category_entity.dart';
-import 'package:bl_inshort/data/models/news/language_entity.dart';
-import 'package:bl_inshort/data/models/news/region_entity.dart';
-import 'package:bl_inshort/data/models/news/resource_entity.dart';
-import 'package:bl_inshort/data/models/news/source_entity.dart';
-import 'package:bl_inshort/data/models/news/status_entity.dart';
-import 'package:bl_inshort/data/models/news/tag_entity.dart';
+import 'package:bl_inshort/data/dto/feed/feed_dto.dart';
+import 'package:bl_inshort/data/models/feeds/author_entity.dart';
+import 'package:bl_inshort/data/models/feeds/category_entity.dart';
+import 'package:bl_inshort/data/models/feeds/language_entity.dart';
+import 'package:bl_inshort/data/models/feeds/region_entity.dart';
+import 'package:bl_inshort/data/models/feeds/resource_entity.dart';
+import 'package:bl_inshort/data/models/feeds/source_entity.dart';
+import 'package:bl_inshort/data/models/feeds/status_entity.dart';
+import 'package:bl_inshort/data/models/feeds/tag_entity.dart';
 
-class NewsEntity {
+class FeedEntity {
   final int id;
   final String title;
   final String subtitle;
@@ -24,16 +24,19 @@ class NewsEntity {
   final List<TagEntity> tags;
   final LanguageEntity language;
   final RegionEntity region;
-  final NewsLayoutType layout;
+  final FeedLayoutType layout;
   final StatusEntity status;
+
+  final ItemType type;
 
   final bool isFeatured;
   final double engagementScore;
 
   final List<ResourceEntity> resources;
 
-  NewsEntity({
+  FeedEntity({
     required this.id,
+    required this.type,
     required this.title,
     required this.subtitle,
     required this.description,
@@ -54,9 +57,10 @@ class NewsEntity {
     required this.html
   });
 
-  factory NewsEntity.fromDto(NewsDto dto) {
-    return NewsEntity(
+  factory FeedEntity.fromDto(NewsDto dto) {
+    return FeedEntity(
       id: dto.id,
+      type: dto.type,
       title: dto.title,
       subtitle: dto.subtitle,
       description: dto.description,

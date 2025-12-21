@@ -1,5 +1,5 @@
 import 'package:bl_inshort/data/dto/common/resource_dto.dart';
-import 'package:bl_inshort/data/models/news/content_type_entity.dart';
+import 'package:bl_inshort/data/models/feeds/content_type_entity.dart';
 
 class ResourceEntity {
   final int id;

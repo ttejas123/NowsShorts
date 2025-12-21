@@ -4,12 +4,12 @@ import 'package:flutter_riverpod/legacy.dart';
 import 'package:flutter_riverpod/misc.dart';
 
 import 'package:bl_inshort/features/feed/providers.dart';
-import 'package:bl_inshort/data/models/news/news_entity.dart';
+import 'package:bl_inshort/data/models/feeds/feed_entity.dart';
 
 typedef Reader = T Function<T>(ProviderListenable<T>);
 
 class FeedState {
-  final List<NewsEntity> items;
+  final List<FeedEntity> items;
   final bool isInitialLoading;
   final bool isLoadingMore;
   final bool hasMore;
@@ -35,7 +35,7 @@ class FeedState {
       );
 
   FeedState copyWith({
-    List<NewsEntity>? items,
+    List<FeedEntity>? items,
     bool? isInitialLoading,
     bool? isLoadingMore,
     bool? hasMore,

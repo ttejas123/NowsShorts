@@ -2,7 +2,7 @@ import 'package:bl_inshort/features/discover/presentation/discover_page.dart';
 import 'package:bl_inshort/features/feed/presentation/feed_page.dart';
 // import 'package:bl_inshort/features/feed/presentation/feed_page.dart';
 import 'package:bl_inshort/features/feedback/presentation/feedback_page.dart';
-import 'package:bl_inshort/features/feedback/presentation/widgets/new_feedback_page.dart';
+import 'package:bl_inshort/features/feedback/presentation/widgets/feed_feedback_page.dart';
 import 'package:bl_inshort/features/preferences/presentation/preferences_page.dart';
 import 'package:bl_inshort/features/settings/presentation/settings_page.dart';
 import 'package:bl_inshort/features/webview/presentation/webview_page.dart';

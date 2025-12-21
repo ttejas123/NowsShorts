@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:bl_inshort/features/feed/providers.dart';
 import 'package:go_router/go_router.dart';
-import 'widgets/news_cards.dart';
+import 'widgets/feed_cards.dart';
 
 class FeedPage extends ConsumerStatefulWidget {
   const FeedPage({super.key});
@@ -111,7 +111,7 @@ class _FeedPageState extends ConsumerState<FeedPage> {
                 }
 
                 final item = state.items[index];
-                return NewsCard(item: item);
+                return FeedCard(item: item);
               },
             );
           },
