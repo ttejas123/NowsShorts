@@ -1,14 +1,34 @@
-import 'package:bl_inshort/features/discover/providers.dart';
+import 'package:bl_inshort/data/models/notifications/notification_entity.dart';
+import 'package:bl_inshort/features/notifications/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class NotificationsPage extends ConsumerWidget {
+class NotificationsPage extends ConsumerStatefulWidget {
   const NotificationsPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final items = ref.watch(discoverNotificationsProvider);
+  ConsumerState<NotificationsPage> createState() =>
+      _NotificationsPageState();
+}
+
+class _NotificationsPageState extends ConsumerState<NotificationsPage> {
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref
+          .read(notificationControllerProvider.notifier)
+          .loadInitial();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final items = ref.watch(notificationControllerProvider).items;
+    print('NotificationsPage build with ${items.length} items');
 
     // sort newest first
     final sorted = [...items]
@@ -44,20 +64,20 @@ class NotificationsPage extends ConsumerWidget {
 
 class _NotificationSection {
   final String title;
-  final List<DiscoverNotificationItem> items;
+  final List<NotificationEntity> items;
 
   _NotificationSection({required this.title, required this.items});
 }
 
 List<_NotificationSection> _groupByTime(
-  List<DiscoverNotificationItem> items,
+  List<NotificationEntity> items,
 ) {
   final now = DateTime.now();
 
-  final yesterday = <DiscoverNotificationItem>[];
-  final last7 = <DiscoverNotificationItem>[];
-  final last30 = <DiscoverNotificationItem>[];
-  final older = <DiscoverNotificationItem>[];
+  final yesterday = <NotificationEntity>[];
+  final last7 = <NotificationEntity>[];
+  final last30 = <NotificationEntity>[];
+  final older = <NotificationEntity>[];
 
   for (final item in items) {
     final diff = now.difference(item.createdAt);
@@ -126,7 +146,7 @@ class _NotificationSectionWidget extends StatelessWidget {
 }
 
 class _NotificationTile extends StatelessWidget {
-  final DiscoverNotificationItem item;
+  final NotificationEntity item;
 
   const _NotificationTile({required this.item});
 

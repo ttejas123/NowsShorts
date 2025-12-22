@@ -62,17 +62,17 @@ class _HomeShellPageState extends ConsumerState<HomeShellPage> {
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home_outlined),
-            activeIcon: Icon(Icons.home),
+            activeIcon: Icon(Icons.home, color: Colors.blue),
             label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.article_outlined),
-            activeIcon: Icon(Icons.article),
+            activeIcon: Icon(Icons.article, color: Colors.blue),
             label: 'Feed',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person_outline),
-            activeIcon: Icon(Icons.person),
+            activeIcon: Icon(Icons.person, color: Colors.blue),
             label: 'Profile',
           ),
         ],

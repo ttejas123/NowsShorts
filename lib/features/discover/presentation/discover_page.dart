@@ -31,7 +31,7 @@ class DiscoverPage extends ConsumerWidget {
               child: Text(
                 'Discover',
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      color: colors.primary,
+                      color: Colors.blue,
                       fontWeight: FontWeight.bold,
                     ),
               ),

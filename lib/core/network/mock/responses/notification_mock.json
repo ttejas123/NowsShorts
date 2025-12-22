@@ -1,0 +1,138 @@
+{
+    "cursor": null,
+    "has_more": true,
+    "items": [
+      {
+        "id": 101,
+        "title": "Breaking: Major Tech Breakthrough",
+        "subtitle": "Silicon chips now 5x faster",
+        "body": "Researchers have developed a new silicon architecture that dramatically improves processing speed.",
+        "image_url": "https://images.unsplash.com/photo-1581091215367-59ab6b1c6f4b",
+        "type": "breaking",
+        "priority": "max",
+        "target_type": "feed",
+        "target_value": "feed_8921",
+        "is_read": false,
+        "is_dismissible": true,
+        "created_at": "2025-01-20T10:30:00Z",
+        "expires_at": "2025-01-20T16:30:00Z",
+        "metadata": {
+          "urgency_score": 0.98,
+          "source": "editorial",
+          "region": "global"
+        }
+      },
+  
+      {
+        "id": 102,
+        "title": "Recommended for you",
+        "subtitle": "AI startups you should know",
+        "body": "Based on your reading history, here are 5 AI startups gaining traction this year.",
+        "image_url": "https://images.unsplash.com/photo-1677442136019-21780ecad995",
+        "type": "recommendation",
+        "priority": "high",
+        "target_type": "feed",
+        "target_value": "feed_7812",
+        "is_read": false,
+        "is_dismissible": true,
+        "created_at": "2025-01-20T08:15:00Z",
+        "metadata": {
+          "personalized": true,
+          "model_version": "rec_v2"
+        }
+      },
+  
+      {
+        "id": 103,
+        "title": "Top stories today",
+        "subtitle": "5 headlines you may have missed",
+        "body": null,
+        "image_url": null,
+        "type": "recent",
+        "priority": "normal",
+        "target_type": "story",
+        "target_value": "story_today",
+        "is_read": true,
+        "is_dismissible": true,
+        "created_at": "2025-01-19T21:00:00Z",
+        "metadata": {
+          "batch": "daily_digest"
+        }
+      },
+  
+      {
+        "id": 104,
+        "title": "New feature launched 🚀",
+        "subtitle": "Dark mode is now available",
+        "body": "You can now switch between light and dark themes from Settings.",
+        "image_url": "https://images.unsplash.com/photo-1526045612212-70caf35c14df",
+        "type": "announcement",
+        "priority": "normal",
+        "target_type": "announcement",
+        "target_value": "feature_dark_mode",
+        "is_read": false,
+        "is_dismissible": true,
+        "created_at": "2025-01-18T12:00:00Z",
+        "metadata": {
+          "feature_flag": "dark_mode_v1"
+        }
+      },
+  
+      {
+        "id": 105,
+        "title": "Reminder",
+        "subtitle": "Continue reading where you left off",
+        "body": "You were reading about India's startup ecosystem.",
+        "image_url": null,
+        "type": "reminder",
+        "priority": "low",
+        "target_type": "feed",
+        "target_value": "feed_6543",
+        "is_read": true,
+        "is_dismissible": true,
+        "created_at": "2025-01-18T09:45:00Z",
+        "metadata": {
+          "trigger": "inactivity_24h"
+        }
+      },
+  
+      {
+        "id": 106,
+        "title": "Sponsored",
+        "subtitle": "Flat 20% off on learning subscriptions",
+        "body": "Upgrade your skills with top instructors. Limited time offer.",
+        "image_url": "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2",
+        "type": "promotional",
+        "priority": "normal",
+        "target_type": "externalUrl",
+        "target_value": "https://example.com/offer",
+        "is_read": false,
+        "is_dismissible": true,
+        "created_at": "2025-01-17T14:20:00Z",
+        "metadata": {
+          "campaign_id": "promo_jan_2025",
+          "advertiser": "edtech_partner"
+        }
+      },
+  
+      {
+        "id": 107,
+        "title": "Background update",
+        "subtitle": "Content refreshed",
+        "body": null,
+        "image_url": null,
+        "type": "silent",
+        "priority": "low",
+        "target_type": "none",
+        "target_value": null,
+        "is_read": true,
+        "is_dismissible": false,
+        "created_at": "2025-01-17T02:00:00Z",
+        "metadata": {
+          "job": "prefetch_feed"
+        }
+      }
+    ]
+    
+  }
+  

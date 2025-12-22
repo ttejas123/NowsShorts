@@ -3,6 +3,7 @@ import 'package:bl_inshort/features/feed/presentation/feed_page.dart';
 // import 'package:bl_inshort/features/feed/presentation/feed_page.dart';
 import 'package:bl_inshort/features/feedback/presentation/feedback_page.dart';
 import 'package:bl_inshort/features/feedback/presentation/widgets/feed_feedback_page.dart';
+import 'package:bl_inshort/features/notifications/presentation/notifications_page.dart';
 import 'package:bl_inshort/features/preferences/presentation/preferences_page.dart';
 import 'package:bl_inshort/features/settings/presentation/settings_page.dart';
 import 'package:bl_inshort/features/webview/presentation/webview_page.dart';
@@ -21,16 +22,20 @@ GoRouter buildRouter(WidgetRef ref) {
           child: HomeShellPage(),
         ),
       ),
+      // GoRoute(
+      //   path: '/notifications',
+      //   builder: (context, state) => AdvancedWebView(
+      //     initialUrl: "https://tejasflutter121124.oneapp.dev/",
+      //     title: 'Notifications',
+      //     injectCSS: '',
+      //     injectJS: "",
+      //     enableJavaScript: true,
+      //     showAppBar: true,
+      //   )
+      // ),
       GoRoute(
         path: '/notifications',
-        builder: (context, state) => AdvancedWebView(
-          initialUrl: "https://tejasflutter121124.oneapp.dev/",
-          title: 'Notifications',
-          injectCSS: '',
-          injectJS: "",
-          enableJavaScript: true,
-          showAppBar: true,
-        )
+        builder: (context, state) => const NotificationsPage()
       ),
       GoRoute(
         path: '/settings',

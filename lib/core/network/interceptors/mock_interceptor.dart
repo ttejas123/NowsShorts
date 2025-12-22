@@ -21,6 +21,17 @@ class MockInterceptor extends Interceptor {
       );
     }
 
+    if (options.path == "/notification") {
+      final data = await loadNotificationMockJson();
+      return handler.resolve(
+        Response(
+          requestOptions: options,
+          statusCode: 200,
+          data: data,
+        ),
+      );
+    }
+
     return handler.next(options);
   }
 }

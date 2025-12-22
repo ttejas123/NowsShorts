@@ -10,9 +10,9 @@ class AppTheme {
 
     colorScheme: ColorScheme(
       brightness: Brightness.light,
-      primary: Colors.teal,
+      primary: Colors.blue,
       onPrimary: Colors.white,
-      secondary: Colors.tealAccent,
+      secondary: const Color.fromARGB(255, 100, 214, 255),
       onSecondary: Colors.black,
 
       background: AppColors.lightBackground,
@@ -50,9 +50,9 @@ class AppTheme {
 
     colorScheme: ColorScheme(
       brightness: Brightness.dark,
-      primary: Colors.teal,
+      primary: Colors.blue,
       onPrimary: Colors.black,
-      secondary: Colors.tealAccent,
+      secondary: const Color.fromARGB(255, 100, 224, 255),
       onSecondary: Colors.black,
 
       background: AppColors.darkBackground,
