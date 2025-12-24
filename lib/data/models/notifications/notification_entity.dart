@@ -1,73 +1,59 @@
 import 'package:bl_inshort/data/dto/notifications/notification_dto.dart';
-import 'package:bl_inshort/data/models/feeds/feed_entity.dart';
+import 'package:bl_inshort/data/models/notifications/notification_action.dart';
 import 'package:bl_inshort/data/models/notifications/notification_common_enums.dart';
+import 'package:bl_inshort/data/models/notifications/notification_presentation.dart';
+import 'package:bl_inshort/data/models/notifications/notification_state.dart';
+
+
 
 class NotificationEntity {
-  final int id;
+  final String id;
 
-  // Display
-  final String title;
-  final String subtitle;
-  final String? body;
-  final String? imageUrl;
+  /// WHY this notification exists
+  final NotificationIntent intent;
 
-  // Classification
-  final NotificationType type;
+  /// HOW important / aggressive
   final NotificationPriority priority;
 
-  // Routing
-  final NotificationTargetType targetType;
-  final String? targetValue; // feedId, url, deeplink, etc.
-  final FeedEntity? feedPreview; // optional rich preview
+  /// WHERE it should take the user
+  final NotificationAction action;
 
-  // State
-  final bool isRead;
-  final bool isDismissible;
+  /// OPTIONAL: visual hints for in-app UI
+  final NotificationPresentation? presentation;
 
-  // Timing
+  /// LIFECYCLE
+  final NotificationState state;
+
+  /// METADATA (analytics, experiments, ML, flags)
+  final Map<String, dynamic>? metadata;
+
+  /// TIMING
   final DateTime createdAt;
   final DateTime? expiresAt;
 
-  // Analytics
-  final String? campaignId;
-  final Map<String, dynamic>? metadata;
-
   const NotificationEntity({
     required this.id,
-    required this.title,
-    required this.subtitle,
-    this.body,
-    this.imageUrl,
-    required this.type,
+    required this.intent,
     required this.priority,
-    required this.targetType,
-    this.targetValue,
-    this.feedPreview,
-    required this.isRead,
-    required this.isDismissible,
+    required this.action,
+    this.presentation,
+    required this.state,
+    this.metadata,
     required this.createdAt,
     this.expiresAt,
-    this.campaignId,
-    this.metadata,
   });
 
   factory NotificationEntity.fromDto(NotificationDTO dto) {
-  return NotificationEntity(
-    id: dto.id,
-    title: dto.title,
-    subtitle: dto.subtitle,
-    body: dto.body,
-    imageUrl: dto.image_url,
-    type: NotificationType.values.byName(dto.type),
-    priority: NotificationPriority.values.byName(dto.priority),
-    targetType: NotificationTargetType.values.byName(dto.target_type),
-    targetValue: dto.target_value,
-    isRead: dto.is_read,
-    isDismissible: dto.is_dismissible,
-    createdAt: DateTime.parse(dto.created_at),
-    expiresAt:
-        dto.expires_at != null ? DateTime.parse(dto.expires_at!) : null,
-    metadata: dto.metadata,
-  );
-}
+    return NotificationEntity(
+      id: dto.id,
+      action: NotificationAction.fromDto(dto.action),
+      intent: dto.intent,
+      state: NotificationState.fromDto(dto.state),
+      presentation: dto.presentation.toEntity(),
+      priority: dto.priority,
+      createdAt: DateTime.parse(dto.created_at),
+      expiresAt: dto.expires_at != null ? DateTime.parse(dto.expires_at!) : null,
+      metadata: dto.metadata,
+    );
+  }
 }

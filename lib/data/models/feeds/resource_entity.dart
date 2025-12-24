@@ -22,4 +22,8 @@ class ResourceEntity {
       contentType: ContentTypeEntity.fromDto(dto.contentType),
     );
   }
+
+  static List<ResourceEntity> fromDtoList(List<ResourceDto> dtoList) {
+    return dtoList.map((dto) => ResourceEntity.fromDto(dto)).toList();
+  }
 }

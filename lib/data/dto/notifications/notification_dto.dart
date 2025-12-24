@@ -1,57 +1,58 @@
+import 'package:bl_inshort/data/models/notifications/notification_common_enums.dart';
+
+import 'notification_action_dto.dart';
+import 'notification_presentation_dto.dart';
+import 'notification_state_dto.dart';
+
 class NotificationDTO {
-  final int id;
-  final String title;
-  final String subtitle;
-  final String? body;
-  final String? image_url;
+  final String id;
 
-  final String type;
-  final String priority;
+  /// intent = breaking / recommendation / reminder etc
+  final NotificationIntent intent;
 
-  final String target_type;
-  final String? target_value;
+  /// priority = max / high / normal / low
+  final NotificationPriority priority;
 
-  final bool is_read;
-  final bool is_dismissible;
+  /// routing / deeplink
+  final NotificationActionDTO action;
+
+  /// optional UI hints
+  final NotificationPresentationDTO? presentation;
+
+  /// read / delivered / opened
+  final NotificationStateDTO state;
+
+  /// analytics / experiments
+  final Map<String, dynamic>? metadata;
 
   final String created_at;
   final String? expires_at;
 
-  final Map<String, dynamic>? metadata;
-
   NotificationDTO({
     required this.id,
-    required this.title,
-    required this.subtitle,
-    this.body,
-    this.image_url,
-    required this.type,
+    required this.intent,
     required this.priority,
-    required this.target_type,
-    this.target_value,
-    required this.is_read,
-    required this.is_dismissible,
+    required this.action,
+    this.presentation,
+    required this.state,
+    this.metadata,
     required this.created_at,
     this.expires_at,
-    this.metadata,
   });
 
   factory NotificationDTO.fromJson(Map<String, dynamic> json) {
     return NotificationDTO(
       id: json['id'],
-      title: json['title'],
-      subtitle: json['subtitle'],
-      body: json['body'],
-      image_url: json['image_url'],
-      type: json['type'],
-      priority: json['priority'],
-      target_type: json['target_type'],
-      target_value: json['target_value'],
-      is_read: json['is_read'],
-      is_dismissible: json['is_dismissible'],
-      created_at: json['created_at'],
-      expires_at: json['expires_at'],
+      intent: NotificationIntent.fromString(json['intent']),
+      priority: NotificationPriority.fromString(json['priority']),
+      action: NotificationActionDTO.fromJson(json['action']),
+      presentation: json['presentation'] != null
+          ? NotificationPresentationDTO.fromJson(json['presentation'])
+          : null,
+      state: NotificationStateDTO.fromJson(json['state']),
       metadata: json['metadata'],
+      created_at: json['createdAt'] ?? json['created_at'],
+      expires_at: json['expiresAt'] ?? json['expires_at'],
     );
   }
 }

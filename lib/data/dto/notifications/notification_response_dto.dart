@@ -1,24 +1,28 @@
-import 'package:bl_inshort/data/dto/notifications/notification_dto.dart';
+import 'package:bl_inshort/data/models/notifications/notification_action.dart';
+import 'package:flutter/widgets.dart';
 
-class NotificationResponseDto {
+import 'notification_dto.dart';
 
-  final String? cursor;
-  final bool hasMore;
+class NotificationResponseDTO {
   final List<NotificationDTO> items;
+  final bool hasMore;
+  final String? cursor;
 
-  NotificationResponseDto({
-    required this.cursor,
-    required this.hasMore,
+  NotificationResponseDTO({
     required this.items,
+    required this.hasMore,
+    this.cursor,
   });
 
-  factory NotificationResponseDto.fromJson(Map<String, dynamic> json) {
-    return NotificationResponseDto(
-      cursor: json['cursor'],
-      hasMore: json['has_more'],
+  factory NotificationResponseDTO.fromJson(Map<String, dynamic> json) {
+    return NotificationResponseDTO(
       items: (json['items'] as List)
           .map((e) => NotificationDTO.fromJson(e))
           .toList(),
+      hasMore: json['hasMore'] ?? false,
+      cursor: json['cursor'],
     );
   }
+
+
 }

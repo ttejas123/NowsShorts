@@ -28,8 +28,6 @@ class _NotificationsPageState extends ConsumerState<NotificationsPage> {
   @override
   Widget build(BuildContext context) {
     final items = ref.watch(notificationControllerProvider).items;
-    print('NotificationsPage build with ${items.length} items');
-
     // sort newest first
     final sorted = [...items]
       ..sort((a, b) => b.createdAt.compareTo(a.createdAt));
@@ -170,11 +168,14 @@ class _NotificationTile extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (item.imageUrl != null)
+            if (item.presentation != null)
               ClipRRect(
                 borderRadius: BorderRadius.circular(8),
                 child: Image.network(
-                  item.imageUrl!,
+                  item.presentation!.resources != null &&
+                          item.presentation!.resources!.isNotEmpty
+                      ? item.presentation!.resources!.first.url
+                      : '',
                   width: 48,
                   height: 48,
                   fit: BoxFit.cover,
@@ -200,7 +201,7 @@ class _NotificationTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    item.title,
+                    item.presentation?.title ?? 'No Title',
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   const SizedBox(height: 4),
