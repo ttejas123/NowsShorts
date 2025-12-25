@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:bl_inshort/data/dto/common/content_type_dto.dart';
 import 'package:bl_inshort/data/models/feeds/resource_entity.dart';
 
@@ -8,7 +10,7 @@ class ResourceDto {
   final ContentTypeDto contentType;
 
   ResourceDto({
-    required this.id,
+    this.id = 0,
     required this.name,
     required this.url,
     required this.contentType,
@@ -16,7 +18,7 @@ class ResourceDto {
 
   factory ResourceDto.fromJson(Map<String, dynamic> json) {
     return ResourceDto(
-      id: json['id'],
+      id: json['id'] ?? Random().nextInt(1000000),
       name: json['name'],
       url: json['url'],
       contentType: ContentTypeDto.fromJson(json['content_type']),

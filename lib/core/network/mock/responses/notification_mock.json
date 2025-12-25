@@ -36,8 +36,12 @@
         "body": "Upgrade your skills with top instructors. Limited time offer.",
         "resources": [
           {
-            "id": "notif_106_1",
-            "type": "image",
+            "content_type": {
+              "id": 1,
+              "name": "story",
+              "description": "Text-based story"
+            },
+            "name": "Story",
             "url": "https://images.pexels.com/photos/210607/pexels-photo-210607.jpeg"
           }
         ]
@@ -147,7 +151,12 @@
         "body": "Based on your reading history, here are 5 AI startups gaining traction this year.",
         "resources": [
           {
-            "type": "image",
+            "content_type": {
+              "id": 1,
+              "name": "story",
+              "description": "Text-based story"
+            },
+            "name": "Story",
             "url": "https://images.pexels.com/photos/210607/pexels-photo-210607.jpeg"
           }
         ]
@@ -180,7 +189,12 @@
         "body": "Researchers have developed a new silicon architecture that dramatically improves processing speed.",
         "resources": [
           {
-            "type": "image",
+            "content_type": {
+              "id": 1,
+              "name": "story",
+              "description": "Text-based story"
+            },
+            "name": "Story",
             "url": "https://images.pexels.com/photos/210607/pexels-photo-210607.jpeg"
           }
         ],

@@ -101,11 +101,17 @@ class _NotificationRow extends StatelessWidget {
             if (item.imageUrl != null)
               ClipRRect(
                 borderRadius: BorderRadius.circular(8),
-                child: Image.network(
-                  item.imageUrl!,
+                child: CachedNetworkImage(
+                  imageUrl: item.imageUrl!,
                   width: 56,
                   height: 56,
                   fit: BoxFit.cover,
+                  placeholder: (_, __) => Container(
+                    width: 56,
+                    height: 56,
+                    color: Colors.grey.shade300,
+                  ),
+                  errorWidget: (_, __, ___) => Icon(Icons.image_not_supported),
                 ),
               )
             else

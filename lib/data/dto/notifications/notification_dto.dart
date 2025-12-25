@@ -1,4 +1,3 @@
-import 'package:bl_inshort/core/logging/logger.dart';
 import 'package:bl_inshort/data/models/notifications/notification_common_enums.dart';
 import 'package:bl_inshort/data/models/notifications/notification_entity.dart';
 

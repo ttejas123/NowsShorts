@@ -50,7 +50,16 @@ class _PhotoDominantCard extends StatelessWidget {
         fit: StackFit.expand,
         children: [
           if (item.resources.isNotEmpty)
-            Image.network(item.resources[0].url, fit: BoxFit.cover),
+            CachedNetworkImage(
+              imageUrl: item.resources[0].url,
+              fit: BoxFit.cover,
+              placeholder: (_, __) => Container(
+                width: size.width,
+                height: size.height,
+                color: Colors.grey.shade300,
+              ),
+              errorWidget: (_, __, ___) => Icon(Icons.image_not_supported),
+            ),
           Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -129,7 +138,16 @@ class _TextDominantCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16),
                 child: AspectRatio(
                   aspectRatio: 16 / 9,
-                  child: Image.network(item.resources[0].url, fit: BoxFit.cover),
+                  child: CachedNetworkImage(
+                    imageUrl: item.resources[0].url,
+                    fit: BoxFit.cover,
+                    placeholder: (_, __) => Container(
+                      width: size.width,
+                      height: size.height,
+                      color: Colors.grey.shade300,
+                    ),
+                    errorWidget: (_, __, ___) => Icon(Icons.image_not_supported),
+                  ),
                 ),
               ),
             const SizedBox(height: 16),
@@ -228,7 +246,16 @@ class _GalleryCardState extends State<_GalleryCard> {
                       padding: const EdgeInsets.all(12),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(20),
-                        child: Image.network(url, fit: BoxFit.cover),
+                        child: CachedNetworkImage(
+                          imageUrl: url,
+                          fit: BoxFit.cover,
+                          placeholder: (_, __) => Container(
+                            width: size.width,
+                            height: size.height,
+                            color: Colors.grey.shade300,
+                          ),
+                          errorWidget: (_, __, ___) => Icon(Icons.image_not_supported),
+                        ),
                       ),
                     );
                   },
@@ -328,7 +355,16 @@ class _StoryCard extends StatelessWidget {
         fit: StackFit.expand,
         children: [
           if (item.resources.isNotEmpty)
-            Image.network(item.resources.first.url, fit: BoxFit.cover),
+            CachedNetworkImage(
+              imageUrl: item.resources.first.url,
+              fit: BoxFit.cover,
+              placeholder: (_, __) => Container(
+                width: size.width,
+                height: size.height,
+                color: Colors.grey.shade300,
+              ),
+              errorWidget: (_, __, ___) => Icon(Icons.image_not_supported),
+            ),
           Container(color: Colors.black.withOpacity(0.4)),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
@@ -611,8 +647,8 @@ class _RelatedImagesGalleryState extends State<RelatedImagesGallery> {
                     minScale: 1.0,
                     maxScale: 4.0,
                     child: Center(
-                      child: Image.network(
-                        widget.resources[index].url,
+                      child: CachedNetworkImage(
+                        imageUrl: widget.resources[index].url,
                         fit: BoxFit.contain,
                         loadingBuilder: (context, child, progress) {
                           if (progress == null) return child;
@@ -721,10 +757,16 @@ class StandardVisualCard extends StatelessWidget {
                 Row(
                   children: [
                     Expanded(
-                      child: Image.network(
-                        item.resources.isNotEmpty ? item.resources[0].url : "",
+                      child: CachedNetworkImage(
+                        imageUrl: item.resources.isNotEmpty ? item.resources[0].url : "",
                         fit: BoxFit.cover,
                         height: 400,
+                        placeholder: (_, __) => Container(
+                          width: size.width,
+                          height: size.height,
+                          color: Colors.grey.shade300,
+                        ),
+                        errorWidget: (_, __, ___) => Icon(Icons.image_not_supported),
                       ),
                     ),
                   ],

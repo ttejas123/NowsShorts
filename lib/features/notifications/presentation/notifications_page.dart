@@ -3,25 +3,22 @@ import 'package:bl_inshort/features/notifications/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class NotificationsPage extends ConsumerStatefulWidget {
   const NotificationsPage({super.key});
 
   @override
-  ConsumerState<NotificationsPage> createState() =>
-      _NotificationsPageState();
+  ConsumerState<NotificationsPage> createState() => _NotificationsPageState();
 }
 
 class _NotificationsPageState extends ConsumerState<NotificationsPage> {
-
   @override
   void initState() {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref
-          .read(notificationControllerProvider.notifier)
-          .loadInitial();
+      ref.read(notificationControllerProvider.notifier).loadInitial();
     });
   }
 
@@ -67,9 +64,7 @@ class _NotificationSection {
   _NotificationSection({required this.title, required this.items});
 }
 
-List<_NotificationSection> _groupByTime(
-  List<NotificationEntity> items,
-) {
+List<_NotificationSection> _groupByTime(List<NotificationEntity> items) {
   final now = DateTime.now();
 
   final yesterday = <NotificationEntity>[];
@@ -123,20 +118,17 @@ class _NotificationSectionWidget extends StatelessWidget {
         children: [
           if (section.items.isNotEmpty)
             Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               child: Text(
                 section.title,
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      // ignore: deprecated_member_use
-                      color: colors.onSurface.withOpacity(0.8),
-                      fontWeight: FontWeight.w600,
-                    ),
+                  // ignore: deprecated_member_use
+                  color: colors.onSurface.withOpacity(0.8),
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
-          ...section.items.map(
-            (item) => _NotificationTile(item: item),
-          ),
+          ...section.items.map((item) => _NotificationTile(item: item)),
         ],
       ),
     );
@@ -163,22 +155,26 @@ class _NotificationTile extends StatelessWidget {
     return InkWell(
       onTap: null, // nothing actionable for now
       child: Padding(
-        padding:
-            const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (item.presentation != null)
+            if (item.presentation != null &&
+                item.presentation!.resources != null &&
+                item.presentation!.resources!.isNotEmpty)
               ClipRRect(
                 borderRadius: BorderRadius.circular(8),
-                child: Image.network(
-                  item.presentation!.resources != null &&
-                          item.presentation!.resources!.isNotEmpty
-                      ? item.presentation!.resources!.first.url
-                      : '',
+                child: CachedNetworkImage(
+                  imageUrl: item.presentation!.resources!.first.url,
                   width: 48,
                   height: 48,
                   fit: BoxFit.cover,
+                  placeholder: (_, __) => Container(
+                    width: 48,
+                    height: 48,
+                    color: Colors.grey.shade300,
+                  ),
+                  errorWidget: (_, __, ___) => Icon(Icons.image_not_supported),
                 ),
               )
             else
@@ -208,9 +204,9 @@ class _NotificationTile extends StatelessWidget {
                   Text(
                     _timeAgo(item.createdAt),
                     style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                          // ignore: deprecated_member_use
-                          color: colors.onSurface.withOpacity(0.6),
-                        ),
+                      // ignore: deprecated_member_use
+                      color: colors.onSurface.withOpacity(0.6),
+                    ),
                   ),
                 ],
               ),

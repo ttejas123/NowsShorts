@@ -298,11 +298,17 @@ class _NotificationTile extends StatelessWidget {
           const SizedBox(width: 12),
           ClipRRect(
             borderRadius: BorderRadius.circular(6),
-            child: Image.network(
-              image,
+            child: CachedNetworkImage(
+              imageUrl: image,
               height: 46,
               width: 46,
               fit: BoxFit.cover,
+              placeholder: (_, __) => Container(
+                width: 46,
+                height: 46,
+                color: Colors.grey.shade300,
+              ),
+              errorWidget: (_, __, ___) => Icon(Icons.image_not_supported),
             ),
           ),
         ],
@@ -329,10 +335,16 @@ class _Insights extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             itemBuilder: (_, i) => ClipRRect(
               borderRadius: BorderRadius.circular(10),
-              child: Image.network(
-                "https://images.pexels.com/photos/1434608/pexels-photo-1434608.jpeg",
+              child: CachedNetworkImage(
+                imageUrl: "https://images.pexels.com/photos/1434608/pexels-photo-1434608.jpeg",
                 width: 220,
                 fit: BoxFit.cover,
+                placeholder: (_, __) => Container(
+                  width: 220,
+                  height: 120,
+                  color: Colors.grey.shade300,
+                ),
+                errorWidget: (_, __, ___) => Icon(Icons.image_not_supported),
               ),
             ),
             separatorBuilder: (_, _) => const SizedBox(width: 12),
@@ -429,9 +441,15 @@ class _InsightCard extends StatelessWidget {
       child: SizedBox(
         width: 150,
         height: 220,
-        child: Image.network(
-          imageUrl,
+        child: CachedNetworkImage(
+          imageUrl: imageUrl,
           fit: BoxFit.cover,
+          placeholder: (_, __) => Container(
+            width: 150,
+            height: 220,
+            color: Colors.grey.shade300,
+          ),
+          errorWidget: (_, __, ___) => Icon(Icons.image_not_supported),
         ),
       ),
     );
