@@ -1,4 +1,4 @@
-import 'package:bl_inshort/data/models/settings/language_entity.dart';
+import 'package:bl_inshort/data/models/feeds/language_entity.dart';
 import 'package:bl_inshort/features/settings/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -6,16 +6,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class LanguageSelectorSheet extends ConsumerWidget {
   const LanguageSelectorSheet({super.key});
 
-  static const _languages = [
-    LanguageEntity(code: 'en', label: 'English'),
-    LanguageEntity(code: 'hi', label: 'हिन्दी'),
-    LanguageEntity(code: 'kn', label: 'ಕನ್ನಡ'),
-    LanguageEntity(code: 'ta', label: 'தமிழ்'),
-    LanguageEntity(code: 'te', label: 'తెలుగు'),
-    LanguageEntity(code: 'gu', label: 'ગુજરાતી'),
-    LanguageEntity(code: 'mr', label: 'मराठी'),
-    LanguageEntity(code: 'bn', label: 'বাংলা'),
-    LanguageEntity(code: 'or', label: 'ଓଡ଼ିଆ'),
+  static final _languages = [
+    LanguageEntity(code: 'en', name: 'English'),
+    LanguageEntity(code: 'hi', name: 'हिन्दी'),
+    LanguageEntity(code: 'kn', name: 'ಕನ್ನಡ'),
+    LanguageEntity(code: 'ta', name: 'தமிழ்'),
+    LanguageEntity(code: 'te', name: 'తెలుగు'),
+    LanguageEntity(code: 'gu', name: 'ગુજરાતી'),
+    LanguageEntity(code: 'mr', name: 'मराठी'),
+    LanguageEntity(code: 'bn', name: 'বাংলা'),
+    LanguageEntity(code: 'or', name: 'ଓଡ଼ିଆ'),
   ];
 
   @override
@@ -67,7 +67,7 @@ class LanguageSelectorSheet extends ConsumerWidget {
                           height: 44,
                           child: Center(
                             child: Text(
-                              lang.label,
+                              lang.name,
                               style: TextStyle(
                                 color: isSelected ? Colors.blue : Colors.white,
                                 fontSize: 14,

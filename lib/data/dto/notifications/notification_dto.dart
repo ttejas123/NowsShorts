@@ -1,5 +1,6 @@
 import 'package:bl_inshort/core/logging/logger.dart';
 import 'package:bl_inshort/data/models/notifications/notification_common_enums.dart';
+import 'package:bl_inshort/data/models/notifications/notification_entity.dart';
 
 import 'notification_action_dto.dart';
 import 'notification_presentation_dto.dart';
@@ -58,9 +59,6 @@ class NotificationDTO {
     copyJsonToClipboard(dto);
     inspectInDevTools(dto);
 
-
-
-
     return dto;
   }
 
@@ -82,6 +80,18 @@ class NotificationDTO {
       'expires_at': expires_at,
     };
   }
+
+  NotificationEntity toEntity() {
+    return NotificationEntity(
+      id: id,
+      intent: intent,
+      priority: priority,
+      action: action.toEntity(),
+      presentation: presentation?.toEntity(),
+      state: state.toEntity(),
+      metadata: metadata,
+      createdAt: DateTime.parse(created_at),
+      expiresAt: expires_at != null ? DateTime.parse(expires_at!) : null,
+    );
+  }
 }
-
-

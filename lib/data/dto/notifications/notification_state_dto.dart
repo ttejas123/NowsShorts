@@ -1,3 +1,5 @@
+import 'package:bl_inshort/data/models/notifications/notification_state.dart';
+
 class NotificationStateDTO {
   final bool isRead;
   final bool isDismissed;
@@ -32,5 +34,14 @@ class NotificationStateDTO {
       'delivered': delivered,
       'opened': opened,
     };
+  }
+
+  NotificationState toEntity() {
+    return NotificationState(
+      isRead: isRead,
+      isDismissed: isDismissed,
+      delivered: delivered,
+      opened: opened,
+    );
   }
 }

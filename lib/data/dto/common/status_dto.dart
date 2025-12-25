@@ -1,13 +1,11 @@
+import 'package:bl_inshort/data/models/feeds/status_entity.dart';
+
 class StatusDto {
   final int id;
   final String name;
   final String description;
 
-  StatusDto({
-    required this.id,
-    required this.name,
-    required this.description,
-  });
+  StatusDto({required this.id, required this.name, required this.description});
 
   factory StatusDto.fromJson(Map<String, dynamic> json) {
     return StatusDto(
@@ -23,10 +21,10 @@ class StatusDto {
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'name': name,
-      'description': description,
-    };
+    return {'id': id, 'name': name, 'description': description};
+  }
+
+  StatusEntity toEntity() {
+    return StatusEntity(id: id, name: name, description: description);
   }
 }

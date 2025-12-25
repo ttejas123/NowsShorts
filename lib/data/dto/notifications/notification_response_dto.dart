@@ -1,4 +1,5 @@
 import 'package:bl_inshort/data/models/notifications/notification_action.dart';
+import 'package:bl_inshort/data/models/notifications/notification_entity.dart';
 import 'package:flutter/widgets.dart';
 
 import 'notification_dto.dart';
@@ -16,7 +17,8 @@ class NotificationResponseDTO {
 
   factory NotificationResponseDTO.fromJson(Map<String, dynamic> json) {
     return NotificationResponseDTO(
-      items: (json['items'] as List).take(1)
+      items: (json['items'] as List)
+          .take(1)
           .map((e) => NotificationDTO.fromJson(e))
           .toList(),
       hasMore: json['hasMore'] ?? false,
@@ -37,4 +39,9 @@ class NotificationResponseDTO {
     };
   }
 
+  static List<NotificationEntity> toEntityFromJson(Map<String, dynamic> json) {
+    return NotificationResponseDTO.fromJson(
+      json,
+    ).items.map((dto) => dto.toEntity()).toList();
+  }
 }

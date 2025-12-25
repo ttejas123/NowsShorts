@@ -1,3 +1,5 @@
+import 'package:bl_inshort/data/models/feeds/author_entity.dart';
+
 class AuthorDto {
   final int id;
   final String name;
@@ -16,7 +18,7 @@ class AuthorDto {
       bio: json['bio'],
       id: json['id'],
       name: json['name'],
-      profilePicture: json['profile_picture']
+      profilePicture: json['profile_picture'],
     );
   }
 
@@ -32,5 +34,14 @@ class AuthorDto {
       'bio': bio,
       'profile_picture': profilePicture,
     };
+  }
+
+  AuthorEntity toEntity() {
+    return AuthorEntity(
+      id: id,
+      name: name,
+      bio: bio,
+      profilePicture: profilePicture,
+    );
   }
 }

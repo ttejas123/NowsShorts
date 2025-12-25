@@ -1,3 +1,4 @@
+import 'package:bl_inshort/data/dto/notifications/notification_dto.dart';
 import 'package:bl_inshort/data/dto/notifications/notification_response_dto.dart';
 import 'package:bl_inshort/data/models/notifications/notification_entity.dart';
 import 'package:dio/dio.dart';
@@ -16,23 +17,16 @@ class NotificationRepository extends NotificationRepositoryAbstract {
   @override
   Future<List<NotificationEntity>> fetchNotification() async {
     final response = await dio.get("/notification");
-    final notificationDto = NotificationResponseDTO.fromJson(response.data);
-    return notificationDto.items
-        .map((dto) => NotificationEntity.fromDto(dto))
-        .toList();
+    return NotificationResponseDTO.toEntityFromJson(response.data);
   }
 
   @override
   Future<void> markAsRead(int notificationId) async {
-    await dio.post("/notification/markAsRead", data: {
-      "id": notificationId,
-    });
+    await dio.post("/notification/markAsRead", data: {"id": notificationId});
   }
 
   @override
   Future<void> dismiss(int notificationId) async {
-    await dio.post("/notification/dismiss", data: {
-      "id": notificationId,
-    });
+    await dio.post("/notification/dismiss", data: {"id": notificationId});
   }
 }

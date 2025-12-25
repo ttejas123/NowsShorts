@@ -1,3 +1,5 @@
+import 'package:bl_inshort/data/models/notifications/notification_presentation.dart';
+
 import '../common/resource_dto.dart';
 
 class NotificationPresentationDTO {
@@ -28,8 +30,8 @@ class NotificationPresentationDTO {
       body: json['body'],
       resources: json['resources'] != null
           ? (json['resources'] as List)
-              .map((e) => ResourceDto.fromJson(e))
-              .toList()
+                .map((e) => ResourceDto.fromJson(e))
+                .toList()
           : [],
       highlight: json['highlight'] ?? false,
       badge: json['badge'],
@@ -50,5 +52,16 @@ class NotificationPresentationDTO {
       'highlight': highlight,
       'badge': badge,
     };
+  }
+
+  NotificationPresentation toEntity() {
+    return NotificationPresentation(
+      title: title,
+      subtitle: subtitle,
+      body: body,
+      resources: resources.map((e) => e.toEntity()).toList(),
+      highlight: highlight,
+      badge: badge,
+    );
   }
 }

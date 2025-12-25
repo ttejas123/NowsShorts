@@ -1,4 +1,5 @@
 import 'package:bl_inshort/data/dto/common/content_type_dto.dart';
+import 'package:bl_inshort/data/models/feeds/resource_entity.dart';
 
 class ResourceDto {
   final int id;
@@ -34,5 +35,14 @@ class ResourceDto {
       'url': url,
       'content_type': contentType.toJson(),
     };
+  }
+
+  ResourceEntity toEntity() {
+    return ResourceEntity(
+      id: id,
+      name: name,
+      url: url,
+      contentType: contentType.toEntity(),
+    );
   }
 }

@@ -1,5 +1,4 @@
-
-import 'package:bl_inshort/data/models/settings/language_entity.dart';
+import 'package:bl_inshort/data/models/feeds/language_entity.dart';
 
 abstract class SettingsRepository {
   Future<LanguageEntity?> getSelectedLanguage();
@@ -9,6 +8,7 @@ abstract class SettingsRepository {
   Future<bool> isAutoplayEnabled();
   Future<bool> isHdImagesEnabled();
 }
+
 class InMemorySettingsRepository implements SettingsRepository {
   LanguageEntity? _language;
   bool _autoplayEnabled = true;

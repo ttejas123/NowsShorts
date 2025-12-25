@@ -6,15 +6,16 @@ import 'package:bl_inshort/data/dto/common/language_dto.dart';
 import 'package:bl_inshort/data/dto/common/region_dto.dart';
 import 'package:bl_inshort/data/dto/common/status_dto.dart';
 import 'package:bl_inshort/data/dto/common/resource_dto.dart';
+import 'package:bl_inshort/data/models/feeds/feed_entity.dart';
 
 enum FeedLayoutType {
   photoDominant, // big image, small text
-  textDominant,  // more text, image secondary
-  gallery,       // horizontal image slider
-  story,         // story-like full-bleed layout
-  htmlViewCard,   // card with static html preview
-  browserCard,   // card with link to external browser
-  standardCard;   // card with link to external browser
+  textDominant, // more text, image secondary
+  gallery, // horizontal image slider
+  story, // story-like full-bleed layout
+  htmlViewCard, // card with static html preview
+  browserCard, // card with link to external browser
+  standardCard; // card with link to external browser
 
   static FeedLayoutType fromString(String value) {
     return FeedLayoutType.values.firstWhere(
@@ -38,7 +39,7 @@ enum ItemType {
   }
 }
 
-class NewsDto {
+class FeedDTO {
   final int id;
   final String title;
   final String subtitle;
@@ -61,7 +62,7 @@ class NewsDto {
   final FeedLayoutType layout;
   final List<ResourceDto> resources;
 
-  NewsDto({
+  FeedDTO({
     required this.id,
     required this.type,
     required this.title,
@@ -84,8 +85,8 @@ class NewsDto {
     required this.html,
   });
 
-  factory NewsDto.fromJson(Map<String, dynamic> json) {
-    return NewsDto(
+  factory FeedDTO.fromJson(Map<String, dynamic> json) {
+    return FeedDTO(
       id: json['id'],
       type: ItemType.fromString(json['type']),
       title: json['title'],
@@ -101,9 +102,7 @@ class NewsDto {
       layout: FeedLayoutType.fromString(json['layout']),
       source: SourceDto.fromJson(json['source']),
       category: CategoryDto.fromJson(json['category']),
-      tags: (json['tags'] as List)
-          .map((e) => TagDto.fromJson(e))
-          .toList(),
+      tags: (json['tags'] as List).map((e) => TagDto.fromJson(e)).toList(),
       language: LanguageDto.fromJson(json['language']),
       region: RegionDto.fromJson(json['region']),
       status: StatusDto.fromJson(json['status']),
@@ -115,7 +114,7 @@ class NewsDto {
 
   @override
   String toString() {
-    return 'NewsDto{id=$id, title=$title, subtitle=$subtitle, description=$description, slug=$slug, publishedAt=$publishedAt, isFeatured=$isFeatured, engagementScore=$engagementScore, webUrl=$webUrl, html=$html, type=$type, author=$author, source=$source, category=$category, tags=$tags, language=$language, region=$region, status=$status, layout=$layout, resources=$resources}';
+    return 'FeedDTO{id=$id, title=$title, subtitle=$subtitle, description=$description, slug=$slug, publishedAt=$publishedAt, isFeatured=$isFeatured, engagementScore=$engagementScore, webUrl=$webUrl, html=$html, type=$type, author=$author, source=$source, category=$category, tags=$tags, language=$language, region=$region, status=$status, layout=$layout, resources=$resources}';
   }
 
   Map<String, dynamic> toJson() {
@@ -141,5 +140,30 @@ class NewsDto {
       'layout': layout.name,
       'resources': resources.map((e) => e.toJson()).toList(),
     };
+  }
+
+  FeedEntity toEntity() {
+    return FeedEntity(
+      id: id,
+      type: type,
+      title: title,
+      subtitle: subtitle,
+      description: description,
+      slug: slug,
+      webUrl: webUrl,
+      html: html,
+      publishedAt: DateTime.parse(publishedAt),
+      isFeatured: isFeatured,
+      engagementScore: engagementScore,
+      author: author.toEntity(),
+      layout: layout,
+      source: source.toEntity(),
+      category: category.toEntity(),
+      tags: tags.map((e) => e.toEntity()).toList(),
+      language: language.toEntity(),
+      region: region.toEntity(),
+      status: status.toEntity(),
+      resources: resources.map((e) => e.toEntity()).toList(),
+    );
   }
 }

@@ -54,10 +54,10 @@ class FeedEntity {
     required this.resources,
     required this.layout,
     required this.webUrl,
-    required this.html
+    required this.html,
   });
 
-  factory FeedEntity.fromDto(NewsDto dto) {
+  factory FeedEntity.fromDto(FeedDTO dto) {
     return FeedEntity(
       id: dto.id,
       type: dto.type,

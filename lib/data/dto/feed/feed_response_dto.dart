@@ -1,9 +1,10 @@
 import 'package:bl_inshort/data/dto/feed/feed_dto.dart';
+import 'package:bl_inshort/data/models/feeds/feed_entity.dart';
 
 class FeedResponseDto {
   final String? cursor;
   final bool hasMore;
-  final List<NewsDto> items;
+  final List<FeedDTO> items;
 
   FeedResponseDto({
     required this.cursor,
@@ -15,9 +16,7 @@ class FeedResponseDto {
     return FeedResponseDto(
       cursor: json['cursor'],
       hasMore: json['has_more'],
-      items: (json['items'] as List)
-          .map((e) => NewsDto.fromJson(e))
-          .toList(),
+      items: (json['items'] as List).map((e) => FeedDTO.fromJson(e)).toList(),
     );
   }
 
@@ -32,5 +31,11 @@ class FeedResponseDto {
       'has_more': hasMore,
       'items': items.map((e) => e.toJson()).toList(),
     };
+  }
+
+  static List<FeedEntity> toEntityFromJson(Map<String, dynamic> json) {
+    return FeedResponseDto.fromJson(
+      json,
+    ).items.map((dto) => dto.toEntity()).toList();
   }
 }

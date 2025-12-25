@@ -1,13 +1,11 @@
+import 'package:bl_inshort/data/models/feeds/source_entity.dart';
+
 class SourceDto {
   final int id;
   final String name;
   final String website;
 
-  SourceDto({
-    required this.id,
-    required this.name,
-    required this.website,
-  });
+  SourceDto({required this.id, required this.name, required this.website});
 
   factory SourceDto.fromJson(Map<String, dynamic> json) {
     return SourceDto(
@@ -23,10 +21,10 @@ class SourceDto {
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'name': name,
-      'website': website,
-    };
+    return {'id': id, 'name': name, 'website': website};
+  }
+
+  SourceEntity toEntity() {
+    return SourceEntity(id: id, name: name, website: website);
   }
 }

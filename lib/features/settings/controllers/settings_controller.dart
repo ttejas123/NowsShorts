@@ -1,12 +1,8 @@
-import 'package:bl_inshort/data/models/settings/language_entity.dart';
+import 'package:bl_inshort/data/models/feeds/language_entity.dart';
 import 'package:bl_inshort/data/repositories/settings_repository.dart';
 import 'package:flutter_riverpod/legacy.dart';
 
-enum InterestPreference {
-  interested,
-  notInterested,
-  neutral,
-}
+enum InterestPreference { interested, notInterested, neutral }
 
 class SettingsState {
   final LanguageEntity? selectedLanguage;
@@ -36,12 +32,10 @@ class SettingsState {
   }
 }
 
-
 class SettingsController extends StateNotifier<SettingsState> {
   final SettingsRepository repository;
 
-  SettingsController(this.repository)
-      : super(const SettingsState()) {
+  SettingsController(this.repository) : super(const SettingsState()) {
     _load();
   }
 
@@ -50,7 +44,11 @@ class SettingsController extends StateNotifier<SettingsState> {
     final autoplay = await repository.isAutoplayEnabled();
     final hdImages = await repository.isHdImagesEnabled();
 
-    state = state.copyWith(selectedLanguage: lang, autoplayEnabled: autoplay, hdImagesEnabled: hdImages);
+    state = state.copyWith(
+      selectedLanguage: lang,
+      autoplayEnabled: autoplay,
+      hdImagesEnabled: hdImages,
+    );
   }
 
   // 🔹 Language

@@ -27,17 +27,18 @@ class SettingsPage extends ConsumerWidget {
               child: Row(
                 children: [
                   GestureDetector(
-                      onTap: () {
-                        context.pop();
-                      },
-                      child:Icon(Icons.arrow_back, color: Theme.of(context).iconTheme.color),
+                    onTap: () {
+                      context.pop();
+                    },
+                    child: Icon(
+                      Icons.arrow_back,
+                      color: Theme.of(context).iconTheme.color,
+                    ),
                   ),
                   const Spacer(),
                   const CircleAvatar(
                     radius: 16,
-                    backgroundImage: NetworkImage(
-                      'https://i.pravatar.cc/150',
-                    ),
+                    backgroundImage: NetworkImage('https://i.pravatar.cc/150'),
                   ),
                 ],
               ),
@@ -54,7 +55,9 @@ class SettingsPage extends ConsumerWidget {
                       showDialog(
                         context: context,
                         // ignore: deprecated_member_use
-                        barrierColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+                        barrierColor: Theme.of(
+                          context,
+                        ).colorScheme.onSurface.withOpacity(0.6),
                         builder: (_) => const LanguageSelectorSheet(),
                       );
                     },
@@ -62,7 +65,7 @@ class SettingsPage extends ConsumerWidget {
                       icon: Icons.text_fields,
                       title: 'Language',
                       trailing: Text(
-                        '${selectedLanguage?.label ?? 'English'} ▼',
+                        '${selectedLanguage?.name ?? 'English'} ▼',
                         style: TextStyle(color: Color(0xFF4EA3FF)),
                       ),
                     ),
@@ -98,7 +101,9 @@ class SettingsPage extends ConsumerWidget {
                     title: 'HD Image',
                     value: hdImagesEnabled,
                     onChanged: (value) {
-                      ref.read(settingsControllerProvider.notifier).setHdImages(value);
+                      ref
+                          .read(settingsControllerProvider.notifier)
+                          .setHdImages(value);
                     },
                   ),
                   _Divider(),
@@ -109,9 +114,11 @@ class SettingsPage extends ConsumerWidget {
                     subtitle: 'For better readability at night',
                     value: isNightMode,
                     onChanged: (value) {
-                      ref.read(themeControllerProvider).setTheme(
-                        value ? AppThemeMode.dark : AppThemeMode.light,
-                      );
+                      ref
+                          .read(themeControllerProvider)
+                          .setTheme(
+                            value ? AppThemeMode.dark : AppThemeMode.light,
+                          );
                     },
                   ),
                   _Divider(),
@@ -121,7 +128,9 @@ class SettingsPage extends ConsumerWidget {
                     title: 'Autoplay',
                     value: autoplayEnabled,
                     onChanged: (value) {
-                      ref.read(settingsControllerProvider.notifier).setAutoplay(value);
+                      ref
+                          .read(settingsControllerProvider.notifier)
+                          .setAutoplay(value);
                     },
                   ),
                   _Divider(),
@@ -132,7 +141,7 @@ class SettingsPage extends ConsumerWidget {
                   _PlainRow(title: 'Rate app'),
                   GestureDetector(
                     onTap: () => context.push('/notifications'),
-                    child: _PlainRow(title: 'Notifications')
+                    child: _PlainRow(title: 'Notifications'),
                   ),
                   _PlainRow(title: 'Terms & Conditions'),
                 ],
@@ -150,11 +159,7 @@ class _SettingsRow extends StatelessWidget {
   final String title;
   final Widget? trailing;
 
-  const _SettingsRow({
-    required this.icon,
-    required this.title,
-    this.trailing,
-  });
+  const _SettingsRow({required this.icon, required this.title, this.trailing});
 
   @override
   Widget build(BuildContext context) {
@@ -165,10 +170,7 @@ class _SettingsRow extends StatelessWidget {
           Icon(icon, color: const Color(0xFF4EA3FF), size: 20),
           const SizedBox(width: 14),
           Expanded(
-            child: Text(
-              title,
-              style: Theme.of(context).textTheme.bodyMedium,
-            ),
+            child: Text(title, style: Theme.of(context).textTheme.bodyMedium),
           ),
           if (trailing != null) trailing!,
         ],
@@ -204,10 +206,7 @@ class _SettingsToggleRow extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  title,
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
+                Text(title, style: Theme.of(context).textTheme.bodyMedium),
                 if (subtitle != null)
                   Padding(
                     padding: const EdgeInsets.only(top: 4),
@@ -244,10 +243,7 @@ class _PlainRow extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
       child: Text(
         title,
-        style: const TextStyle(
-          color: Color(0xFFB0B0B0),
-          fontSize: 14,
-        ),
+        style: const TextStyle(color: Color(0xFFB0B0B0), fontSize: 14),
       ),
     );
   }

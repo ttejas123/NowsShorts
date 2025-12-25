@@ -1,3 +1,5 @@
+import 'package:bl_inshort/data/models/feeds/category_entity.dart';
+
 class CategoryDto {
   final int id;
   final String name;
@@ -23,10 +25,10 @@ class CategoryDto {
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'name': name,
-      'description': description,
-    };
+    return {'id': id, 'name': name, 'description': description};
+  }
+
+  CategoryEntity toEntity() {
+    return CategoryEntity(id: id, name: name, description: description);
   }
 }

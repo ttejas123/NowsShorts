@@ -1,3 +1,5 @@
+import 'package:bl_inshort/data/models/feeds/content_type_entity.dart';
+
 class ContentTypeDto {
   final int id;
   final String name;
@@ -23,10 +25,10 @@ class ContentTypeDto {
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'name': name,
-      'description': description,
-    };
+    return {'id': id, 'name': name, 'description': description};
+  }
+
+  ContentTypeEntity toEntity() {
+    return ContentTypeEntity(id: id, name: name, description: description);
   }
 }
