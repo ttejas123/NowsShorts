@@ -19,4 +19,18 @@ class AuthorDto {
       profilePicture: json['profile_picture']
     );
   }
+
+  @override
+  String toString() {
+    return 'AuthorDto{id=$id, name=$name, bio=$bio, profilePicture=$profilePicture}';
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'bio': bio,
+      'profile_picture': profilePicture,
+    };
+  }
 }

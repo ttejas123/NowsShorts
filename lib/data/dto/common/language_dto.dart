@@ -16,4 +16,17 @@ class LanguageDto {
       code: json['code'],
     );
   }
+
+  @override
+  String toString() {
+    return 'LanguageDto{id=$id, name=$name, code=$code}';
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'code': code,
+    };
+  }
 }

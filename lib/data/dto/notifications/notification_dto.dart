@@ -1,3 +1,4 @@
+import 'package:bl_inshort/core/logging/logger.dart';
 import 'package:bl_inshort/data/models/notifications/notification_common_enums.dart';
 
 import 'notification_action_dto.dart';
@@ -41,7 +42,7 @@ class NotificationDTO {
   });
 
   factory NotificationDTO.fromJson(Map<String, dynamic> json) {
-    return NotificationDTO(
+    final dto = NotificationDTO(
       id: json['id'],
       intent: NotificationIntent.fromString(json['intent']),
       priority: NotificationPriority.fromString(json['priority']),
@@ -54,5 +55,33 @@ class NotificationDTO {
       created_at: json['createdAt'] ?? json['created_at'],
       expires_at: json['expiresAt'] ?? json['expires_at'],
     );
+    copyJsonToClipboard(dto);
+    inspectInDevTools(dto);
+
+
+
+
+    return dto;
+  }
+
+  @override
+  String toString() {
+    return 'NotificationDTO{id=$id, intent=$intent, priority=$priority, action=$action, presentation=$presentation, state=$state, metadata=$metadata, created_at=$created_at, expires_at=$expires_at}';
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'intent': intent.name,
+      'priority': priority.name,
+      'action': action.toJson(),
+      'presentation': presentation?.toJson(),
+      'state': state.toJson(),
+      'metadata': metadata,
+      'created_at': created_at,
+      'expires_at': expires_at,
+    };
   }
 }
+
+

@@ -17,7 +17,6 @@ class NotificationRepository extends NotificationRepositoryAbstract {
   Future<List<NotificationEntity>> fetchNotification() async {
     final response = await dio.get("/notification");
     final notificationDto = NotificationResponseDTO.fromJson(response.data);
-    print("notificationDto: $notificationDto");
     return notificationDto.items
         .map((dto) => NotificationEntity.fromDto(dto))
         .toList();

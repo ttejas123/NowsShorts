@@ -35,4 +35,20 @@ class NotificationPresentationDTO {
       badge: json['badge'],
     );
   }
+
+  @override
+  String toString() {
+    return 'NotificationPresentationDTO{title=$title, subtitle=$subtitle, body=$body, resources=$resources, highlight=$highlight, badge=$badge}';
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'title': title,
+      'subtitle': subtitle,
+      'body': body,
+      'resources': resources.map((e) => e.toJson()).toList(),
+      'highlight': highlight,
+      'badge': badge,
+    };
+  }
 }

@@ -703,7 +703,6 @@ class StandardVisualCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("item.resources.length =${item.resources.length}");
     return Container(
       // margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
       height: 560,

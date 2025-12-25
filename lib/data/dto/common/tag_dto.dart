@@ -13,4 +13,16 @@ class TagDto {
       name: json['name'],
     );
   }
+
+  @override
+  String toString() {
+    return 'TagDto{id=$id, name=$name}';
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+    };
+  }
 }

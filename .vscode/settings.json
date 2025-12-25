@@ -3,5 +3,8 @@
         "inshort",
         "Sabha",
         "shortnews"
-    ]
+    ],
+    "dart.openDevTools": "flutter",
+    "dart.devToolsTheme": "dark",
+    "dart.devToolsPort": 9100
 }

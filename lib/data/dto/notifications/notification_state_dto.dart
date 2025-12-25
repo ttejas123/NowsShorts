@@ -19,4 +19,18 @@ class NotificationStateDTO {
       opened: json['opened'] ?? false,
     );
   }
+
+  @override
+  String toString() {
+    return 'NotificationStateDTO{isRead=$isRead, isDismissed=$isDismissed, delivered=$delivered, opened=$opened}';
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'isRead': isRead,
+      'isDismissed': isDismissed,
+      'delivered': delivered,
+      'opened': opened,
+    };
+  }
 }

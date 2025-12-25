@@ -112,4 +112,34 @@ class NewsDto {
           .toList(),
     );
   }
+
+  @override
+  String toString() {
+    return 'NewsDto{id=$id, title=$title, subtitle=$subtitle, description=$description, slug=$slug, publishedAt=$publishedAt, isFeatured=$isFeatured, engagementScore=$engagementScore, webUrl=$webUrl, html=$html, type=$type, author=$author, source=$source, category=$category, tags=$tags, language=$language, region=$region, status=$status, layout=$layout, resources=$resources}';
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'title': title,
+      'subtitle': subtitle,
+      'description': description,
+      'slug': slug,
+      'published_at': publishedAt,
+      'is_featured': isFeatured,
+      'engagement_score': engagementScore,
+      'web_url': webUrl,
+      'html': html,
+      'type': type.name,
+      'author': author.toJson(),
+      'source': source.toJson(),
+      'category': category.toJson(),
+      'tags': tags.map((e) => e.toJson()).toList(),
+      'language': language.toJson(),
+      'region': region.toJson(),
+      'status': status.toJson(),
+      'layout': layout.name,
+      'resources': resources.map((e) => e.toJson()).toList(),
+    };
+  }
 }

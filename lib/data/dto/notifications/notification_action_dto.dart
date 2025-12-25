@@ -18,4 +18,16 @@ class NotificationActionDTO {
       payload: json['payload'],
     );
   }
+
+  @override
+  String toString() {
+    return 'NotificationActionDTO{type=$type, payload=$payload}';
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'type': type.name,
+      'payload': payload,
+    };
+  }
 }

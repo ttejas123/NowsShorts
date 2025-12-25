@@ -16,4 +16,17 @@ class StatusDto {
       description: json['description'],
     );
   }
+
+  @override
+  String toString() {
+    return 'StatusDto{id=$id, name=$name, description=$description}';
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'description': description,
+    };
+  }
 }

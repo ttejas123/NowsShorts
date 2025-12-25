@@ -20,4 +20,17 @@ class FeedResponseDto {
           .toList(),
     );
   }
+
+  @override
+  String toString() {
+    return 'FeedResponseDto{cursor=$cursor, hasMore=$hasMore, items=$items}';
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'cursor': cursor,
+      'has_more': hasMore,
+      'items': items.map((e) => e.toJson()).toList(),
+    };
+  }
 }

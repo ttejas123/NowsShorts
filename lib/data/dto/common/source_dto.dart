@@ -16,4 +16,17 @@ class SourceDto {
       website: json['website'],
     );
   }
+
+  @override
+  String toString() {
+    return 'SourceDto{id=$id, name=$name, website=$website}';
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'website': website,
+    };
+  }
 }

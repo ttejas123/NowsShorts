@@ -16,7 +16,7 @@ class NotificationResponseDTO {
 
   factory NotificationResponseDTO.fromJson(Map<String, dynamic> json) {
     return NotificationResponseDTO(
-      items: (json['items'] as List)
+      items: (json['items'] as List).take(1)
           .map((e) => NotificationDTO.fromJson(e))
           .toList(),
       hasMore: json['hasMore'] ?? false,
@@ -24,5 +24,17 @@ class NotificationResponseDTO {
     );
   }
 
+  @override
+  String toString() {
+    return 'NotificationResponseDTO{items=$items, hasMore=$hasMore, cursor=$cursor}';
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'items': items.map((e) => e.toJson()).toList(),
+      'hasMore': hasMore,
+      'cursor': cursor,
+    };
+  }
 
 }

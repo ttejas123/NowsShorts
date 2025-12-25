@@ -16,4 +16,17 @@ class CategoryDto {
       description: json['description'],
     );
   }
+
+  @override
+  String toString() {
+    return 'CategoryDto{id=$id, name=$name, description=$description}';
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'description': description,
+    };
+  }
 }

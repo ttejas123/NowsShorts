@@ -21,4 +21,18 @@ class ResourceDto {
       contentType: ContentTypeDto.fromJson(json['content_type']),
     );
   }
+
+  @override
+  String toString() {
+    return 'ResourceDto{id=$id, name=$name, url=$url, contentType=$contentType}';
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'url': url,
+      'content_type': contentType.toJson(),
+    };
+  }
 }

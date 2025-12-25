@@ -16,4 +16,17 @@ class RegionDto {
       code: json['code'],
     );
   }
+
+  @override
+  String toString() {
+    return 'RegionDto{id=$id, name=$name, code=$code}';
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'code': code,
+    };
+  }
 }
