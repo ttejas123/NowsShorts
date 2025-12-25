@@ -1,0 +1,4 @@
+To see all extension files open .vscode/settings.json and remove the line
+"files.exclude": {
+    "**/_extension_*": true
+}

@@ -1,229 +1,205 @@
 {
-    "cursor": null,
-    "has_more": true,
-    "items": [
-      {
-        "id": "notif_107",
-        "intent": "silent",
-        "priority": "low",
-      
-        "action": {
-          "type": "none"
-        },
-      
-        "state": {
-          "isRead": true,
-          "isDismissed": false,
-          "delivered": true,
-          "opened": false
-        },
-      
-        "metadata": {
-          "job": "prefetch_feed"
-        },
-      
-        "createdAt": "2025-01-17T02:00:00Z"
+  "cursor": null,
+  "has_more": true,
+  "items": [
+    {
+      "id": "notif_107",
+      "intent": "silent",
+      "priority": "low",
+      "action": {
+        "type": "none"
       },
-      {
-        "id": "notif_106",
-        "intent": "promotion",
-        "priority": "normal",
-      
-        "action": {
-          "type": "externalUrl",
-          "payload": { "url": "https://example.com/offer" }
-        },
-      
-        "presentation": {
-          "title": "Sponsored",
-          "subtitle": "Flat 20% off on learning subscriptions",
-          "body": "Upgrade your skills with top instructors. Limited time offer.",
-          "resources": [
-            {
-              "type": "image",
-              "url": "https://images.pexels.com/photos/210607/pexels-photo-210607.jpeg"
-            }
-          ]
-        },
-      
-        "state": {
-          "isRead": false,
-          "isDismissed": false,
-          "delivered": true,
-          "opened": false
-        },
-      
-        "metadata": {
-          "campaignId": "promo_jan_2025",
-          "advertiser": "edtech_partner"
-        },
-      
-        "createdAt": "2025-01-17T14:20:00Z"
+      "state": {
+        "isRead": true,
+        "isDismissed": false,
+        "delivered": true,
+        "opened": false
       },
-      {
-        "id": "notif_105",
-        "intent": "reminder",
-        "priority": "low",
-      
-        "action": {
-          "type": "feed",
-          "payload": { "feedId": "6543" }
-        },
-      
-        "presentation": {
-          "title": "Reminder",
-          "subtitle": "Continue reading where you left off",
-          "body": "You were reading about India's startup ecosystem."
-        },
-      
-        "state": {
-          "isRead": true,
-          "isDismissed": false,
-          "delivered": true,
-          "opened": true
-        },
-      
-        "metadata": {
-          "trigger": "inactivity_24h"
-        },
-      
-        "createdAt": "2025-01-18T09:45:00Z"
+      "metadata": {
+        "job": "prefetch_feed"
       },
-      {
-        "id": "notif_104",
-        "intent": "announcement",
-        "priority": "normal",
-      
-        "action": {
-          "type": "announcement",
-          "payload": { "key": "feature_dark_mode" }
-        },
-      
-        "presentation": {
-          "title": "New feature launched 🚀",
-          "subtitle": "Dark mode is now available",
-          "body": "You can now switch between light and dark themes from Settings."
-        },
-      
-        "state": {
-          "isRead": false,
-          "isDismissed": false,
-          "delivered": true,
-          "opened": false
-        },
-      
-        "metadata": {
-          "featureFlag": "dark_mode_v1"
-        },
-      
-        "createdAt": "2025-01-18T12:00:00Z"
+      "createdAt": "2025-01-17T02:00:00Z"
+    },
+    {
+      "id": "notif_106",
+      "intent": "promotion",
+      "priority": "normal",
+      "action": {
+        "type": "externalUrl",
+        "payload": {
+          "url": "https://example.com/offer"
+        }
       },
-      {
-        "id": "notif_103",
-        "intent": "engagement",
-        "priority": "normal",
-      
-        "action": {
-          "type": "story",
-          "payload": { "storyId": "story_today" }
-        },
-      
-        "presentation": {
-          "title": "Top stories today",
-          "subtitle": "5 headlines you may have missed"
-        },
-      
-        "state": {
-          "isRead": true,
-          "isDismissed": false,
-          "delivered": true,
-          "opened": true
-        },
-      
-        "metadata": {
-          "batch": "daily_digest"
-        },
-      
-        "createdAt": "2025-01-19T21:00:00Z"
+      "presentation": {
+        "title": "Sponsored",
+        "subtitle": "Flat 20% off on learning subscriptions",
+        "body": "Upgrade your skills with top instructors. Limited time offer.",
+        "resources": [
+          {
+            "id": "notif_106_1",
+            "type": "image",
+            "url": "https://images.pexels.com/photos/210607/pexels-photo-210607.jpeg"
+          }
+        ]
       },
-      {
-        "id": "notif_102",
-        "intent": "recommendation",
-        "priority": "high",
-      
-        "action": {
-          "type": "feed",
-          "payload": { "feedId": "7812" }
-        },
-      
-        "presentation": {
-          "title": "Recommended for you",
-          "subtitle": "AI startups you should know",
-          "body": "Based on your reading history, here are 5 AI startups gaining traction this year.",
-          "resources": [
-            {
-              "type": "image",
-              "url": "https://images.pexels.com/photos/210607/pexels-photo-210607.jpeg"
-            }
-          ]
-        },
-      
-        "state": {
-          "isRead": false,
-          "isDismissed": false,
-          "delivered": true,
-          "opened": false
-        },
-      
-        "metadata": {
-          "personalized": true,
-          "modelVersion": "rec_v2"
-        },
-      
-        "createdAt": "2025-12-20T08:15:00Z"
+      "state": {
+        "isRead": false,
+        "isDismissed": false,
+        "delivered": true,
+        "opened": false
       },
-      {
-        "id": "notif_101",
-        "intent": "breaking",
-        "priority": "max",
-      
-        "action": {
-          "type": "feed",
-          "payload": { "feedId": "8921" }
-        },
-      
-        "presentation": {
-          "title": "Breaking: Major Tech Breakthrough",
-          "subtitle": "Silicon chips now 5x faster",
-          "body": "Researchers have developed a new silicon architecture that dramatically improves processing speed.",
-          "resources": [
-            {
-              "type": "image",
-              "url": "https://images.pexels.com/photos/210607/pexels-photo-210607.jpeg"
-            }
-          ],
-          "highlight": true,
-          "badge": "LIVE"
-        },
-      
-        "state": {
-          "isRead": false,
-          "isDismissed": false,
-          "delivered": true,
-          "opened": false
-        },
-      
-        "metadata": {
-          "urgencyScore": 0.98,
-          "source": "editorial",
-          "region": "global"
-        },
-      
-        "createdAt": "2025-12-22T10:30:00Z",
-        "expiresAt": "2025-12-22T16:30:00Z"
-      }                                    
-      
-    ]
-    
-  }
-  
+      "metadata": {
+        "campaignId": "promo_jan_2025",
+        "advertiser": "edtech_partner"
+      },
+      "createdAt": "2025-01-17T14:20:00Z"
+    },
+    {
+      "id": "notif_105",
+      "intent": "reminder",
+      "priority": "low",
+      "action": {
+        "type": "feed",
+        "payload": {
+          "feedId": "6543"
+        }
+      },
+      "presentation": {
+        "title": "Reminder",
+        "subtitle": "Continue reading where you left off",
+        "body": "You were reading about India's startup ecosystem."
+      },
+      "state": {
+        "isRead": true,
+        "isDismissed": false,
+        "delivered": true,
+        "opened": true
+      },
+      "metadata": {
+        "trigger": "inactivity_24h"
+      },
+      "createdAt": "2025-01-18T09:45:00Z"
+    },
+    {
+      "id": "notif_104",
+      "intent": "announcement",
+      "priority": "normal",
+      "action": {
+        "type": "announcement",
+        "payload": {
+          "key": "feature_dark_mode"
+        }
+      },
+      "presentation": {
+        "title": "New feature launched 🚀",
+        "subtitle": "Dark mode is now available",
+        "body": "You can now switch between light and dark themes from Settings."
+      },
+      "state": {
+        "isRead": false,
+        "isDismissed": false,
+        "delivered": true,
+        "opened": false
+      },
+      "metadata": {
+        "featureFlag": "dark_mode_v1"
+      },
+      "createdAt": "2025-01-18T12:00:00Z"
+    },
+    {
+      "id": "notif_103",
+      "intent": "engagement",
+      "priority": "normal",
+      "action": {
+        "type": "story",
+        "payload": {
+          "storyId": "story_today"
+        }
+      },
+      "presentation": {
+        "title": "Top stories today",
+        "subtitle": "5 headlines you may have missed"
+      },
+      "state": {
+        "isRead": true,
+        "isDismissed": false,
+        "delivered": true,
+        "opened": true
+      },
+      "metadata": {
+        "batch": "daily_digest"
+      },
+      "createdAt": "2025-01-19T21:00:00Z"
+    },
+    {
+      "id": "notif_102",
+      "intent": "recommendation",
+      "priority": "high",
+      "action": {
+        "type": "feed",
+        "payload": {
+          "feedId": "7812"
+        }
+      },
+      "presentation": {
+        "title": "Recommended for you",
+        "subtitle": "AI startups you should know",
+        "body": "Based on your reading history, here are 5 AI startups gaining traction this year.",
+        "resources": [
+          {
+            "type": "image",
+            "url": "https://images.pexels.com/photos/210607/pexels-photo-210607.jpeg"
+          }
+        ]
+      },
+      "state": {
+        "isRead": false,
+        "isDismissed": false,
+        "delivered": true,
+        "opened": false
+      },
+      "metadata": {
+        "personalized": true,
+        "modelVersion": "rec_v2"
+      },
+      "createdAt": "2025-12-20T08:15:00Z"
+    },
+    {
+      "id": "notif_101",
+      "intent": "breaking",
+      "priority": "max",
+      "action": {
+        "type": "feed",
+        "payload": {
+          "feedId": "8921"
+        }
+      },
+      "presentation": {
+        "title": "Breaking: Major Tech Breakthrough",
+        "subtitle": "Silicon chips now 5x faster",
+        "body": "Researchers have developed a new silicon architecture that dramatically improves processing speed.",
+        "resources": [
+          {
+            "type": "image",
+            "url": "https://images.pexels.com/photos/210607/pexels-photo-210607.jpeg"
+          }
+        ],
+        "highlight": true,
+        "badge": "LIVE"
+      },
+      "state": {
+        "isRead": false,
+        "isDismissed": false,
+        "delivered": true,
+        "opened": false
+      },
+      "metadata": {
+        "urgencyScore": 0.98,
+        "source": "editorial",
+        "region": "global"
+      },
+      "createdAt": "2025-12-22T10:30:00Z",
+      "expiresAt": "2025-12-22T16:30:00Z"
+    }
+  ]
+}

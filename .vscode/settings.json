@@ -6,5 +6,8 @@
     ],
     "dart.openDevTools": "flutter",
     "dart.devToolsTheme": "dark",
-    "dart.devToolsPort": 9100
+    "dart.devToolsPort": 9100,
+    "files.exclude": {
+        "**/_extension_*": true
+    }
 }

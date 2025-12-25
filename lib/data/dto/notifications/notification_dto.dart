@@ -56,8 +56,6 @@ class NotificationDTO {
       created_at: json['createdAt'] ?? json['created_at'],
       expires_at: json['expiresAt'] ?? json['expires_at'],
     );
-    copyJsonToClipboard(dto);
-    inspectInDevTools(dto);
 
     return dto;
   }
