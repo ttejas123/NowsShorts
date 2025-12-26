@@ -2,6 +2,7 @@ import 'package:bl_inshort/data/models/feeds/author_entity.dart';
 import 'package:bl_inshort/data/models/feeds/category_entity.dart';
 import 'package:bl_inshort/data/models/feeds/content_type_entity.dart';
 import 'package:bl_inshort/data/models/feeds/feed_entity.dart';
+import 'package:bl_inshort/data/models/feeds/item_type_provider_entity.dart';
 import 'package:bl_inshort/data/models/feeds/language_entity.dart';
 import 'package:bl_inshort/data/models/feeds/region_entity.dart';
 import 'package:bl_inshort/data/models/feeds/source_entity.dart';
@@ -19,7 +20,7 @@ import 'package:bl_inshort/data/models/feeds/resource_entity.dart';
 
 extension FeedEntityExtension on FeedEntity {
   String toStringPrint() {
-    return 'FeedEntity(id: $id, title: $title, type: $type)';
+    return 'FeedEntity(id: $id, title: $title, provider: $provider)';
   }
 
   Map<String, dynamic> toJsonPrint() {
@@ -40,11 +41,20 @@ extension FeedEntityExtension on FeedEntity {
       'region': region.toJsonPrint(),
       'layout': layout.toString(),
       'status': status.toJsonPrint(),
-      'type': type.toString(),
+      'provider': provider.toJsonPrint(),
       'isFeatured': isFeatured,
       'engagementScore': engagementScore,
       'resources': resources.map((e) => e.toJsonPrint()).toList(),
     };
+  }
+}
+
+extension ItemTypeProviderExtension on ItemTypeProvider {
+  String toStringPrint() =>
+      'ItemTypeProvider(id: $id, name: $name, type: $type, subType: $subType)';
+
+  Map<String, dynamic> toJsonPrint() {
+    return {'id': id, 'name': name, 'type': type.name, 'subType': subType};
   }
 }
 

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -18,9 +19,7 @@ class DiscoverNotificationsList extends ConsumerWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         elevation: 1,
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 8),
@@ -28,8 +27,10 @@ class DiscoverNotificationsList extends ConsumerWidget {
             children: [
               // Header row: "Notifications" + VIEW ALL
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 4,
+                ),
                 child: Row(
                   children: [
                     Text(
@@ -73,10 +74,7 @@ class _NotificationRow extends StatelessWidget {
   final DiscoverNotificationItem item;
   final ColorScheme colors;
 
-  const _NotificationRow({
-    required this.item,
-    required this.colors,
-  });
+  const _NotificationRow({required this.item, required this.colors});
 
   String _timeAgo(DateTime dt) {
     final diff = DateTime.now().difference(dt);
@@ -93,8 +91,7 @@ class _NotificationRow extends StatelessWidget {
         // later: open story detail
       },
       child: Padding(
-        padding:
-            const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -139,9 +136,9 @@ class _NotificationRow extends StatelessWidget {
                   Text(
                     _timeAgo(item.createdAt),
                     style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                          // ignore: deprecated_member_use
-                          color: colors.onSurface.withOpacity(0.6),
-                        ),
+                      // ignore: deprecated_member_use
+                      color: colors.onSurface.withOpacity(0.6),
+                    ),
                   ),
                 ],
               ),

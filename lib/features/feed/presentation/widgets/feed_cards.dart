@@ -4,6 +4,7 @@ import 'package:bl_inshort/data/dto/feed/feed_dto.dart';
 import 'package:bl_inshort/data/models/feeds/feed_entity.dart';
 import 'package:bl_inshort/data/models/feeds/resource_entity.dart';
 import 'package:bl_inshort/features/webview/presentation/webview_page.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class FeedCard extends StatelessWidget {
@@ -146,19 +147,20 @@ class _TextDominantCard extends StatelessWidget {
                       height: size.height,
                       color: Colors.grey.shade300,
                     ),
-                    errorWidget: (_, __, ___) => Icon(Icons.image_not_supported),
+                    errorWidget: (_, __, ___) =>
+                        Icon(Icons.image_not_supported),
                   ),
                 ),
               ),
             const SizedBox(height: 16),
             Text(item.title, style: Theme.of(context).textTheme.headlineSmall),
             ...[
-            const SizedBox(height: 8),
-            Text(
-              item.subtitle,
-              style: Theme.of(context).textTheme.bodyMedium,
-            ),
-          ],
+              const SizedBox(height: 8),
+              Text(
+                item.subtitle,
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+            ],
             const SizedBox(height: 12),
             Expanded(
               child: SingleChildScrollView(
@@ -254,7 +256,8 @@ class _GalleryCardState extends State<_GalleryCard> {
                             height: size.height,
                             color: Colors.grey.shade300,
                           ),
-                          errorWidget: (_, __, ___) => Icon(Icons.image_not_supported),
+                          errorWidget: (_, __, ___) =>
+                              Icon(Icons.image_not_supported),
                         ),
                       ),
                     );
@@ -458,8 +461,6 @@ class _BrowserViewCard extends StatelessWidget {
   }
 }
 
-
-
 class RelatedImagesRow extends StatelessWidget {
   final List<ResourceEntity> resources;
   const RelatedImagesRow({super.key, required this.resources});
@@ -514,14 +515,19 @@ class RelatedImagesRow extends StatelessWidget {
                     height: 44,
                     child: Stack(
                       children: [
-                        ...resources.take(visibleCount).toList().asMap().entries.map((entry) {
-                          final idx = entry.key;
-                          final resource = entry.value;
-                          return _imageCircle(
-                            left: idx * 22,
-                            imageUrl: resource.url,
-                          );
-                        }),       
+                        ...resources
+                            .take(visibleCount)
+                            .toList()
+                            .asMap()
+                            .entries
+                            .map((entry) {
+                              final idx = entry.key;
+                              final resource = entry.value;
+                              return _imageCircle(
+                                left: idx * 22,
+                                imageUrl: resource.url,
+                              );
+                            }),
                       ],
                     ),
                   ),
@@ -531,7 +537,6 @@ class RelatedImagesRow extends StatelessWidget {
           ),
 
           // 🔹 Arrow button (HALF OUTSIDE – EXACT MATCH)
-
           Positioned(
             right: -18, // 🔥 critical: pushes it outside
             top: 12,
@@ -541,9 +546,7 @@ class RelatedImagesRow extends StatelessWidget {
                 Navigator.of(context).push(
                   MaterialPageRoute(
                     fullscreenDialog: true,
-                    builder: (_) => RelatedImagesGallery(
-                      resources: resources,
-                    ),
+                    builder: (_) => RelatedImagesGallery(resources: resources),
                   ),
                 );
               },
@@ -570,10 +573,7 @@ class RelatedImagesRow extends StatelessWidget {
     );
   }
 
-  static Widget _imageCircle({
-    required double left,
-    required String imageUrl,
-  }) {
+  static Widget _imageCircle({required double left, required String imageUrl}) {
     return Positioned(
       left: left,
       child: Container(
@@ -596,10 +596,7 @@ class RelatedImagesRow extends StatelessWidget {
 class RelatedImagesGallery extends StatefulWidget {
   final List<ResourceEntity> resources;
 
-  const RelatedImagesGallery({
-    super.key,
-    required this.resources,
-  });
+  const RelatedImagesGallery({super.key, required this.resources});
 
   @override
   State<RelatedImagesGallery> createState() => _RelatedImagesGalleryState();
@@ -650,8 +647,7 @@ class _RelatedImagesGalleryState extends State<RelatedImagesGallery> {
                       child: CachedNetworkImage(
                         imageUrl: widget.resources[index].url,
                         fit: BoxFit.contain,
-                        loadingBuilder: (context, child, progress) {
-                          if (progress == null) return child;
+                        progressIndicatorBuilder: (context, child, progress) {
                           return const Center(
                             child: CircularProgressIndicator(
                               color: Colors.white,
@@ -758,15 +754,18 @@ class StandardVisualCard extends StatelessWidget {
                   children: [
                     Expanded(
                       child: CachedNetworkImage(
-                        imageUrl: item.resources.isNotEmpty ? item.resources[0].url : "",
+                        imageUrl: item.resources.isNotEmpty
+                            ? item.resources[0].url
+                            : "",
                         fit: BoxFit.cover,
                         height: 400,
                         placeholder: (_, __) => Container(
-                          width: size.width,
-                          height: size.height,
+                          width: 400,
+                          height: 400,
                           color: Colors.grey.shade300,
                         ),
-                        errorWidget: (_, __, ___) => Icon(Icons.image_not_supported),
+                        errorWidget: (_, __, ___) =>
+                            Icon(Icons.image_not_supported),
                       ),
                     ),
                   ],
@@ -910,29 +909,29 @@ class StandardVisualCard extends StatelessWidget {
               item.resources.isNotEmpty && item.resources.length > 1
                   ? RelatedImagesRow(resources: item.resources)
                   : Container(
-                height: 56,
-                alignment: Alignment.centerLeft,
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomRight,
-                    colors: [
-                      Color.fromARGB(255, 40, 33, 48),
-                      Color(0xFF2E3440),
-                      Color(0xFF1B1F27),
-                    ],
-                  ),
-                ),
-                child: const Text(
-                  "People called the robbery 'brazen'\nTap to know what more they said",
-                  style: TextStyle(
-                    color: Colors.white70,
-                    fontSize: 13,
-                    height: 1.4,
-                  ),
-                ),
-              ),
+                      height: 56,
+                      alignment: Alignment.centerLeft,
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      decoration: const BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            Color.fromARGB(255, 40, 33, 48),
+                            Color(0xFF2E3440),
+                            Color(0xFF1B1F27),
+                          ],
+                        ),
+                      ),
+                      child: const Text(
+                        "People called the robbery 'brazen'\nTap to know what more they said",
+                        style: TextStyle(
+                          color: Colors.white70,
+                          fontSize: 13,
+                          height: 1.4,
+                        ),
+                      ),
+                    ),
             ],
           ),
         ],

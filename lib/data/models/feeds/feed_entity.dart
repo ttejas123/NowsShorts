@@ -1,6 +1,7 @@
 import 'package:bl_inshort/data/dto/feed/feed_dto.dart';
 import 'package:bl_inshort/data/models/feeds/author_entity.dart';
 import 'package:bl_inshort/data/models/feeds/category_entity.dart';
+import 'package:bl_inshort/data/models/feeds/item_type_provider_entity.dart';
 import 'package:bl_inshort/data/models/feeds/language_entity.dart';
 import 'package:bl_inshort/data/models/feeds/region_entity.dart';
 import 'package:bl_inshort/data/models/feeds/resource_entity.dart';
@@ -17,6 +18,7 @@ class FeedEntity {
   final String slug;
   final String webUrl;
   final String html;
+  final ItemTypeProvider provider;
 
   final AuthorEntity author;
   final SourceEntity source;
@@ -27,8 +29,6 @@ class FeedEntity {
   final FeedLayoutType layout;
   final StatusEntity status;
 
-  final ItemType type;
-
   final bool isFeatured;
   final double engagementScore;
 
@@ -36,7 +36,7 @@ class FeedEntity {
 
   FeedEntity({
     required this.id,
-    required this.type,
+    required this.provider,
     required this.title,
     required this.subtitle,
     required this.description,
@@ -60,7 +60,7 @@ class FeedEntity {
   factory FeedEntity.fromDto(FeedDTO dto) {
     return FeedEntity(
       id: dto.id,
-      type: dto.type,
+      provider: ItemTypeProvider.fromDto(dto.provider),
       title: dto.title,
       subtitle: dto.subtitle,
       description: dto.description,

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -31,9 +32,9 @@ class DiscoverPage extends ConsumerWidget {
               child: Text(
                 'Discover',
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      color: Colors.blue,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  color: Colors.blue,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
             const SizedBox(width: 12),
@@ -44,24 +45,23 @@ class DiscoverPage extends ConsumerWidget {
               child: Text(
                 'My Feed',
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      // ignore: deprecated_member_use
-                      color: colors.onSurface.withOpacity(0.5),
-                    ),
+                  // ignore: deprecated_member_use
+                  color: colors.onSurface.withOpacity(0.5),
+                ),
               ),
             ),
           ],
         ),
         actions: [
           GestureDetector(
-              onTap: () {
-                context.push('/notifications');
-              },
-              child: Padding(
-                padding: EdgeInsets.only(right: 12),
-                child: Icon(Icons.notifications_outlined),
-              ),
+            onTap: () {
+              context.push('/notifications');
+            },
+            child: Padding(
+              padding: EdgeInsets.only(right: 12),
+              child: Icon(Icons.notifications_outlined),
+            ),
           ),
-          
         ],
       ),
       body: HomePage(),
@@ -79,27 +79,27 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   bool _navigated = false;
 
-@override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: NotificationListener<ScrollNotification>(
           onNotification: (notification) {
-              if (notification is ScrollUpdateNotification) {
-                final metrics = notification.metrics;
+            if (notification is ScrollUpdateNotification) {
+              final metrics = notification.metrics;
 
-                if (!_navigated &&
-                    metrics.pixels <= 0 &&
-                    notification.scrollDelta! < -30) {
-                  _navigated = true;
-                  context.push('/search');
-                  Future.delayed(const Duration(milliseconds: 500), () {
-                    _navigated = false;
-                  });
-                }
+              if (!_navigated &&
+                  metrics.pixels <= 0 &&
+                  notification.scrollDelta! < -30) {
+                _navigated = true;
+                context.push('/search');
+                Future.delayed(const Duration(milliseconds: 500), () {
+                  _navigated = false;
+                });
               }
-              return false;
+            }
+            return false;
           },
           child: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
@@ -140,34 +140,32 @@ class _SearchBar extends StatelessWidget {
         onTap: () {
           context.push('/search');
         },
-      child: Container(
-        height: 44,
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.surfaceContainer,
-          borderRadius: BorderRadius.circular(22),
-        ),
-        child: Row(
-          children: [
-            SizedBox(width: 16),
-            Icon(Icons.search, color: Theme.of(context).colorScheme.onSurface, size: 20),
-            SizedBox(width: 12),
-            Text(
-              "Search for News, Topics",
-              style: TextStyle(
-                color: Colors.grey,
-                fontSize: 15,
+        child: Container(
+          height: 44,
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.surfaceContainer,
+            borderRadius: BorderRadius.circular(22),
+          ),
+          child: Row(
+            children: [
+              SizedBox(width: 16),
+              Icon(
+                Icons.search,
+                color: Theme.of(context).colorScheme.onSurface,
+                size: 20,
               ),
-            ),
-          ],
+              SizedBox(width: 12),
+              Text(
+                "Search for News, Topics",
+                style: TextStyle(color: Colors.grey, fontSize: 15),
+              ),
+            ],
+          ),
         ),
       ),
-      )
-
-
     );
   }
 }
-
 
 class _PromoBanner extends StatelessWidget {
   const _PromoBanner();
@@ -194,7 +192,6 @@ class _PromoBanner extends StatelessWidget {
     );
   }
 }
-
 
 class _CategoryRow extends ConsumerWidget {
   const _CategoryRow();
@@ -234,12 +231,11 @@ class _CategoryItem extends ConsumerWidget {
             color: Theme.of(context).colorScheme.onSurface,
             fontSize: 13,
           ),
-        )
+        ),
       ],
     );
   }
 }
-
 
 class _Notifications extends StatelessWidget {
   const _Notifications();
@@ -250,38 +246,37 @@ class _Notifications extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         GestureDetector(
-                    onTap: () => context.push('/notifications'),
-                    child: _SectionHeader("Notifications"),
+          onTap: () => context.push('/notifications'),
+          child: _SectionHeader("Notifications"),
         ),
         const SizedBox(height: 14),
         const _NotificationTile(
           title: "Actor Akhil Vishwanath dies by suicide aged 30",
-          image: "https://images.pexels.com/photos/1257860/pexels-photo-1257860.jpeg",
+          image:
+              "https://images.pexels.com/photos/1257860/pexels-photo-1257860.jpeg",
         ),
         const _NotificationTile(
           title:
               "She has lost 5 kg, is constantly crying: Husband of Goa club dancer after fire killed 25",
-          image: "https://images.pexels.com/photos/1257860/pexels-photo-1257860.jpeg",
+          image:
+              "https://images.pexels.com/photos/1257860/pexels-photo-1257860.jpeg",
         ),
         const _NotificationTile(
           title:
               "Police lathi charge fans protesting against mismanagement during Messi's event in Kolkata",
-          image: "https://images.pexels.com/photos/1257860/pexels-photo-1257860.jpeg",
+          image:
+              "https://images.pexels.com/photos/1257860/pexels-photo-1257860.jpeg",
         ),
       ],
     );
   }
 }
 
-
 class _NotificationTile extends StatelessWidget {
   final String title;
   final String image;
 
-  const _NotificationTile({
-    required this.title,
-    required this.image,
-  });
+  const _NotificationTile({required this.title, required this.image});
 
   @override
   Widget build(BuildContext context) {
@@ -292,7 +287,9 @@ class _NotificationTile extends StatelessWidget {
           Expanded(
             child: Text(
               title,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(height: 1.3),
+              style: Theme.of(
+                context,
+              ).textTheme.bodyMedium?.copyWith(height: 1.3),
             ),
           ),
           const SizedBox(width: 12),
@@ -303,11 +300,8 @@ class _NotificationTile extends StatelessWidget {
               height: 46,
               width: 46,
               fit: BoxFit.cover,
-              placeholder: (_, __) => Container(
-                width: 46,
-                height: 46,
-                color: Colors.grey.shade300,
-              ),
+              placeholder: (_, __) =>
+                  Container(width: 46, height: 46, color: Colors.grey.shade300),
               errorWidget: (_, __, ___) => Icon(Icons.image_not_supported),
             ),
           ),
@@ -316,7 +310,6 @@ class _NotificationTile extends StatelessWidget {
     );
   }
 }
-
 
 class _Insights extends StatelessWidget {
   const _Insights();
@@ -336,7 +329,8 @@ class _Insights extends StatelessWidget {
             itemBuilder: (_, i) => ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: CachedNetworkImage(
-                imageUrl: "https://images.pexels.com/photos/1434608/pexels-photo-1434608.jpeg",
+                imageUrl:
+                    "https://images.pexels.com/photos/1434608/pexels-photo-1434608.jpeg",
                 width: 220,
                 fit: BoxFit.cover,
                 placeholder: (_, __) => Container(
@@ -380,11 +374,7 @@ class _SectionHeader extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 6),
-              Container(
-                height: 2,
-                width: 28,
-                color: Color(0xFF1E88E5),
-              ),
+              Container(height: 2, width: 28, color: Color(0xFF1E88E5)),
             ],
           ),
           const Text(
@@ -444,11 +434,8 @@ class _InsightCard extends StatelessWidget {
         child: CachedNetworkImage(
           imageUrl: imageUrl,
           fit: BoxFit.cover,
-          placeholder: (_, __) => Container(
-            width: 150,
-            height: 220,
-            color: Colors.grey.shade300,
-          ),
+          placeholder: (_, __) =>
+              Container(width: 150, height: 220, color: Colors.grey.shade300),
           errorWidget: (_, __, ___) => Icon(Icons.image_not_supported),
         ),
       ),
@@ -548,11 +535,7 @@ class TopicModel {
   final String image;
   final bool isActive;
 
-  TopicModel({
-    required this.title,
-    required this.image,
-    this.isActive = false,
-  });
+  TopicModel({required this.title, required this.image, this.isActive = false});
 }
 
 final List<TopicModel> topics = [
@@ -625,7 +608,9 @@ class SearchPage extends StatelessWidget {
                               cursorColor: Colors.blue,
                               decoration: InputDecoration(
                                 hintText: 'Search for News, Topics',
-                                hintStyle: Theme.of(context).textTheme.bodyMedium,
+                                hintStyle: Theme.of(
+                                  context,
+                                ).textTheme.bodyMedium,
                                 border: InputBorder.none,
                                 isDense: true,
                               ),
@@ -662,19 +647,13 @@ class SearchPage extends StatelessWidget {
 
             // Recent Searches Row
             Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 16,
-                vertical: 12,
-              ),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     'Recent Searches',
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 14,
-                    ),
+                    style: TextStyle(color: Colors.grey, fontSize: 14),
                   ),
                   Text(
                     'Clear All',
@@ -731,10 +710,7 @@ class SearchPage extends StatelessWidget {
 
                   const Text(
                     'No Recent Searches',
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 15,
-                    ),
+                    style: TextStyle(color: Colors.grey, fontSize: 15),
                   ),
                 ],
               ),

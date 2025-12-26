@@ -1,288 +1,858 @@
 {
-    "cursor": null,
-    "has_more": true,
-    "items": [
-      {
-        "id": 0,
-        "title": "Government Announces New Start-up Incentive Policy",
-        "type": "News",
-        "subtitle": "Boost for Early-Stage Entrepreneurs",
-        "description": "The central government unveiled a new incentive policy offering tax relaxations, seed funding, and compliance support for early-stage startups across India.",
-        "slug": "government-startup-incentive-policy",
-        "published_at": "2025-01-15T10:30:00Z",
-        "is_featured": true,
-        "engagement_score": 8.4,
-        "html": "",
-        "layout": "standardCard",
-        "web_url": "",
-        "author": { "id": 1, "name": "Editorial Desk", "bio": "Policy and governance reporters.", "profile_picture": "" },
-        "source": { "id": 1, "name": "Business Daily", "website": "" },
-        "category": { "id": 1, "name": "Business", "description": "Business and economy" },
-        "tags": [{ "id": 1, "name": "Startups" }, { "id": 2, "name": "Policy" }],
-        "language": { "id": 1, "name": "English", "code": "en" },
-        "region": { "id": 1, "name": "India", "code": "IN" },
-        "status": { "id": 1, "name": "published", "description": "Visible to all users" },
-        "resources": [
-          { "id": 10, "name": "cover_image", "url": "https://images.pexels.com/photos/1550337/pexels-photo-1550337.jpeg", "content_type": { "id": 1, "name": "story", "description": "Text-based story" } },
-          { "id": 11, "name": "cover_image", "url": "https://images.pexels.com/photos/7991579/pexels-photo-7991579.jpeg", "content_type": { "id": 1, "name": "story", "description": "Text-based story" } },
-          { "id": 12, "name": "cover_image", "url": "https://images.pexels.com/photos/210607/pexels-photo-210607.jpeg", "content_type": { "id": 1, "name": "story", "description": "Text-based story" } }
-        ]
-      },
-    
-      {
+  "cursor": null,
+  "has_more": true,
+  "items": [
+    {
+      "id": 0,
+      "title": "Government Announces New Start-up Incentive Policy",
+      "provider": {
         "id": 1,
-        "title": "Heavy Monsoon Rains Flood City Roads, Traffic at Standstill",
+        "name": "News",
         "type": "News",
-        "subtitle": "Authorities Issue Red Alert",
-        "description": "Overnight rainfall caused severe waterlogging across major intersections, disrupting daily commute and emergency services.",
-        "slug": "monsoon-rains-city-traffic",
-        "published_at": "2025-01-16T06:15:00Z",
-        "is_featured": false,
-        "engagement_score": 6.2,
-        "html": "",
-        "layout": "photoDominant",
-        "web_url": "",
-        "author": { "id": 2, "name": "City Reporter", "bio": "Covers urban affairs.", "profile_picture": "" },
-        "source": { "id": 2, "name": "City News", "website": "" },
-        "category": { "id": 2, "name": "Weather", "description": "Weather and climate updates" },
-        "tags": [{ "id": 3, "name": "Monsoon" }, { "id": 4, "name": "Traffic" }],
-        "language": { "id": 1, "name": "English", "code": "en" },
-        "region": { "id": 1, "name": "India", "code": "IN" },
-        "status": { "id": 1, "name": "published", "description": "Visible to all users" },
-        "resources": [
-          { "id": 2, "name": "cover_image", "url": "https://images.pexels.com/photos/1105766/pexels-photo-1105766.jpeg", "content_type": { "id": 1, "name": "story", "description": "Text-based story" } }
-        ]
+        "subType": "News"
       },
-    
-      {
+      "subtitle": "Boost for Early-Stage Entrepreneurs",
+      "description": "The central government unveiled a new incentive policy offering tax relaxations, seed funding, and compliance support for early-stage startups across India.",
+      "slug": "government-startup-incentive-policy",
+      "published_at": "2025-01-15T10:30:00Z",
+      "is_featured": true,
+      "engagement_score": 8.4,
+      "html": "",
+      "layout": "standardCard",
+      "web_url": "",
+      "author": {
+        "id": 1,
+        "name": "Editorial Desk",
+        "bio": "Policy and governance reporters.",
+        "profile_picture": ""
+      },
+      "source": {
+        "id": 1,
+        "name": "Business Daily",
+        "website": ""
+      },
+      "category": {
+        "id": 1,
+        "name": "Business",
+        "description": "Business and economy"
+      },
+      "tags": [
+        {
+          "id": 1,
+          "name": "Startups"
+        },
+        {
+          "id": 2,
+          "name": "Policy"
+        }
+      ],
+      "language": {
+        "id": 1,
+        "name": "English",
+        "code": "en"
+      },
+      "region": {
+        "id": 1,
+        "name": "India",
+        "code": "IN"
+      },
+      "status": {
+        "id": 1,
+        "name": "published",
+        "description": "Visible to all users"
+      },
+      "resources": [
+        {
+          "id": 10,
+          "name": "cover_image",
+          "url": "https://images.pexels.com/photos/1550337/pexels-photo-1550337.jpeg",
+          "content_type": {
+            "id": 1,
+            "name": "story",
+            "description": "Text-based story"
+          }
+        },
+        {
+          "id": 11,
+          "name": "cover_image",
+          "url": "https://images.pexels.com/photos/7991579/pexels-photo-7991579.jpeg",
+          "content_type": {
+            "id": 1,
+            "name": "story",
+            "description": "Text-based story"
+          }
+        },
+        {
+          "id": 12,
+          "name": "cover_image",
+          "url": "https://images.pexels.com/photos/210607/pexels-photo-210607.jpeg",
+          "content_type": {
+            "id": 1,
+            "name": "story",
+            "description": "Text-based story"
+          }
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "title": "Heavy Monsoon Rains Flood City Roads, Traffic at Standstill",
+      "provider": {
+        "id": 1,
+        "name": "News",
+        "type": "News",
+        "subType": "News"
+      },
+      "subtitle": "Authorities Issue Red Alert",
+      "description": "Overnight rainfall caused severe waterlogging across major intersections, disrupting daily commute and emergency services.",
+      "slug": "monsoon-rains-city-traffic",
+      "published_at": "2025-01-16T06:15:00Z",
+      "is_featured": false,
+      "engagement_score": 6.2,
+      "html": "",
+      "layout": "photoDominant",
+      "web_url": "",
+      "author": {
         "id": 2,
-        "title": "In Pictures: Northern Lights Dazzle Skies Across Europe",
-        "type": "News",
-        "subtitle": "Rare Geomagnetic Storm",
-        "description": "A powerful solar storm produced stunning auroras visible far beyond their usual range.",
-        "slug": "aurora-lights-europe",
-        "published_at": "2025-01-16T21:00:00Z",
-        "is_featured": false,
-        "engagement_score": 9.1,
-        "html": "",
-        "layout": "gallery",
-        "web_url": "",
-        "author": { "id": 3, "name": "Science Desk", "bio": "Covers space and science.", "profile_picture": "" },
-        "source": { "id": 3, "name": "Space Today", "website": "" },
-        "category": { "id": 3, "name": "Science", "description": "Science and space" },
-        "tags": [{ "id": 5, "name": "Aurora" }, { "id": 6, "name": "Space" }],
-        "language": { "id": 1, "name": "English", "code": "en" },
-        "region": { "id": 2, "name": "Europe", "code": "EU" },
-        "status": { "id": 1, "name": "published", "description": "Visible to all users" },
-        "resources": [
-          { "id": 3, "name": "image_1", "url": "https://images.pexels.com/photos/1257860/pexels-photo-1257860.jpeg", "content_type": { "id": 2, "name": "gallery", "description": "Image gallery" } },
-          { "id": 4, "name": "image_2", "url": "https://images.pexels.com/photos/1434608/pexels-photo-1434608.jpeg", "content_type": { "id": 2, "name": "gallery", "description": "Image gallery" } },
-          { "id": 5, "name": "image_3", "url": "https://images.pexels.com/photos/3227982/pexels-photo-3227982.jpeg", "content_type": { "id": 2, "name": "gallery", "description": "Image gallery" } }
-        ]
+        "name": "City Reporter",
+        "bio": "Covers urban affairs.",
+        "profile_picture": ""
       },
-    
-      {
+      "source": {
+        "id": 2,
+        "name": "City News",
+        "website": ""
+      },
+      "category": {
+        "id": 2,
+        "name": "Weather",
+        "description": "Weather and climate updates"
+      },
+      "tags": [
+        {
+          "id": 3,
+          "name": "Monsoon"
+        },
+        {
+          "id": 4,
+          "name": "Traffic"
+        }
+      ],
+      "language": {
+        "id": 1,
+        "name": "English",
+        "code": "en"
+      },
+      "region": {
+        "id": 1,
+        "name": "India",
+        "code": "IN"
+      },
+      "status": {
+        "id": 1,
+        "name": "published",
+        "description": "Visible to all users"
+      },
+      "resources": [
+        {
+          "id": 2,
+          "name": "cover_image",
+          "url": "https://images.pexels.com/photos/1105766/pexels-photo-1105766.jpeg",
+          "content_type": {
+            "id": 1,
+            "name": "story",
+            "description": "Text-based story"
+          }
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "In Pictures: Northern Lights Dazzle Skies Across Europe",
+      "provider": {
+        "id": 1,
+        "name": "News",
+        "type": "News",
+        "subType": "News"
+      },
+      "subtitle": "Rare Geomagnetic Storm",
+      "description": "A powerful solar storm produced stunning auroras visible far beyond their usual range.",
+      "slug": "aurora-lights-europe",
+      "published_at": "2025-01-16T21:00:00Z",
+      "is_featured": false,
+      "engagement_score": 9.1,
+      "html": "",
+      "layout": "gallery",
+      "web_url": "",
+      "author": {
         "id": 3,
-        "title": "Tech Giants Report Strong Quarterly Earnings",
-        "type": "News",
-        "subtitle": "AI and Cloud Drive Growth",
-        "description": "Major technology firms reported better-than-expected earnings, driven by AI adoption and cloud services demand.",
-        "slug": "tech-giants-q4-earnings",
-        "published_at": "2025-01-17T08:45:00Z",
-        "is_featured": false,
-        "engagement_score": 7.3,
-        "html": "",
-        "layout": "standardCard",
-        "web_url": "",
-        "author": { "id": 4, "name": "Tech Desk", "bio": "Technology and innovation.", "profile_picture": "" },
-        "source": { "id": 4, "name": "TechWire", "website": "" },
-        "category": { "id": 4, "name": "Technology", "description": "Tech industry news" },
-        "tags": [{ "id": 7, "name": "AI" }, { "id": 8, "name": "Earnings" }],
-        "language": { "id": 1, "name": "English", "code": "en" },
-        "region": { "id": 3, "name": "Global", "code": "GL" },
-        "status": { "id": 1, "name": "published", "description": "Visible to all users" },
-        "resources": [
-          { "id": 6, "name": "cover_image", "url": "https://images.pexels.com/photos/3184298/pexels-photo-3184298.jpeg", "content_type": { "id": 1, "name": "story", "description": "Text-based story" } }
-        ]
+        "name": "Science Desk",
+        "bio": "Covers space and science.",
+        "profile_picture": ""
       },
-    
-      {
+      "source": {
+        "id": 3,
+        "name": "Space Today",
+        "website": ""
+      },
+      "category": {
+        "id": 3,
+        "name": "Science",
+        "description": "Science and space"
+      },
+      "tags": [
+        {
+          "id": 5,
+          "name": "Aurora"
+        },
+        {
+          "id": 6,
+          "name": "Space"
+        }
+      ],
+      "language": {
+        "id": 1,
+        "name": "English",
+        "code": "en"
+      },
+      "region": {
+        "id": 2,
+        "name": "Europe",
+        "code": "EU"
+      },
+      "status": {
+        "id": 1,
+        "name": "published",
+        "description": "Visible to all users"
+      },
+      "resources": [
+        {
+          "id": 3,
+          "name": "image_1",
+          "url": "https://images.pexels.com/photos/1257860/pexels-photo-1257860.jpeg",
+          "content_type": {
+            "id": 2,
+            "name": "gallery",
+            "description": "Image gallery"
+          }
+        },
+        {
+          "id": 4,
+          "name": "image_2",
+          "url": "https://images.pexels.com/photos/1434608/pexels-photo-1434608.jpeg",
+          "content_type": {
+            "id": 2,
+            "name": "gallery",
+            "description": "Image gallery"
+          }
+        },
+        {
+          "id": 5,
+          "name": "image_3",
+          "url": "https://images.pexels.com/photos/3227982/pexels-photo-3227982.jpeg",
+          "content_type": {
+            "id": 2,
+            "name": "gallery",
+            "description": "Image gallery"
+          }
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Tech Giants Report Strong Quarterly Earnings",
+      "provider": {
+        "id": 1,
+        "name": "News",
+        "type": "News",
+        "subType": "News"
+      },
+      "subtitle": "AI and Cloud Drive Growth",
+      "description": "Major technology firms reported better-than-expected earnings, driven by AI adoption and cloud services demand.",
+      "slug": "tech-giants-q4-earnings",
+      "published_at": "2025-01-17T08:45:00Z",
+      "is_featured": false,
+      "engagement_score": 7.3,
+      "html": "",
+      "layout": "standardCard",
+      "web_url": "",
+      "author": {
         "id": 4,
-        "title": "Historic Win Seals Championship for Underdog Team",
-        "type": "News",
-        "subtitle": "Fans Celebrate Across the City",
-        "description": "In a dramatic final, the underdogs clinched the title, marking their first championship victory in decades.",
-        "slug": "historic-sports-championship-win",
-        "published_at": "2025-01-17T22:10:00Z",
-        "is_featured": false,
-        "engagement_score": 8.9,
-        "html": "",
-        "layout": "photoDominant",
-        "web_url": "",
-        "author": { "id": 5, "name": "Sports Desk", "bio": "Sports coverage and analysis.", "profile_picture": "" },
-        "source": { "id": 5, "name": "Sports Arena", "website": "" },
-        "category": { "id": 5, "name": "Sports", "description": "Sports news" },
-        "tags": [{ "id": 9, "name": "Championship" }, { "id": 10, "name": "Final" }],
-        "language": { "id": 1, "name": "English", "code": "en" },
-        "region": { "id": 1, "name": "India", "code": "IN" },
-        "status": { "id": 1, "name": "published", "description": "Visible to all users" },
-        "resources": [
-          { "id": 7, "name": "cover_image", "url": "https://images.pexels.com/photos/114296/pexels-photo-114296.jpeg", "content_type": { "id": 1, "name": "story", "description": "Text-based story" } }
-        ]
+        "name": "Tech Desk",
+        "bio": "Technology and innovation.",
+        "profile_picture": ""
       },
-    
-      {
+      "source": {
+        "id": 4,
+        "name": "TechWire",
+        "website": ""
+      },
+      "category": {
+        "id": 4,
+        "name": "Technology",
+        "description": "Tech industry news"
+      },
+      "tags": [
+        {
+          "id": 7,
+          "name": "AI"
+        },
+        {
+          "id": 8,
+          "name": "Earnings"
+        }
+      ],
+      "language": {
+        "id": 1,
+        "name": "English",
+        "code": "en"
+      },
+      "region": {
+        "id": 3,
+        "name": "Global",
+        "code": "GL"
+      },
+      "status": {
+        "id": 1,
+        "name": "published",
+        "description": "Visible to all users"
+      },
+      "resources": [
+        {
+          "id": 6,
+          "name": "cover_image",
+          "url": "https://images.pexels.com/photos/3184298/pexels-photo-3184298.jpeg",
+          "content_type": {
+            "id": 1,
+            "name": "story",
+            "description": "Text-based story"
+          }
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Historic Win Seals Championship for Underdog Team",
+      "provider": {
+        "id": 1,
+        "name": "News",
+        "type": "News",
+        "subType": "News"
+      },
+      "subtitle": "Fans Celebrate Across the City",
+      "description": "In a dramatic final, the underdogs clinched the title, marking their first championship victory in decades.",
+      "slug": "historic-sports-championship-win",
+      "published_at": "2025-01-17T22:10:00Z",
+      "is_featured": false,
+      "engagement_score": 8.9,
+      "html": "",
+      "layout": "photoDominant",
+      "web_url": "",
+      "author": {
         "id": 5,
-        "title": "Doctors Warn Against Rising Lifestyle Diseases in Youth",
-        "type": "News",
-        "subtitle": "Early Screening Advised",
-        "description": "Medical experts report a sharp increase in diabetes and heart conditions among people under 35.",
-        "slug": "lifestyle-diseases-youth",
-        "published_at": "2025-01-18T09:00:00Z",
-        "is_featured": false,
-        "engagement_score": 5.8,
-        "html": "",
-        "layout": "standardCard",
-        "web_url": "",
-        "author": { "id": 6, "name": "Health Correspondent", "bio": "Health and wellness.", "profile_picture": "" },
-        "source": { "id": 6, "name": "HealthLine", "website": "" },
-        "category": { "id": 6, "name": "Health", "description": "Health and wellness" },
-        "tags": [{ "id": 11, "name": "Health" }, { "id": 12, "name": "Lifestyle" }],
-        "language": { "id": 1, "name": "English", "code": "en" },
-        "region": { "id": 1, "name": "India", "code": "IN" },
-        "status": { "id": 1, "name": "published", "description": "Visible to all users" },
-        "resources": [
-          { "id": 8, "name": "cover_image", "url": "https://images.pexels.com/photos/40568/medical-appointment-doctor-healthcare-40568.jpeg", "content_type": { "id": 1, "name": "story", "description": "Text-based story" } }
-        ]
+        "name": "Sports Desk",
+        "bio": "Sports coverage and analysis.",
+        "profile_picture": ""
       },
-    
-      {
+      "source": {
+        "id": 5,
+        "name": "Sports Arena",
+        "website": ""
+      },
+      "category": {
+        "id": 5,
+        "name": "Sports",
+        "description": "Sports news"
+      },
+      "tags": [
+        {
+          "id": 9,
+          "name": "Championship"
+        },
+        {
+          "id": 10,
+          "name": "Final"
+        }
+      ],
+      "language": {
+        "id": 1,
+        "name": "English",
+        "code": "en"
+      },
+      "region": {
+        "id": 1,
+        "name": "India",
+        "code": "IN"
+      },
+      "status": {
+        "id": 1,
+        "name": "published",
+        "description": "Visible to all users"
+      },
+      "resources": [
+        {
+          "id": 7,
+          "name": "cover_image",
+          "url": "https://images.pexels.com/photos/114296/pexels-photo-114296.jpeg",
+          "content_type": {
+            "id": 1,
+            "name": "story",
+            "description": "Text-based story"
+          }
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Doctors Warn Against Rising Lifestyle Diseases in Youth",
+      "provider": {
+        "id": 1,
+        "name": "News",
+        "type": "News",
+        "subType": "News"
+      },
+      "subtitle": "Early Screening Advised",
+      "description": "Medical experts report a sharp increase in diabetes and heart conditions among people under 35.",
+      "slug": "lifestyle-diseases-youth",
+      "published_at": "2025-01-18T09:00:00Z",
+      "is_featured": false,
+      "engagement_score": 5.8,
+      "html": "",
+      "layout": "standardCard",
+      "web_url": "",
+      "author": {
         "id": 6,
-        "title": "New Electric SUV Launched with 600km Range",
-        "type": "News",
-        "subtitle": "Auto Industry Pushes Green Mobility",
-        "description": "The latest electric SUV promises extended range, fast charging, and advanced safety features.",
-        "slug": "electric-suv-launch",
-        "published_at": "2025-01-18T14:20:00Z",
-        "is_featured": false,
-        "engagement_score": 7.6,
-        "html": "",
-        "layout": "browserCard",
-        "web_url": "https://example.com/ev-launch",
-        "author": { "id": 7, "name": "Auto Desk", "bio": "Automobile industry news.", "profile_picture": "" },
-        "source": { "id": 7, "name": "AutoWorld", "website": "" },
-        "category": { "id": 7, "name": "Automobile", "description": "Auto and mobility" },
-        "tags": [{ "id": 13, "name": "EV" }, { "id": 14, "name": "Cars" }],
-        "language": { "id": 1, "name": "English", "code": "en" },
-        "region": { "id": 3, "name": "Global", "code": "GL" },
-        "status": { "id": 1, "name": "published", "description": "Visible to all users" },
-        "resources": [
-          { "id": 9, "name": "cover_image", "url": "https://images.pexels.com/photos/1149831/pexels-photo-1149831.jpeg", "content_type": { "id": 1, "name": "story", "description": "Text-based story" } }
-        ]
+        "name": "Health Correspondent",
+        "bio": "Health and wellness.",
+        "profile_picture": ""
       },
-    
-      {
+      "source": {
+        "id": 6,
+        "name": "HealthLine",
+        "website": ""
+      },
+      "category": {
+        "id": 6,
+        "name": "Health",
+        "description": "Health and wellness"
+      },
+      "tags": [
+        {
+          "id": 11,
+          "name": "Health"
+        },
+        {
+          "id": 12,
+          "name": "Lifestyle"
+        }
+      ],
+      "language": {
+        "id": 1,
+        "name": "English",
+        "code": "en"
+      },
+      "region": {
+        "id": 1,
+        "name": "India",
+        "code": "IN"
+      },
+      "status": {
+        "id": 1,
+        "name": "published",
+        "description": "Visible to all users"
+      },
+      "resources": [
+        {
+          "id": 8,
+          "name": "cover_image",
+          "url": "https://images.pexels.com/photos/40568/medical-appointment-doctor-healthcare-40568.jpeg",
+          "content_type": {
+            "id": 1,
+            "name": "story",
+            "description": "Text-based story"
+          }
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "New Electric SUV Launched with 600km Range",
+      "provider": {
+        "id": 1,
+        "name": "News",
+        "type": "News",
+        "subType": "News"
+      },
+      "subtitle": "Auto Industry Pushes Green Mobility",
+      "description": "The latest electric SUV promises extended range, fast charging, and advanced safety features.",
+      "slug": "electric-suv-launch",
+      "published_at": "2025-01-18T14:20:00Z",
+      "is_featured": false,
+      "engagement_score": 7.6,
+      "html": "",
+      "layout": "browserCard",
+      "web_url": "https://example.com/ev-launch",
+      "author": {
         "id": 7,
-        "title": "Election Commission Announces Poll Dates",
-        "type": "News",
-        "subtitle": "Code of Conduct Comes into Effect",
-        "description": "The Election Commission released the schedule for upcoming state elections, urging parties to follow guidelines strictly.",
-        "slug": "election-dates-announced",
-        "published_at": "2025-01-19T11:00:00Z",
-        "is_featured": true,
-        "engagement_score": 8.1,
-        "html": "",
-        "layout": "story",
-        "web_url": "",
-        "author": { "id": 8, "name": "Political Editor", "bio": "Covers elections and policy.", "profile_picture": "" },
-        "source": { "id": 8, "name": "National Herald", "website": "" },
-        "category": { "id": 8, "name": "Politics", "description": "Political news" },
-        "tags": [{ "id": 15, "name": "Elections" }, { "id": 16, "name": "Politics" }],
-        "language": { "id": 1, "name": "English", "code": "en" },
-        "region": { "id": 1, "name": "India", "code": "IN" },
-        "status": { "id": 1, "name": "published", "description": "Visible to all users" },
-        "resources": [
-          { "id": 10, "name": "cover_image", "url": "https://images.pexels.com/photos/1550337/pexels-photo-1550337.jpeg", "content_type": { "id": 1, "name": "story", "description": "Text-based story" } },
-          { "id": 11, "name": "cover_image", "url": "https://images.pexels.com/photos/7991579/pexels-photo-7991579.jpeg", "content_type": { "id": 1, "name": "story", "description": "Text-based story" } },
-          { "id": 12, "name": "cover_image", "url": "https://images.pexels.com/photos/210607/pexels-photo-210607.jpeg", "content_type": { "id": 1, "name": "story", "description": "Text-based story" } }
-        ]
+        "name": "Auto Desk",
+        "bio": "Automobile industry news.",
+        "profile_picture": ""
       },
-    
-      {
+      "source": {
+        "id": 7,
+        "name": "AutoWorld",
+        "website": ""
+      },
+      "category": {
+        "id": 7,
+        "name": "Automobile",
+        "description": "Auto and mobility"
+      },
+      "tags": [
+        {
+          "id": 13,
+          "name": "EV"
+        },
+        {
+          "id": 14,
+          "name": "Cars"
+        }
+      ],
+      "language": {
+        "id": 1,
+        "name": "English",
+        "code": "en"
+      },
+      "region": {
+        "id": 3,
+        "name": "Global",
+        "code": "GL"
+      },
+      "status": {
+        "id": 1,
+        "name": "published",
+        "description": "Visible to all users"
+      },
+      "resources": [
+        {
+          "id": 9,
+          "name": "cover_image",
+          "url": "https://images.pexels.com/photos/1149831/pexels-photo-1149831.jpeg",
+          "content_type": {
+            "id": 1,
+            "name": "story",
+            "description": "Text-based story"
+          }
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Election Commission Announces Poll Dates",
+      "provider": {
+        "id": 1,
+        "name": "News",
+        "type": "News",
+        "subType": "News"
+      },
+      "subtitle": "Code of Conduct Comes into Effect",
+      "description": "The Election Commission released the schedule for upcoming state elections, urging parties to follow guidelines strictly.",
+      "slug": "election-dates-announced",
+      "published_at": "2025-01-19T11:00:00Z",
+      "is_featured": true,
+      "engagement_score": 8.1,
+      "html": "",
+      "layout": "story",
+      "web_url": "",
+      "author": {
         "id": 8,
-        "title": "Film Festival Opens with Standing Ovation",
-        "type": "News",
-        "subtitle": "Cinema from Around the World",
-        "description": "The annual international film festival kicked off with premieres from acclaimed directors.",
-        "slug": "film-festival-opening",
-        "published_at": "2025-01-19T20:30:00Z",
-        "is_featured": false,
-        "engagement_score": 6.9,
-        "html": "",
-        "layout": "photoDominant",
-        "web_url": "",
-        "author": { "id": 9, "name": "Culture Writer", "bio": "Arts and culture.", "profile_picture": "" },
-        "source": { "id": 9, "name": "Culture Post", "website": "" },
-        "category": { "id": 9, "name": "Culture", "description": "Arts and entertainment" },
-        "tags": [{ "id": 17, "name": "Cinema" }, { "id": 18, "name": "Festival" }],
-        "language": { "id": 1, "name": "English", "code": "en" },
-        "region": { "id": 3, "name": "Global", "code": "GL" },
-        "status": { "id": 1, "name": "published", "description": "Visible to all users" },
-        "resources": [
-          { "id": 11, "name": "cover_image", "url": "https://images.pexels.com/photos/7991579/pexels-photo-7991579.jpeg", "content_type": { "id": 1, "name": "story", "description": "Text-based story" } }
-        ]
+        "name": "Political Editor",
+        "bio": "Covers elections and policy.",
+        "profile_picture": ""
       },
-    
-      {
+      "source": {
+        "id": 8,
+        "name": "National Herald",
+        "website": ""
+      },
+      "category": {
+        "id": 8,
+        "name": "Politics",
+        "description": "Political news"
+      },
+      "tags": [
+        {
+          "id": 15,
+          "name": "Elections"
+        },
+        {
+          "id": 16,
+          "name": "Politics"
+        }
+      ],
+      "language": {
+        "id": 1,
+        "name": "English",
+        "code": "en"
+      },
+      "region": {
+        "id": 1,
+        "name": "India",
+        "code": "IN"
+      },
+      "status": {
+        "id": 1,
+        "name": "published",
+        "description": "Visible to all users"
+      },
+      "resources": [
+        {
+          "id": 10,
+          "name": "cover_image",
+          "url": "https://images.pexels.com/photos/1550337/pexels-photo-1550337.jpeg",
+          "content_type": {
+            "id": 1,
+            "name": "story",
+            "description": "Text-based story"
+          }
+        },
+        {
+          "id": 11,
+          "name": "cover_image",
+          "url": "https://images.pexels.com/photos/7991579/pexels-photo-7991579.jpeg",
+          "content_type": {
+            "id": 1,
+            "name": "story",
+            "description": "Text-based story"
+          }
+        },
+        {
+          "id": 12,
+          "name": "cover_image",
+          "url": "https://images.pexels.com/photos/210607/pexels-photo-210607.jpeg",
+          "content_type": {
+            "id": 1,
+            "name": "story",
+            "description": "Text-based story"
+          }
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Film Festival Opens with Standing Ovation",
+      "provider": {
+        "id": 1,
+        "name": "News",
+        "type": "News",
+        "subType": "News"
+      },
+      "subtitle": "Cinema from Around the World",
+      "description": "The annual international film festival kicked off with premieres from acclaimed directors.",
+      "slug": "film-festival-opening",
+      "published_at": "2025-01-19T20:30:00Z",
+      "is_featured": false,
+      "engagement_score": 6.9,
+      "html": "",
+      "layout": "photoDominant",
+      "web_url": "",
+      "author": {
         "id": 9,
-        "title": "Stock Markets End Week on a High",
-        "type": "News",
-        "subtitle": "Banking and IT Stocks Rally",
-        "description": "Benchmark indices closed higher as investors reacted positively to global cues.",
-        "slug": "markets-weekly-gains",
-        "published_at": "2025-01-20T16:00:00Z",
-        "is_featured": false,
-        "engagement_score": 7.0,
-        "html": "",
-        "layout": "standardCard",
-        "web_url": "",
-        "author": { "id": 10, "name": "Market Analyst", "bio": "Markets and finance.", "profile_picture": "" },
-        "source": { "id": 10, "name": "Market Watch", "website": "" },
-        "category": { "id": 10, "name": "Finance", "description": "Markets and finance" },
-        "tags": [{ "id": 19, "name": "Stocks" }, { "id": 20, "name": "Markets" }],
-        "language": { "id": 1, "name": "English", "code": "en" },
-        "region": { "id": 1, "name": "India", "code": "IN" },
-        "status": { "id": 1, "name": "published", "description": "Visible to all users" },
-        "resources": [
-          { "id": 12, "name": "cover_image", "url": "https://images.pexels.com/photos/210607/pexels-photo-210607.jpeg", "content_type": { "id": 1, "name": "story", "description": "Text-based story" } }
-        ]
+        "name": "Culture Writer",
+        "bio": "Arts and culture.",
+        "profile_picture": ""
       },
-    
-      {
-        "id": 10,
-        "title": "Space Agency Successfully Tests Reusable Rocket",
+      "source": {
+        "id": 9,
+        "name": "Culture Post",
+        "website": ""
+      },
+      "category": {
+        "id": 9,
+        "name": "Culture",
+        "description": "Arts and entertainment"
+      },
+      "tags": [
+        {
+          "id": 17,
+          "name": "Cinema"
+        },
+        {
+          "id": 18,
+          "name": "Festival"
+        }
+      ],
+      "language": {
+        "id": 1,
+        "name": "English",
+        "code": "en"
+      },
+      "region": {
+        "id": 3,
+        "name": "Global",
+        "code": "GL"
+      },
+      "status": {
+        "id": 1,
+        "name": "published",
+        "description": "Visible to all users"
+      },
+      "resources": [
+        {
+          "id": 11,
+          "name": "cover_image",
+          "url": "https://images.pexels.com/photos/7991579/pexels-photo-7991579.jpeg",
+          "content_type": {
+            "id": 1,
+            "name": "story",
+            "description": "Text-based story"
+          }
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Stock Markets End Week on a High",
+      "provider": {
+        "id": 1,
+        "name": "News",
         "type": "News",
-        "subtitle": "Major Step Towards Cost Reduction",
-        "description": "The successful test marks a significant milestone in reusable launch vehicle development.",
-        "slug": "reusable-rocket-test",
-        "published_at": "2025-01-20T23:40:00Z",
-        "is_featured": true,
-        "engagement_score": 9.3,
-        "html": "",
-        "layout": "story",
-        "web_url": "",
-        "author": { "id": 11, "name": "Science Editor", "bio": "Science and aerospace.", "profile_picture": "" },
-        "source": { "id": 11, "name": "Space Chronicle", "website": "" },
-        "category": { "id": 3, "name": "Science", "description": "Science and space" },
-        "tags": [{ "id": 21, "name": "Rocket" }, { "id": 22, "name": "SpaceTech" }],
-        "language": { "id": 1, "name": "English", "code": "en" },
-        "region": { "id": 3, "name": "Global", "code": "GL" },
-        "status": { "id": 1, "name": "published", "description": "Visible to all users" },
-        "resources": [
-          { "id": 13, "name": "cover_image", "url": "https://images.pexels.com/photos/586030/pexels-photo-586030.jpeg", "content_type": { "id": 1, "name": "story", "description": "Text-based story" } }
-        ]
-      }
-    ]
-    
-  }
-  
+        "subType": "News"
+      },
+      "subtitle": "Banking and IT Stocks Rally",
+      "description": "Benchmark indices closed higher as investors reacted positively to global cues.",
+      "slug": "markets-weekly-gains",
+      "published_at": "2025-01-20T16:00:00Z",
+      "is_featured": false,
+      "engagement_score": 7.0,
+      "html": "",
+      "layout": "standardCard",
+      "web_url": "",
+      "author": {
+        "id": 10,
+        "name": "Market Analyst",
+        "bio": "Markets and finance.",
+        "profile_picture": ""
+      },
+      "source": {
+        "id": 10,
+        "name": "Market Watch",
+        "website": ""
+      },
+      "category": {
+        "id": 10,
+        "name": "Finance",
+        "description": "Markets and finance"
+      },
+      "tags": [
+        {
+          "id": 19,
+          "name": "Stocks"
+        },
+        {
+          "id": 20,
+          "name": "Markets"
+        }
+      ],
+      "language": {
+        "id": 1,
+        "name": "English",
+        "code": "en"
+      },
+      "region": {
+        "id": 1,
+        "name": "India",
+        "code": "IN"
+      },
+      "status": {
+        "id": 1,
+        "name": "published",
+        "description": "Visible to all users"
+      },
+      "resources": [
+        {
+          "id": 12,
+          "name": "cover_image",
+          "url": "https://images.pexels.com/photos/210607/pexels-photo-210607.jpeg",
+          "content_type": {
+            "id": 1,
+            "name": "story",
+            "description": "Text-based story"
+          }
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "title": "Space Agency Successfully Tests Reusable Rocket",
+      "provider": {
+        "id": 1,
+        "name": "News",
+        "type": "News",
+        "subType": "News"
+      },
+      "subtitle": "Major Step Towards Cost Reduction",
+      "description": "The successful test marks a significant milestone in reusable launch vehicle development.",
+      "slug": "reusable-rocket-test",
+      "published_at": "2025-01-20T23:40:00Z",
+      "is_featured": true,
+      "engagement_score": 9.3,
+      "html": "",
+      "layout": "story",
+      "web_url": "",
+      "author": {
+        "id": 11,
+        "name": "Science Editor",
+        "bio": "Science and aerospace.",
+        "profile_picture": ""
+      },
+      "source": {
+        "id": 11,
+        "name": "Space Chronicle",
+        "website": ""
+      },
+      "category": {
+        "id": 3,
+        "name": "Science",
+        "description": "Science and space"
+      },
+      "tags": [
+        {
+          "id": 21,
+          "name": "Rocket"
+        },
+        {
+          "id": 22,
+          "name": "SpaceTech"
+        }
+      ],
+      "language": {
+        "id": 1,
+        "name": "English",
+        "code": "en"
+      },
+      "region": {
+        "id": 3,
+        "name": "Global",
+        "code": "GL"
+      },
+      "status": {
+        "id": 1,
+        "name": "published",
+        "description": "Visible to all users"
+      },
+      "resources": [
+        {
+          "id": 13,
+          "name": "cover_image",
+          "url": "https://images.pexels.com/photos/586030/pexels-photo-586030.jpeg",
+          "content_type": {
+            "id": 1,
+            "name": "story",
+            "description": "Text-based story"
+          }
+        }
+      ]
+    }
+  ]
+}

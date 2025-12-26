@@ -1,3 +1,4 @@
+import 'package:bl_inshort/data/dto/common/Item_type_provider_dto.dart';
 import 'package:bl_inshort/data/dto/common/author_dto.dart';
 import 'package:bl_inshort/data/dto/common/source_dto.dart';
 import 'package:bl_inshort/data/dto/common/category_dto.dart';
@@ -50,7 +51,7 @@ class FeedDTO {
   final double engagementScore;
   final String webUrl;
   final String html;
-  final ItemType type;
+  final ItemTypeProviderDto provider;
 
   final AuthorDto author;
   final SourceDto source;
@@ -64,7 +65,7 @@ class FeedDTO {
 
   FeedDTO({
     required this.id,
-    required this.type,
+    required this.provider,
     required this.title,
     required this.subtitle,
     required this.description,
@@ -88,7 +89,7 @@ class FeedDTO {
   factory FeedDTO.fromJson(Map<String, dynamic> json) {
     return FeedDTO(
       id: json['id'],
-      type: ItemType.fromString(json['type']),
+      provider: ItemTypeProviderDto.fromJson(json['provider']),
       title: json['title'],
       subtitle: json['subtitle'],
       description: json['description'],
@@ -114,7 +115,7 @@ class FeedDTO {
 
   @override
   String toString() {
-    return 'FeedDTO{id=$id, title=$title, subtitle=$subtitle, description=$description, slug=$slug, publishedAt=$publishedAt, isFeatured=$isFeatured, engagementScore=$engagementScore, webUrl=$webUrl, html=$html, type=$type, author=$author, source=$source, category=$category, tags=$tags, language=$language, region=$region, status=$status, layout=$layout, resources=$resources}';
+    return 'FeedDTO{id=$id, title=$title, subtitle=$subtitle, description=$description, slug=$slug, publishedAt=$publishedAt, isFeatured=$isFeatured, engagementScore=$engagementScore, webUrl=$webUrl, html=$html, provider=$provider, author=$author, source=$source, category=$category, tags=$tags, language=$language, region=$region, status=$status, layout=$layout, resources=$resources}';
   }
 
   Map<String, dynamic> toJson() {
@@ -129,7 +130,7 @@ class FeedDTO {
       'engagement_score': engagementScore,
       'web_url': webUrl,
       'html': html,
-      'type': type.name,
+      'provider': provider.toJson(),
       'author': author.toJson(),
       'source': source.toJson(),
       'category': category.toJson(),
@@ -145,7 +146,7 @@ class FeedDTO {
   FeedEntity toEntity() {
     return FeedEntity(
       id: id,
-      type: type,
+      provider: provider.toEntity(),
       title: title,
       subtitle: subtitle,
       description: description,
