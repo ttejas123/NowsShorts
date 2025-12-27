@@ -1,3 +1,4 @@
+import 'package:bl_inshort/core/logging/Console.dart';
 import 'package:bl_inshort/data/dto/feed/feed_dto.dart';
 import 'package:bl_inshort/data/models/feeds/item_type_provider_entity.dart';
 
@@ -17,9 +18,9 @@ class ItemTypeProviderDto {
   factory ItemTypeProviderDto.fromJson(Map<String, dynamic> json) {
     return ItemTypeProviderDto(
       name: json['name'],
-      subType: json['provider']['subType'],
-      type: ItemType.fromString(json['provider']['type']),
-      id: json['id'] + '-' + json['provider']['type'].name + '-' + json['name'],
+      subType: json['subType'],
+      type: ItemType.fromString(json['type']),
+      id: "${json['id']} - ${json['type']} - ${json['name']}",
     );
   }
 

@@ -1,5 +1,6 @@
 // ignore_for_file: deprecated_member_use, duplicate_ignore
 
+import 'package:bl_inshort/core/ads/presentation/ad_slot_widget.dart';
 import 'package:bl_inshort/data/dto/feed/feed_dto.dart';
 import 'package:bl_inshort/data/models/feeds/feed_entity.dart';
 import 'package:bl_inshort/data/models/feeds/resource_entity.dart';
@@ -14,6 +15,13 @@ class FeedCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // if (item.provider.type == ItemType.News) {
+    //   return AdSlotWidget(
+    //     meta: item.provider,
+    //     runtime: adsRuntime,
+    //     fallback: NewsCard(item),
+    //   );
+    // }
     switch (item.layout) {
       case FeedLayoutType.photoDominant:
         return _PhotoDominantCard(item: item);

@@ -9,3 +9,12 @@
     This file translates:
     provider events → analytics_client
 */
+
+import 'ads_types.dart';
+
+class AdsAnalytics {
+  void adRequested(AdMeta meta) {}
+  void adLoaded(AdMeta meta) {}
+  void adFailed(AdMeta meta) {}
+  void fallbackShown(AdMeta meta) {}
+}

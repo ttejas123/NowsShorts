@@ -1,3 +1,5 @@
+import 'package:bl_inshort/core/logging/Console.dart';
+import 'package:bl_inshort/core/logging/json_decode_exception.dart';
 import 'package:bl_inshort/data/dto/common/Item_type_provider_dto.dart';
 import 'package:bl_inshort/data/dto/common/author_dto.dart';
 import 'package:bl_inshort/data/dto/common/source_dto.dart';
@@ -89,7 +91,11 @@ class FeedDTO {
   factory FeedDTO.fromJson(Map<String, dynamic> json) {
     return FeedDTO(
       id: json['id'],
-      provider: ItemTypeProviderDto.fromJson(json['provider']),
+      provider: safeFromJson(
+        json['provider'],
+        ItemTypeProviderDto.fromJson,
+        'ItemTypeProviderDto',
+      ),
       title: json['title'],
       subtitle: json['subtitle'],
       description: json['description'],
@@ -99,16 +105,30 @@ class FeedDTO {
       publishedAt: json['published_at'],
       isFeatured: json['is_featured'],
       engagementScore: (json['engagement_score'] as num).toDouble(),
-      author: AuthorDto.fromJson(json['author']),
+      author: safeFromJson(json['author'], AuthorDto.fromJson, 'AuthorDto'),
       layout: FeedLayoutType.fromString(json['layout']),
-      source: SourceDto.fromJson(json['source']),
-      category: CategoryDto.fromJson(json['category']),
-      tags: (json['tags'] as List).map((e) => TagDto.fromJson(e)).toList(),
-      language: LanguageDto.fromJson(json['language']),
-      region: RegionDto.fromJson(json['region']),
-      status: StatusDto.fromJson(json['status']),
+      source: safeFromJson(json['source'], SourceDto.fromJson, 'SourceDto'),
+      category: safeFromJson(
+        json['category'],
+        CategoryDto.fromJson,
+        'CategoryDto',
+      ),
+      tags: (json['tags'] as List)
+          .map((e) => safeFromJson(e, TagDto.fromJson, 'TagDto'))
+          .toList(),
+      language: safeFromJson(
+        json['language'],
+        LanguageDto.fromJson,
+        'LanguageDto',
+      ),
+      region: safeFromJson(json['region'], RegionDto.fromJson, 'RegionDto'),
+      status: safeFromJson(
+        json['status'],
+        StatusDto.prototype().fromJson,
+        'StatusDto',
+      ),
       resources: (json['resources'] as List)
-          .map((e) => ResourceDto.fromJson(e))
+          .map((e) => safeFromJson(e, ResourceDto.fromJson, 'ResourceDto'))
           .toList(),
     );
   }

@@ -1,4 +1,7 @@
 // lib/features/feed/presentation/feed_page.dart
+// import 'package:bl_inshort/core/ads/ads_providers.dart';
+import 'package:bl_inshort/core/ads/presentation/ad_slot_widget.dart';
+import 'package:bl_inshort/data/dto/feed/feed_dto.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:bl_inshort/features/feed/providers.dart';
@@ -18,7 +21,6 @@ class _FeedPageState extends ConsumerState<FeedPage> {
   @override
   void initState() {
     super.initState();
-
     // Load initial batch
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(feedControllerProvider.notifier).loadInitial();
@@ -41,12 +43,11 @@ class _FeedPageState extends ConsumerState<FeedPage> {
 
   @override
   Widget build(BuildContext context) {
+    // final adsRuntime = ref.watch(adsRuntimeProvider);
     final state = ref.watch(feedControllerProvider);
 
     if (state.isInitialLoading && state.items.isEmpty) {
-      return const Scaffold(
-        body: Center(child: CircularProgressIndicator()),
-      );
+      return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
 
     if (state.error != null && state.items.isEmpty) {
@@ -61,9 +62,7 @@ class _FeedPageState extends ConsumerState<FeedPage> {
     }
 
     if (state.items.isEmpty) {
-      return const Scaffold(
-        body: Center(child: Text('No news yet')),
-      );
+      return const Scaffold(body: Center(child: Text('No news yet')));
     }
 
     return Scaffold(
@@ -74,15 +73,12 @@ class _FeedPageState extends ConsumerState<FeedPage> {
           onPressed: () => context.pop(),
           color: Colors.white,
         ),
-        backgroundColor: Colors
-            .transparent, // 👈 transparent background (no solid bar)
+        backgroundColor:
+            Colors.transparent, // 👈 transparent background (no solid bar)
         elevation: 0,
         scrolledUnderElevation: 0,
         surfaceTintColor: Colors.transparent,
-        title: const Text(
-          'My Feed',
-          style: TextStyle(color: Colors.white),
-        ),
+        title: const Text('My Feed', style: TextStyle(color: Colors.white)),
         centerTitle: true,
       ),
       body: SafeArea(
@@ -98,11 +94,10 @@ class _FeedPageState extends ConsumerState<FeedPage> {
               itemExtent: itemHeight,
               // how many items to keep offscreen (tune this for memory)
               cacheExtent: itemHeight * 1.5, // roughly next + previous
-              itemCount:
-                  state.items.length + (state.isLoadingMore ? 1 : 0),
+              itemCount: state.items.length + (state.isLoadingMore ? 1 : 0),
               itemBuilder: (context, index) {
                 // Show loading indicator at end while loading more
-                if (index == state.items.length-2 && state.isLoadingMore) {
+                if (index == state.items.length - 2 && state.isLoadingMore) {
                   return const Center(child: CircularProgressIndicator());
                 }
 
@@ -111,6 +106,17 @@ class _FeedPageState extends ConsumerState<FeedPage> {
                 }
 
                 final item = state.items[index];
+
+                // // Advertisement
+                // if (item.provider.type == ItemType.Advertisement) {
+                //   return AdSlotWidget(
+                //     meta: item,
+                //     runtime: adsRuntime,
+                //     fallback: FeedCard(item: item),
+                //   );
+                // }
+
+                // News
                 return FeedCard(item: item);
               },
             );

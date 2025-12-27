@@ -7,12 +7,16 @@ class StatusDto {
 
   StatusDto({required this.id, required this.name, required this.description});
 
-  factory StatusDto.fromJson(Map<String, dynamic> json) {
+  StatusDto fromJson(Map<String, dynamic> json) {
     return StatusDto(
       id: json['id'],
       name: json['name'],
       description: json['description'],
     );
+  }
+
+  factory StatusDto.prototype() {
+    return StatusDto(id: -1, name: "", description: "");
   }
 
   @override
