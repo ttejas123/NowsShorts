@@ -1,8 +1,8 @@
 import 'package:bl_inshort/data/models/feeds/feed_entity.dart';
 import 'package:flutter/widgets.dart';
-import '../ads_runtime.dart';
-import 'ad_fallback_widget.dart';
-import 'ad_card_shell.dart';
+import 'package:bl_inshort/core/ads/ads_runtime.dart';
+import 'package:bl_inshort/core/ads/presentation/ad_fallback_widget.dart';
+import 'package:bl_inshort/core/ads/presentation/ad_card_shell.dart';
 
 class AdSlotWidget extends StatefulWidget {
   final FeedEntity meta;

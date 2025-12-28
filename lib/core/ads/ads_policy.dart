@@ -13,7 +13,7 @@
   Policy decides whether
 */
 
-import 'ads_types.dart';
+import 'package:bl_inshort/core/ads/ads_types.dart';
 
 class AdsPolicy {
   bool shouldRenderAd(AdMeta meta) {

@@ -41,16 +41,20 @@ class _GoogleNativeAdWidgetState extends State<_GoogleNativeAdWidget> {
   }
 
   void _loadAd() {
+    debugPrint('🧪 Loading Google Native Ad');
+    debugPrint('🧪 adUnitId = ${widget.adUnitId}');
     _nativeAd = NativeAd(
       adUnitId: widget.adUnitId,
       factoryId: 'feedNativeAd', // IMPORTANT
       listener: NativeAdListener(
         onAdLoaded: (ad) {
+          debugPrint('🟢 Google Native Ad loaded');
           setState(() => _isLoaded = true);
           widget.onLoaded();
         },
         onAdFailedToLoad: (ad, error) {
           ad.dispose();
+          debugPrint('🔴 Google Native Ad failed to load: $error');
           widget.onFailed();
         },
       ),

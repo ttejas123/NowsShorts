@@ -13,8 +13,8 @@
 import 'package:bl_inshort/core/ads/ads_types.dart';
 import 'package:bl_inshort/data/models/feeds/feed_entity.dart';
 
-import 'ads_registry.dart';
-import 'providers/ad_provider.dart';
+import 'package:bl_inshort/core/ads/ads_registry.dart';
+import 'package:bl_inshort/core/ads/providers/ad_provider.dart';
 
 class AdsRuntime {
   final AdsRegistry _registry;
@@ -22,6 +22,8 @@ class AdsRuntime {
   AdsRuntime(this._registry);
 
   AdProvider resolveProvider(FeedEntity meta) {
-    return _registry.getProvider(meta.provider.type as AdProviderType);
+    return _registry.getProvider(
+      AdProviderType.fromString(meta.provider.subType),
+    );
   }
 }

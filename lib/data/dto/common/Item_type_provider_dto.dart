@@ -21,7 +21,7 @@ class ItemTypeProviderDto extends FactorySafeDto<ItemTypeProviderDto> {
       name: json['name'],
       subType: json['subType'],
       type: ItemType.fromString(json['type']),
-      id: "${json['id']} - ${json['type']} - ${json['name']}",
+      id: json['id'],
     );
   }
 

@@ -13,8 +13,8 @@ Meta disabled
 Promo always enabled
 */
 
-import 'ads_types.dart';
-import 'providers/ad_provider.dart';
+import 'package:bl_inshort/core/ads/ads_types.dart';
+import 'package:bl_inshort/core/ads/providers/ad_provider.dart';
 
 class AdsRegistry {
   final Map<AdProviderType, AdProvider> _providers = {};

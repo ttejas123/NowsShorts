@@ -98,10 +98,10 @@
       "id": 1,
       "title": "Heavy Monsoon Rains Flood City Roads, Traffic at Standstill",
       "provider": {
-        "id": "ca-app-pub-3940256099942544/2247696110",
+        "id": "ca-app-pub-3940256099942544/3986624511",
         "name": "News",
-        "type": "News",
-        "subType": "News"
+        "type": "Advertisement",
+        "subType": "google"
       },
       "subtitle": "Authorities Issue Red Alert",
       "description": "Overnight rainfall caused severe waterlogging across major intersections, disrupting daily commute and emergency services.",

@@ -10,7 +10,7 @@
     provider events → analytics_client
 */
 
-import 'ads_types.dart';
+import 'package:bl_inshort/core/ads/ads_types.dart';
 
 class AdsAnalytics {
   void adRequested(AdMeta meta) {}

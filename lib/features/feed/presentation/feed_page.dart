@@ -1,5 +1,4 @@
-// lib/features/feed/presentation/feed_page.dart
-// import 'package:bl_inshort/core/ads/ads_providers.dart';
+import 'package:bl_inshort/core/ads/ads_providers.dart';
 import 'package:bl_inshort/core/ads/presentation/ad_slot_widget.dart';
 import 'package:bl_inshort/data/dto/feed/feed_dto.dart';
 import 'package:flutter/material.dart';
@@ -43,7 +42,7 @@ class _FeedPageState extends ConsumerState<FeedPage> {
 
   @override
   Widget build(BuildContext context) {
-    // final adsRuntime = ref.watch(adsRuntimeProvider);
+    final adsRuntime = ref.watch(adsRuntimeProvider);
     final state = ref.watch(feedControllerProvider);
 
     if (state.isInitialLoading && state.items.isEmpty) {
@@ -107,14 +106,14 @@ class _FeedPageState extends ConsumerState<FeedPage> {
 
                 final item = state.items[index];
 
-                // // Advertisement
-                // if (item.provider.type == ItemType.Advertisement) {
-                //   return AdSlotWidget(
-                //     meta: item,
-                //     runtime: adsRuntime,
-                //     fallback: FeedCard(item: item),
-                //   );
-                // }
+                // Advertisement
+                if (item.provider.type == ItemType.Advertisement) {
+                  return AdSlotWidget(
+                    meta: item,
+                    runtime: adsRuntime,
+                    fallback: FeedCard(item: item),
+                  );
+                }
 
                 // News
                 return FeedCard(item: item);
