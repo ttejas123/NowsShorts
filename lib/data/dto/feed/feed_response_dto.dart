@@ -1,7 +1,8 @@
+import 'package:bl_inshort/core/logging/factory_safe_dto_conversion.dart';
 import 'package:bl_inshort/data/dto/feed/feed_dto.dart';
 import 'package:bl_inshort/data/models/feeds/feed_entity.dart';
 
-class FeedResponseDto {
+class FeedResponseDto extends FactorySafeDto<FeedResponseDto> {
   final String? cursor;
   final bool hasMore;
   final List<FeedDTO> items;
@@ -12,12 +13,16 @@ class FeedResponseDto {
     required this.items,
   });
 
-  factory FeedResponseDto.fromJson(Map<String, dynamic> json) {
+  FeedResponseDto fromJson(Map<String, dynamic> json) {
     return FeedResponseDto(
       cursor: json['cursor'],
       hasMore: json['has_more'],
       items: (json['items'] as List).map((e) => FeedDTO.fromJson(e)).toList(),
     );
+  }
+
+  factory FeedResponseDto.prototype() {
+    return FeedResponseDto(cursor: "", hasMore: false, items: []);
   }
 
   @override
@@ -34,8 +39,10 @@ class FeedResponseDto {
   }
 
   static List<FeedEntity> toEntityFromJson(Map<String, dynamic> json) {
-    return FeedResponseDto.fromJson(
-      json,
-    ).items.map((dto) => dto.toEntity()).toList();
+    return FeedResponseDto.prototype()
+        .fromJson(json)
+        .items
+        .map((dto) => dto.toEntity())
+        .toList();
   }
 }

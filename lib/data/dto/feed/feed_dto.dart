@@ -1,5 +1,4 @@
-import 'package:bl_inshort/core/logging/Console.dart';
-import 'package:bl_inshort/core/logging/json_decode_exception.dart';
+import 'package:bl_inshort/core/logging/factory_safe_dto_conversion.dart';
 import 'package:bl_inshort/data/dto/common/Item_type_provider_dto.dart';
 import 'package:bl_inshort/data/dto/common/author_dto.dart';
 import 'package:bl_inshort/data/dto/common/source_dto.dart';
@@ -42,7 +41,7 @@ enum ItemType {
   }
 }
 
-class FeedDTO {
+class FeedDTO extends FactorySafeDto<FeedDTO> {
   final int id;
   final String title;
   final String subtitle;
@@ -91,11 +90,7 @@ class FeedDTO {
   factory FeedDTO.fromJson(Map<String, dynamic> json) {
     return FeedDTO(
       id: json['id'],
-      provider: safeFromJson(
-        json['provider'],
-        ItemTypeProviderDto.fromJson,
-        'ItemTypeProviderDto',
-      ),
+      provider: ItemTypeProviderDto.prototype().decode(json['provider']),
       title: json['title'],
       subtitle: json['subtitle'],
       description: json['description'],
@@ -105,30 +100,18 @@ class FeedDTO {
       publishedAt: json['published_at'],
       isFeatured: json['is_featured'],
       engagementScore: (json['engagement_score'] as num).toDouble(),
-      author: safeFromJson(json['author'], AuthorDto.fromJson, 'AuthorDto'),
+      author: AuthorDto.prototype().decode(json['author']),
       layout: FeedLayoutType.fromString(json['layout']),
-      source: safeFromJson(json['source'], SourceDto.fromJson, 'SourceDto'),
-      category: safeFromJson(
-        json['category'],
-        CategoryDto.fromJson,
-        'CategoryDto',
-      ),
+      source: SourceDto.prototype().decode(json['source']),
+      category: CategoryDto.prototype().decode(json['category']),
       tags: (json['tags'] as List)
-          .map((e) => safeFromJson(e, TagDto.fromJson, 'TagDto'))
+          .map((e) => TagDto.prototype().decode(e))
           .toList(),
-      language: safeFromJson(
-        json['language'],
-        LanguageDto.fromJson,
-        'LanguageDto',
-      ),
-      region: safeFromJson(json['region'], RegionDto.fromJson, 'RegionDto'),
-      status: safeFromJson(
-        json['status'],
-        StatusDto.prototype().fromJson,
-        'StatusDto',
-      ),
+      language: LanguageDto.prototype().decode(json['language']),
+      region: RegionDto.prototype().decode(json['region']),
+      status: StatusDto.prototype().decode(json['status']),
       resources: (json['resources'] as List)
-          .map((e) => safeFromJson(e, ResourceDto.fromJson, 'ResourceDto'))
+          .map((e) => ResourceDto.prototype().decode(e))
           .toList(),
     );
   }

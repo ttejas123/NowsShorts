@@ -1,7 +1,8 @@
+import 'package:bl_inshort/core/logging/factory_safe_dto_conversion.dart';
 import 'package:bl_inshort/data/models/notifications/notification_action.dart';
 import 'package:bl_inshort/data/models/notifications/notification_common_enums.dart';
 
-class NotificationActionDTO {
+class NotificationActionDTO extends FactorySafeDto<NotificationActionDTO> {
   /// feed / webview / externalUrl / none
   final NotificationTargetType type;
 
@@ -10,10 +11,17 @@ class NotificationActionDTO {
 
   NotificationActionDTO({required this.type, this.payload});
 
-  factory NotificationActionDTO.fromJson(Map<String, dynamic> json) {
+  NotificationActionDTO fromJson(Map<String, dynamic> json) {
     return NotificationActionDTO(
       type: NotificationTargetType.fromString(json['type'] ?? 'none'),
       payload: json['payload'],
+    );
+  }
+
+  factory NotificationActionDTO.prototype() {
+    return NotificationActionDTO(
+      type: NotificationTargetType.none,
+      payload: null,
     );
   }
 

@@ -1,14 +1,19 @@
+import 'package:bl_inshort/core/logging/factory_safe_dto_conversion.dart';
 import 'package:bl_inshort/data/models/feeds/language_entity.dart';
 
-class LanguageDto {
+class LanguageDto extends FactorySafeDto<LanguageDto> {
   final int id;
   final String name;
   final String code;
 
   LanguageDto({required this.id, required this.name, required this.code});
 
-  factory LanguageDto.fromJson(Map<String, dynamic> json) {
+  LanguageDto fromJson(Map<String, dynamic> json) {
     return LanguageDto(id: json['id'], name: json['name'], code: json['code']);
+  }
+
+  factory LanguageDto.prototype() {
+    return LanguageDto(id: -1, name: "", code: "");
   }
 
   @override

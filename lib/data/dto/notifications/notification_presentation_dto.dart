@@ -1,8 +1,10 @@
+import 'package:bl_inshort/core/logging/factory_safe_dto_conversion.dart';
 import 'package:bl_inshort/data/models/notifications/notification_presentation.dart';
 
 import '../common/resource_dto.dart';
 
-class NotificationPresentationDTO {
+class NotificationPresentationDTO
+    extends FactorySafeDto<NotificationPresentationDTO> {
   final String title;
   final String subtitle;
   final String? body;
@@ -23,18 +25,29 @@ class NotificationPresentationDTO {
     this.badge,
   });
 
-  factory NotificationPresentationDTO.fromJson(Map<String, dynamic> json) {
+  NotificationPresentationDTO fromJson(Map<String, dynamic> json) {
     return NotificationPresentationDTO(
       title: json['title'],
       subtitle: json['subtitle'],
       body: json['body'],
       resources: json['resources'] != null
           ? (json['resources'] as List)
-                .map((e) => ResourceDto.fromJson(e))
+                .map((e) => ResourceDto.prototype().fromJson(e))
                 .toList()
           : [],
       highlight: json['highlight'] ?? false,
       badge: json['badge'],
+    );
+  }
+
+  factory NotificationPresentationDTO.prototype() {
+    return NotificationPresentationDTO(
+      title: "",
+      subtitle: "",
+      body: "",
+      resources: [],
+      highlight: false,
+      badge: "",
     );
   }
 

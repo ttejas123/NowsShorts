@@ -1,8 +1,9 @@
 import 'package:bl_inshort/core/logging/Console.dart';
+import 'package:bl_inshort/core/logging/factory_safe_dto_conversion.dart';
 import 'package:bl_inshort/data/dto/feed/feed_dto.dart';
 import 'package:bl_inshort/data/models/feeds/item_type_provider_entity.dart';
 
-class ItemTypeProviderDto {
+class ItemTypeProviderDto extends FactorySafeDto<ItemTypeProviderDto> {
   final String name;
   final ItemType type;
   final String subType;
@@ -15,12 +16,21 @@ class ItemTypeProviderDto {
     required this.id,
   });
 
-  factory ItemTypeProviderDto.fromJson(Map<String, dynamic> json) {
+  ItemTypeProviderDto fromJson(Map<String, dynamic> json) {
     return ItemTypeProviderDto(
       name: json['name'],
       subType: json['subType'],
       type: ItemType.fromString(json['type']),
       id: "${json['id']} - ${json['type']} - ${json['name']}",
+    );
+  }
+
+  factory ItemTypeProviderDto.prototype() {
+    return ItemTypeProviderDto(
+      name: "",
+      subType: "",
+      type: ItemType.News,
+      id: "",
     );
   }
 

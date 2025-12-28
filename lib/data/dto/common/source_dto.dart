@@ -1,18 +1,23 @@
+import 'package:bl_inshort/core/logging/factory_safe_dto_conversion.dart';
 import 'package:bl_inshort/data/models/feeds/source_entity.dart';
 
-class SourceDto {
+class SourceDto extends FactorySafeDto<SourceDto> {
   final int id;
   final String name;
   final String website;
 
   SourceDto({required this.id, required this.name, required this.website});
 
-  factory SourceDto.fromJson(Map<String, dynamic> json) {
+  SourceDto fromJson(Map<String, dynamic> json) {
     return SourceDto(
       id: json['id'],
       name: json['name'],
       website: json['website'],
     );
+  }
+
+  factory SourceDto.prototype() {
+    return SourceDto(id: -1, name: "", website: "");
   }
 
   @override

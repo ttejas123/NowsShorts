@@ -1,6 +1,7 @@
+import 'package:bl_inshort/core/logging/factory_safe_dto_conversion.dart';
 import 'package:bl_inshort/data/models/notifications/notification_state.dart';
 
-class NotificationStateDTO {
+class NotificationStateDTO extends FactorySafeDto<NotificationStateDTO> {
   final bool isRead;
   final bool isDismissed;
   final bool delivered;
@@ -13,12 +14,21 @@ class NotificationStateDTO {
     required this.opened,
   });
 
-  factory NotificationStateDTO.fromJson(Map<String, dynamic> json) {
+  NotificationStateDTO fromJson(Map<String, dynamic> json) {
     return NotificationStateDTO(
       isRead: json['isRead'] ?? false,
       isDismissed: json['isDismissed'] ?? false,
       delivered: json['delivered'] ?? false,
       opened: json['opened'] ?? false,
+    );
+  }
+
+  factory NotificationStateDTO.prototype() {
+    return NotificationStateDTO(
+      isRead: false,
+      isDismissed: false,
+      delivered: false,
+      opened: false,
     );
   }
 

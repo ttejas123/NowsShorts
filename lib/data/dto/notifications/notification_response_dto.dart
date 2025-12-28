@@ -1,9 +1,10 @@
 import 'package:bl_inshort/core/logging/Console.dart';
+import 'package:bl_inshort/core/logging/factory_safe_dto_conversion.dart';
 import 'package:bl_inshort/data/models/notifications/notification_entity.dart';
 
 import 'notification_dto.dart';
 
-class NotificationResponseDTO {
+class NotificationResponseDTO extends FactorySafeDto<NotificationResponseDTO> {
   final List<NotificationDTO> items;
   final bool hasMore;
   final String? cursor;
@@ -14,13 +15,13 @@ class NotificationResponseDTO {
     this.cursor,
   });
 
-  factory NotificationResponseDTO.fromJson(Map<String, dynamic> json) {
+  NotificationResponseDTO fromJson(Map<String, dynamic> json) {
     return NotificationResponseDTO(
       items: (json['items'] as List)
           .take(4)
           .map((e) {
             try {
-              return NotificationDTO.fromJson(e);
+              return NotificationDTO.prototype().fromJson(e);
             } catch (err, stack) {
               return {err, stack};
             }
@@ -30,6 +31,10 @@ class NotificationResponseDTO {
       hasMore: json['hasMore'] ?? false,
       cursor: json['cursor'],
     );
+  }
+
+  factory NotificationResponseDTO.prototype() {
+    return NotificationResponseDTO(items: [], hasMore: false, cursor: "");
   }
 
   @override
@@ -46,8 +51,10 @@ class NotificationResponseDTO {
   }
 
   static List<NotificationEntity> toEntityFromJson(Map<String, dynamic> json) {
-    return NotificationResponseDTO.fromJson(
-      json,
-    ).items.map((dto) => dto.toEntity()).toList();
+    return NotificationResponseDTO.prototype()
+        .fromJson(json)
+        .items
+        .map((dto) => dto.toEntity())
+        .toList();
   }
 }

@@ -1,6 +1,7 @@
+import 'package:bl_inshort/core/logging/factory_safe_dto_conversion.dart';
 import 'package:bl_inshort/data/models/feeds/category_entity.dart';
 
-class CategoryDto {
+class CategoryDto extends FactorySafeDto<CategoryDto> {
   final int id;
   final String name;
   final String description;
@@ -11,12 +12,16 @@ class CategoryDto {
     required this.description,
   });
 
-  factory CategoryDto.fromJson(Map<String, dynamic> json) {
+  CategoryDto fromJson(Map<String, dynamic> json) {
     return CategoryDto(
       id: json['id'],
       name: json['name'],
       description: json['description'],
     );
+  }
+
+  factory CategoryDto.prototype() {
+    return CategoryDto(id: -1, name: "", description: "");
   }
 
   @override

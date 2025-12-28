@@ -4,7 +4,6 @@ import 'package:bl_inshort/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class App extends ConsumerStatefulWidget {
   const App({super.key});
@@ -24,7 +23,6 @@ class _AppState extends ConsumerState<App> {
     // Perform any initialization tasks here
     // await Future.delayed(const Duration(seconds: 4)); // Simulate a delay
     FlutterNativeSplash.remove();
-    await MobileAds.instance.initialize();
   }
 
   @override

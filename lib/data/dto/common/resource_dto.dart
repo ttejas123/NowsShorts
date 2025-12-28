@@ -1,9 +1,10 @@
 import 'dart:math';
 
+import 'package:bl_inshort/core/logging/factory_safe_dto_conversion.dart';
 import 'package:bl_inshort/data/dto/common/content_type_dto.dart';
 import 'package:bl_inshort/data/models/feeds/resource_entity.dart';
 
-class ResourceDto {
+class ResourceDto extends FactorySafeDto<ResourceDto> {
   final int id;
   final String name;
   final String url;
@@ -16,12 +17,21 @@ class ResourceDto {
     required this.contentType,
   });
 
-  factory ResourceDto.fromJson(Map<String, dynamic> json) {
+  ResourceDto fromJson(Map<String, dynamic> json) {
     return ResourceDto(
       id: json['id'] ?? Random().nextInt(1000000),
       name: json['name'],
       url: json['url'],
-      contentType: ContentTypeDto.fromJson(json['content_type']),
+      contentType: ContentTypeDto.prototype().fromJson(json['content_type']),
+    );
+  }
+
+  factory ResourceDto.prototype() {
+    return ResourceDto(
+      id: -1,
+      name: "",
+      url: "",
+      contentType: ContentTypeDto.prototype(),
     );
   }
 
