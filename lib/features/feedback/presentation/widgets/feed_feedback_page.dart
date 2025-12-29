@@ -6,8 +6,12 @@ class NewFeedbackPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colors = theme.colorScheme;
+    final textTheme = theme.textTheme;
+    final isDark = theme.brightness == Brightness.dark;
     return Scaffold(
-      backgroundColor: const Color(0xFF1B1B1B),
+      backgroundColor: theme.scaffoldBackgroundColor,
       body: SafeArea(
         child: Column(
           children: [
@@ -18,15 +22,15 @@ class NewFeedbackPage extends StatelessWidget {
                 children: [
                   GestureDetector(
                     onTap: () => context.pop(),
-                    child: const Icon(Icons.arrow_back_ios_new,
-                        color: Colors.white, size: 18),
+                    child: Icon(Icons.arrow_back_ios_new,
+                        color: colors.onSurfaceVariant, size: 18),
                   ),
-                  const Expanded(
+                  Expanded(
                     child: Center(
                       child: Text(
                         'New Feedback',
-                        style: TextStyle(
-                          color: Colors.white,
+                        style: textTheme.titleMedium?.copyWith(
+                          // color: Colors.white,
                           fontSize: 17,
                           fontWeight: FontWeight.w500,
                         ),
@@ -104,12 +108,16 @@ class _SectionTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colors = theme.colorScheme;
+    final textTheme = theme.textTheme;
+    final isDark = theme.brightness == Brightness.dark;
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
       child: Text(
         title,
-        style: const TextStyle(
-          color: Colors.white,
+        style: textTheme.titleMedium?.copyWith(
+          // color: Colors.white,
           fontSize: 15,
           fontWeight: FontWeight.w500,
         ),
@@ -124,6 +132,10 @@ class _ChipWrap extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colors = theme.colorScheme;
+    final textTheme = theme.textTheme;
+    final isDark = theme.brightness == Brightness.dark;
     return Wrap(
       spacing: 10,
       runSpacing: 10,
@@ -132,7 +144,7 @@ class _ChipWrap extends StatelessWidget {
             (e) => Container(
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
               decoration: BoxDecoration(
-                color: const Color(0xFF2A2A2A),
+                color: isDark ? const Color(0xFF2A2A2A) : const Color.fromARGB(255, 182, 182, 182),
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Text(
@@ -151,11 +163,15 @@ class _TextArea extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colors = theme.colorScheme;
+    final textTheme = theme.textTheme;
+    final isDark = theme.brightness == Brightness.dark;
     return Container(
       height: 140,
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: const Color(0xFF2A2A2A),
+        color: isDark ? const Color(0xFF2A2A2A) : const Color.fromARGB(255, 255, 255, 255),
         borderRadius: BorderRadius.circular(12),
       ),
       child: const TextField(
@@ -177,10 +193,14 @@ class _UploadBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+       final theme = Theme.of(context);
+    final colors = theme.colorScheme;
+    final textTheme = theme.textTheme;
+    final isDark = theme.brightness == Brightness.dark;
     return Container(
       height: 110,
       decoration: BoxDecoration(
-        color: const Color(0xFF2A2A2A),
+        color: isDark ? const Color(0xFF2A2A2A) : const Color.fromARGB(255, 255, 255, 255),
         borderRadius: BorderRadius.circular(12),
         border: Border.all(color: const Color(0xFF3A3A3A)),
       ),

@@ -232,7 +232,7 @@
           "url": "https://images.pexels.com/photos/1257860/pexels-photo-1257860.jpeg",
           "content_type": {
             "id": 2,
-            "name": "gallery",
+            "name": "image",
             "description": "Image gallery"
           }
         },
@@ -242,7 +242,7 @@
           "url": "https://images.pexels.com/photos/1434608/pexels-photo-1434608.jpeg",
           "content_type": {
             "id": 2,
-            "name": "gallery",
+            "name": "image",
             "description": "Image gallery"
           }
         },
@@ -252,7 +252,7 @@
           "url": "https://images.pexels.com/photos/3227982/pexels-photo-3227982.jpeg",
           "content_type": {
             "id": 2,
-            "name": "gallery",
+            "name": "image",
             "description": "Image gallery"
           }
         }
@@ -772,6 +772,16 @@
       "resources": [
         {
           "id": 12,
+          "name": "cover_image",
+          "url": "https://images.pexels.com/photos/210607/pexels-photo-210607.jpeg",
+          "content_type": {
+            "id": 1,
+            "name": "story",
+            "description": "Text-based story"
+          }
+        },
+        {
+          "id": 19,
           "name": "cover_image",
           "url": "https://images.pexels.com/photos/210607/pexels-photo-210607.jpeg",
           "content_type": {

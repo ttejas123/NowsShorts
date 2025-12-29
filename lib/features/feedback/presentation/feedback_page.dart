@@ -6,8 +6,12 @@ class FeedbackPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colors = theme.colorScheme;
+    final textTheme = theme.textTheme;
+    final isDark = theme.brightness == Brightness.dark;
     return Scaffold(
-      backgroundColor: const Color(0xFF1B1B1B),
+      backgroundColor: isDark ? Color(0xFF1B1B1B): theme.scaffoldBackgroundColor,
       body: SafeArea(
         child: Column(
           children: [
@@ -22,11 +26,11 @@ class FeedbackPage extends StatelessWidget {
                       height: 36,
                       width: 36,
                       decoration: BoxDecoration(
-                        color: const Color(0xFF2A2A2A),
+                        color: isDark ? Color(0xFF2A2A2A) : colors.surfaceVariant,
                         borderRadius: BorderRadius.circular(18),
                       ),
-                      child: const Icon(Icons.arrow_back_ios_new,
-                          color: Colors.white, size: 16),
+                      child: Icon(Icons.arrow_back_ios_new,
+                          color: colors.onSurfaceVariant, size: 16),
                     ),
                   ),
                   Expanded(
