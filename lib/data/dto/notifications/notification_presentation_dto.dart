@@ -32,7 +32,7 @@ class NotificationPresentationDTO
       body: json['body'],
       resources: json['resources'] != null
           ? (json['resources'] as List)
-                .map((e) => ResourceDto.prototype().fromJson(e))
+                .map((e) => ResourceDto.prototype().decode(e))
                 .toList()
           : [],
       highlight: json['highlight'] ?? false,

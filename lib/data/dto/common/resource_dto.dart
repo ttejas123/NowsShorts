@@ -22,7 +22,7 @@ class ResourceDto extends FactorySafeDto<ResourceDto> {
       id: json['id'] ?? Random().nextInt(1000000),
       name: json['name'],
       url: json['url'],
-      contentType: ContentTypeDto.prototype().fromJson(json['content_type']),
+      contentType: ContentTypeDto.prototype().decode(json['content_type']),
     );
   }
 

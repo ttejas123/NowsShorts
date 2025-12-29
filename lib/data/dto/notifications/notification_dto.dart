@@ -47,13 +47,13 @@ class NotificationDTO extends FactorySafeDto<NotificationDTO> {
       id: json['id'],
       intent: NotificationIntent.fromString(json['intent']),
       priority: NotificationPriority.fromString(json['priority']),
-      action: NotificationActionDTO.prototype().fromJson(json['action']),
+      action: NotificationActionDTO.prototype().decode(json['action']),
       presentation: json['presentation'] != null
-          ? NotificationPresentationDTO.prototype().fromJson(
+          ? NotificationPresentationDTO.prototype().decode(
               json['presentation'],
             )
           : null,
-      state: NotificationStateDTO.prototype().fromJson(json['state']),
+      state: NotificationStateDTO.prototype().decode(json['state']),
       metadata: json['metadata'],
       created_at: json['createdAt'] ?? json['created_at'],
       expires_at: json['expiresAt'] ?? json['expires_at'],

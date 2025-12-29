@@ -21,7 +21,7 @@ class NotificationResponseDTO extends FactorySafeDto<NotificationResponseDTO> {
           .take(4)
           .map((e) {
             try {
-              return NotificationDTO.prototype().fromJson(e);
+              return NotificationDTO.prototype().decode(e);
             } catch (err, stack) {
               return {err, stack};
             }
