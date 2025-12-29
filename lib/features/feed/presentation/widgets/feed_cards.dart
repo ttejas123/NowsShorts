@@ -1,12 +1,12 @@
-// ignore_for_file: deprecated_member_use, duplicate_ignore
-
-import 'package:bl_inshort/core/ads/presentation/ad_slot_widget.dart';
 import 'package:bl_inshort/data/dto/feed/feed_dto.dart';
 import 'package:bl_inshort/data/models/feeds/feed_entity.dart';
 import 'package:bl_inshort/data/models/feeds/resource_entity.dart';
+import 'package:bl_inshort/features/feed/presentation/widgets/story_feed_card.dart';
 import 'package:bl_inshort/features/webview/presentation/webview_page.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class FeedCard extends StatelessWidget {
   final FeedEntity item;
@@ -15,13 +15,6 @@ class FeedCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // if (item.provider.type == ItemType.News) {
-    //   return AdSlotWidget(
-    //     meta: item.provider,
-    //     runtime: adsRuntime,
-    //     fallback: NewsCard(item),
-    //   );
-    // }
     switch (item.layout) {
       case FeedLayoutType.photoDominant:
         return _PhotoDominantCard(item: item);
@@ -30,7 +23,7 @@ class FeedCard extends StatelessWidget {
       case FeedLayoutType.gallery:
         return _GalleryCard(item: item);
       case FeedLayoutType.story:
-        return _StoryCard(item: item);
+        return StoryCard(item: item);
       case FeedLayoutType.htmlViewCard:
         return _HTMLViewCard(item: item);
       case FeedLayoutType.browserCard:
@@ -228,13 +221,17 @@ class _GalleryCardState extends State<_GalleryCard> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colors = theme.colorScheme;
+    final textTheme = theme.textTheme;
+    final isDark = theme.brightness == Brightness.dark;
     final size = MediaQuery.of(context).size;
     final images = _images;
 
     return Container(
       width: size.width,
       height: size.height,
-      color: Colors.black,
+      color: colors.surface,
       child: Stack(
         children: [
           // main content
@@ -262,7 +259,7 @@ class _GalleryCardState extends State<_GalleryCard> {
                           placeholder: (_, __) => Container(
                             width: size.width,
                             height: size.height,
-                            color: Colors.grey.shade300,
+                            color: Theme.of(context).colorScheme.surfaceVariant,
                           ),
                           errorWidget: (_, __, ___) =>
                               Icon(Icons.image_not_supported),
@@ -284,14 +281,14 @@ class _GalleryCardState extends State<_GalleryCard> {
                       widget.item.source.name.toUpperCase(),
                       style: Theme.of(
                         context,
-                      ).textTheme.labelSmall?.copyWith(color: Colors.white70),
+                      ).textTheme.labelSmall,
                     ),
                     const SizedBox(height: 8),
                     Text(
                       widget.item.title,
                       style: Theme.of(
                         context,
-                      ).textTheme.titleLarge?.copyWith(color: Colors.white),
+                      ).textTheme.titleLarge,
                     ),
                   ],
                 ),
@@ -356,12 +353,16 @@ class _StoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colors = theme.colorScheme;
+    final textTheme = theme.textTheme;
+    final isDark = theme.brightness == Brightness.dark;
     final size = MediaQuery.of(context).size;
 
     return Container(
       width: size.width,
       height: size.height,
-      color: Colors.black,
+      color: colors.surface,
       child: Stack(
         fit: StackFit.expand,
         children: [
@@ -741,14 +742,26 @@ class StandardVisualCard extends StatelessWidget {
 
   const StandardVisualCard({super.key, required this.item});
 
+  void shareLink(String url) {
+    Share.share(
+      url,
+      subject: 'Check this out', // optional
+    );
+  }
+
+
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colors = theme.colorScheme;
+    final textTheme = theme.textTheme;
+    final isDark = theme.brightness == Brightness.dark;
     return Container(
       // margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
       height: 560,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(0),
-        color: Colors.black,
+        color: colors.surface,
       ),
       clipBehavior: Clip.antiAlias,
       child: Column(
@@ -782,14 +795,14 @@ class StandardVisualCard extends StatelessWidget {
                 // Dark gradient overlay
                 Positioned.fill(
                   child: Container(
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
                       gradient: LinearGradient(
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
                         colors: [
                           Colors.transparent,
-                          Colors.black87,
-                          Colors.black,
+                            colors.surface.withOpacity(isDark ? 0.9 : 0.6),
+                            colors.surface,
                         ],
                       ),
                     ),
@@ -804,7 +817,7 @@ class StandardVisualCard extends StatelessWidget {
                   height: 360,
                   child: Container(
                     padding: const EdgeInsets.fromLTRB(16, 14, 16, 16),
-                    color: Colors.black, // 🔥 SOLID BLACK BACKGROUND
+                    color: colors.surface, // 🔥 SOLID BLACK BACKGROUND
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
@@ -813,22 +826,22 @@ class StandardVisualCard extends StatelessWidget {
                           children: [
                             Container(
                               decoration: BoxDecoration(
-                                color: Colors.black.withOpacity(0.85),
+                                color: colors.surface.withOpacity(0.85),
                                 borderRadius: BorderRadius.circular(16),
                               ),
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
-                                children: const [
-                                  Icon(
+                                children: [
+                                  const Icon(
                                     Icons.fiber_new_sharp,
                                     size: 12,
                                     color: Colors.blueAccent,
                                   ),
-                                  SizedBox(width: 6),
+                                  const SizedBox(width: 6),
                                   Text(
                                     "yalla news",
-                                    style: TextStyle(
-                                      color: Colors.white,
+                                    style: textTheme.displaySmall?.copyWith(
+                                      // color: Colors.white,
                                       fontSize: 12,
                                       fontWeight: FontWeight.w600,
                                     ),
@@ -844,22 +857,30 @@ class StandardVisualCard extends StatelessWidget {
                               ),
                               decoration: BoxDecoration(
                                 // ignore: deprecated_member_use
-                                color: Colors.black.withOpacity(0.85),
+                                color: colors.surface.withOpacity(0.85),
                                 borderRadius: BorderRadius.circular(16),
                               ),
                               child: Row(
-                                children: const [
+                                children: [
                                   Icon(
                                     Icons.bookmark_border,
-                                    color: Colors.white,
+                                    color: colors.onSurfaceVariant,
                                     size: 16,
                                   ),
                                   SizedBox(width: 12),
-                                  Icon(
-                                    Icons.share,
-                                    color: Colors.white,
-                                    size: 16,
+                                  InkWell(
+                                    onTap: () {
+                                      shareLink(
+                                        'https://yourapp.com/news/robbery-brazen?id=123',
+                                      );
+                                    },
+                                    child: Icon(
+                                      Icons.share,
+                                      color: colors.onSurfaceVariant,
+                                      size: 16,
+                                    ),
                                   ),
+                                  
                                 ],
                               ),
                             ),
@@ -873,11 +894,11 @@ class StandardVisualCard extends StatelessWidget {
                           item.title,
                           maxLines: 3,
                           overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                            color: Colors.white,
+                          style: textTheme.displayMedium?.copyWith(
+                            // color: Colors.white,
                             fontSize: 18,
-                            fontWeight: FontWeight.w700,
-                            height: 1.25,
+                            fontWeight: FontWeight.w600,
+                            height: 1.25, 
                           ),
                         ),
 
@@ -888,8 +909,8 @@ class StandardVisualCard extends StatelessWidget {
                           item.description,
                           maxLines: 6,
                           overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                            color: Colors.white70,
+                          style: textTheme.displaySmall?.copyWith(
+                            // color: Colors.white70,
                             fontSize: 14.5,
                             height: 1.45,
                           ),
@@ -900,7 +921,11 @@ class StandardVisualCard extends StatelessWidget {
                         // 🔹 Meta
                         Text(
                           "${item.publishedAt.toUtc().toLocal().toString().split(' ')[0]} | ${item.source.name} | ${item.author.name}",
-                          style: TextStyle(color: Colors.white54, fontSize: 12),
+                          style: textTheme.displayMedium?.copyWith(
+                            color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+                            fontSize: 12
+                            
+                            ),
                         ),
                       ],
                     ),
@@ -920,25 +945,45 @@ class StandardVisualCard extends StatelessWidget {
                       height: 56,
                       alignment: Alignment.centerLeft,
                       padding: const EdgeInsets.symmetric(horizontal: 20),
-                      decoration: const BoxDecoration(
+                      decoration: BoxDecoration(
                         gradient: LinearGradient(
                           begin: Alignment.topCenter,
                           end: Alignment.bottomRight,
-                          colors: [
-                            Color.fromARGB(255, 40, 33, 48),
-                            Color(0xFF2E3440),
-                            Color(0xFF1B1F27),
-                          ],
+                          colors: isDark
+                          ? [
+                              Color.fromARGB(255, 40, 33, 48),
+                              Color(0xFF2E3440),
+                              Color(0xFF1B1F27),
+                            ]
+                          : [
+                              Color(0xFFF3F4F7),
+                              Color(0xFFE6E8ED),
+                              Color(0xFFD9DDE6),
+                            ],
                         ),
                       ),
-                      child: const Text(
-                        "People called the robbery 'brazen'\nTap to know what more they said",
-                        style: TextStyle(
-                          color: Colors.white70,
-                          fontSize: 13,
-                          height: 1.4,
-                        ),
-                      ),
+                      child: GestureDetector(
+                                onTap: () async {
+                                  final uri = Uri.parse(
+                                    'https://example.com/robbery-details',
+                                  );
+
+                                  if (await canLaunchUrl(uri)) {
+                                    await launchUrl(
+                                      uri,
+                                      mode: LaunchMode.externalApplication, // opens browser
+                                    );
+                                  }
+                                },
+                                child: Text(
+                                  "Know there current evaluation in NSE/BSE \nTap to know what more they said",
+                                  style: textTheme.titleLarge?.copyWith(
+                                    fontSize: 13,
+                                    height: 1.4,
+                                    // decoration: TextDecoration.underline, // optional UX hint
+                                  ),
+                                ),
+                              ),
                     ),
             ],
           ),

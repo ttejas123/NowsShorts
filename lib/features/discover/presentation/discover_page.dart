@@ -202,11 +202,31 @@ class _CategoryRow extends ConsumerWidget {
       padding: const EdgeInsets.symmetric(horizontal: 18),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: const [
-          _CategoryItem(Icons.feed, "My Feed"),
-          _CategoryItem(Icons.article, "All News"),
-          _CategoryItem(Icons.star, "Top Stories"),
-          _CategoryItem(Icons.local_fire_department, "Trending"),
+        children: [
+          GestureDetector(
+            onTap: () {
+              context.push('/feed');
+            },
+            child: _CategoryItem(Icons.feed, "My Feed"),
+          ),
+          GestureDetector(
+            onTap: () {
+              context.push('/feed');
+            },
+            child: _CategoryItem(Icons.article, "All News"),
+          ),
+          GestureDetector(
+            onTap: () {
+              context.push('/feed');
+            },
+            child: _CategoryItem(Icons.star, "Top Stories"),
+          ),
+          GestureDetector(
+            onTap: () {
+              context.push('/feed');
+            },
+            child: _CategoryItem(Icons.local_fire_department, "Trending"),
+          ),
         ],
       ),
     );

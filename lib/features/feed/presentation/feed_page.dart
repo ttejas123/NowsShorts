@@ -44,6 +44,9 @@ class _FeedPageState extends ConsumerState<FeedPage> {
   Widget build(BuildContext context) {
     final adsRuntime = ref.watch(adsRuntimeProvider);
     final state = ref.watch(feedControllerProvider);
+    final theme = Theme.of(context);
+    final colors = theme.colorScheme;
+    final textTheme = theme.textTheme;
 
     if (state.isInitialLoading && state.items.isEmpty) {
       return const Scaffold(body: Center(child: CircularProgressIndicator()));
@@ -68,16 +71,16 @@ class _FeedPageState extends ConsumerState<FeedPage> {
       extendBodyBehindAppBar: true, // 👈 let body draw behind appbar
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: Icon(Icons.arrow_back),
           onPressed: () => context.pop(),
-          color: Colors.white,
+          color: colors.onSurfaceVariant,
         ),
         backgroundColor:
             Colors.transparent, // 👈 transparent background (no solid bar)
         elevation: 0,
         scrolledUnderElevation: 0,
-        surfaceTintColor: Colors.transparent,
-        title: const Text('My Feed', style: TextStyle(color: Colors.white)),
+        surfaceTintColor: Theme.of(context).scaffoldBackgroundColor,
+        title: Text('My Feed', style: textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w700, fontSize: 18)),
         centerTitle: true,
       ),
       body: SafeArea(
