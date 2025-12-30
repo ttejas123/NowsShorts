@@ -1,4 +1,4 @@
-import 'package:bl_inshort/app/routes.dart';
+import 'package:bl_inshort/core/navigation/routes.dart';
 import 'package:bl_inshort/features/theme/theme_provider.dart';
 import 'package:bl_inshort/theme/app_theme.dart';
 import 'package:flutter/material.dart';
