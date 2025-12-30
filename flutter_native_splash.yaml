@@ -1,4 +1,6 @@
 flutter_native_splash:
+  color: "#ffffff"
+  image: assets/splash.png
   # This package generates native code to customize Flutter's default white native splash screen
   # with background color and splash image.
   # Steps to make this work:
@@ -63,7 +65,7 @@ flutter_native_splash:
   # general image for all platform (except android 12+):
   # allows you to specify an image used in the splash screen. It must be a
   # png file and should be sized for 4x pixel density.
-  image:                assets/logo.png
+  # image:                assets/splash.png
   #image_dark:          assets/splash-invert.png
   # platform-specific image. will override general image if active:
   #image_android:       assets/splash-android.png
