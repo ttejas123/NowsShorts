@@ -7,12 +7,16 @@ abstract class SettingsRepository {
   Future<void> setHdImages(bool enabled);
   Future<bool> isAutoplayEnabled();
   Future<bool> isHdImagesEnabled();
+
+  Future<Set<String>> getSelectedRegions();
+  Future<void> setSelectedRegions(Set<String> regions);
 }
 
 class InMemorySettingsRepository implements SettingsRepository {
   LanguageEntity? _language;
   bool _autoplayEnabled = true;
   bool _hdImagesEnabled = true;
+  Set<String> _regions = {};
 
   @override
   Future<LanguageEntity?> getSelectedLanguage() async {
@@ -44,5 +48,15 @@ class InMemorySettingsRepository implements SettingsRepository {
   @override
   Future<bool> isHdImagesEnabled() async {
     return _hdImagesEnabled;
+  }
+
+  @override
+  Future<Set<String>> getSelectedRegions() async {
+    return _regions;
+  }
+
+  @override
+  Future<void> setSelectedRegions(Set<String> regions) async {
+    _regions = regions;
   }
 }

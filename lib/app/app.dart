@@ -1,3 +1,4 @@
+import 'package:bl_inshort/core/deeplink/deeplink_handler.dart';
 import 'package:bl_inshort/core/navigation/routes.dart';
 import 'package:bl_inshort/features/theme/theme_provider.dart';
 import 'package:bl_inshort/theme/app_theme.dart';
@@ -29,6 +30,12 @@ class _AppState extends ConsumerState<App> {
   Widget build(BuildContext context) {
     final router = buildRouter(ref);
     final themeController = ref.watch(themeControllerProvider);
+
+    @override
+    void didChangeDependencies() {
+      super.didChangeDependencies();
+      DeepLinkHandler.init(context);
+    }
 
     return MaterialApp.router(
       title: 'BL News',

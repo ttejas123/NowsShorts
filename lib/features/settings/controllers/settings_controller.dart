@@ -10,11 +10,15 @@ class SettingsState {
   final bool hdImagesEnabled;
   final Map<String, InterestPreference> interests;
 
+  /// NEW
+  final Set<String> selectedRegions;
+
   const SettingsState({
     this.selectedLanguage,
     this.autoplayEnabled = true,
     this.hdImagesEnabled = true,
     this.interests = const {},
+    this.selectedRegions = const {},
   });
 
   SettingsState copyWith({
@@ -22,12 +26,14 @@ class SettingsState {
     bool? autoplayEnabled,
     bool? hdImagesEnabled,
     Map<String, InterestPreference>? interests,
+    Set<String>? selectedRegions,
   }) {
     return SettingsState(
       selectedLanguage: selectedLanguage ?? this.selectedLanguage,
       autoplayEnabled: autoplayEnabled ?? this.autoplayEnabled,
       hdImagesEnabled: hdImagesEnabled ?? this.hdImagesEnabled,
       interests: interests ?? this.interests,
+      selectedRegions: selectedRegions ?? this.selectedRegions,
     );
   }
 }
@@ -43,11 +49,13 @@ class SettingsController extends StateNotifier<SettingsState> {
     final lang = await repository.getSelectedLanguage();
     final autoplay = await repository.isAutoplayEnabled();
     final hdImages = await repository.isHdImagesEnabled();
+    final regions = await repository.getSelectedRegions();
 
     state = state.copyWith(
       selectedLanguage: lang,
       autoplayEnabled: autoplay,
       hdImagesEnabled: hdImages,
+      selectedRegions: regions,
     );
   }
 
@@ -55,6 +63,20 @@ class SettingsController extends StateNotifier<SettingsState> {
   Future<void> selectLanguage(LanguageEntity language) async {
     await repository.setSelectedLanguage(language);
     state = state.copyWith(selectedLanguage: language);
+  }
+
+  // 🔹 Regions
+  Future<void> toggleRegion(String region) async {
+    final updated = Set<String>.from(state.selectedRegions);
+
+    if (updated.contains(region)) {
+      updated.remove(region);
+    } else {
+      updated.add(region);
+    }
+
+    await repository.setSelectedRegions(updated);
+    state = state.copyWith(selectedRegions: updated);
   }
 
   // 🔹 Autoplay
@@ -76,4 +98,11 @@ class SettingsController extends StateNotifier<SettingsState> {
 
     state = state.copyWith(interests: updated);
   }
+
+  bool isRegionSelected(String region) {
+    return state.selectedRegions.contains(region);
+  }
+
+  bool get hasCompletedOnboarding =>
+      state.selectedLanguage != null && state.selectedRegions.isNotEmpty;
 }

@@ -2,9 +2,11 @@ import 'package:bl_inshort/features/discover/presentation/discover_page.dart';
 import 'package:bl_inshort/features/feed/presentation/feed_page.dart';
 import 'package:bl_inshort/features/feedback/presentation/feedback_page.dart';
 import 'package:bl_inshort/features/feedback/presentation/widgets/feed_feedback_page.dart';
+import 'package:bl_inshort/features/onboarding/presentation/language_selection_screen.dart';
 import 'package:bl_inshort/features/notifications/presentation/notifications_page.dart';
 import 'package:bl_inshort/features/preferences/presentation/preferences_page.dart';
 import 'package:bl_inshort/features/settings/presentation/settings_page.dart';
+import 'package:bl_inshort/features/settings/provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:bl_inshort/features/shell/home_shell_page.dart';
@@ -15,8 +17,17 @@ GoRouter buildRouter(WidgetRef ref) {
     routes: [
       GoRoute(
         path: '/',
-        pageBuilder: (context, state) =>
-            const NoTransitionPage(child: HomeShellPage()),
+        builder: (context, state) {
+          final settings = ref.read(settingsControllerProvider);
+          if (settings.selectedLanguage == null) {
+            return const LanguageSelectionScreen();
+          }
+          return const HomeShellPage();
+        },
+      ),
+      GoRoute(
+        path: '/home',
+        builder: (context, state) => const HomeShellPage(),
       ),
       GoRoute(
         path: '/notifications',

@@ -6,14 +6,14 @@ class AppTheme {
   static ThemeData lightTheme = ThemeData(
     useMaterial3: true,
     brightness: Brightness.light,
-    // colorSchemeSeed: Colors.teal,
 
-    colorScheme: ColorScheme(
-      brightness: Brightness.light,
-      primary: Colors.blue,
+    scaffoldBackgroundColor: AppColors.lightBackground,
+
+    colorScheme: const ColorScheme.light(
+      primary: AppColors.primary,
       onPrimary: Colors.white,
-      secondary: const Color.fromARGB(255, 100, 214, 255),
-      onSecondary: Colors.black,
+      secondary: AppColors.primary,
+      onSecondary: Colors.white,
 
       background: AppColors.lightBackground,
       onBackground: AppColors.lightTextPrimary,
@@ -21,38 +21,52 @@ class AppTheme {
       surface: AppColors.lightCard,
       onSurface: AppColors.lightTextPrimary,
 
-      error: Colors.red,
+      error: AppColors.danger,
       onError: Colors.white,
     ),
-
-    scaffoldBackgroundColor: AppColors.lightBackground,
 
     textTheme: buildTextTheme(Brightness.light),
 
     cardTheme: const CardThemeData(
       color: AppColors.lightCard,
-      elevation: 1,
+      elevation: 0,
       margin: EdgeInsets.zero,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(16)),
+      ),
     ),
 
     dividerTheme: const DividerThemeData(
       color: AppColors.lightDivider,
-      thickness: 0.6,
+      thickness: 1,
+    ),
+
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: AppColors.primary,
+        foregroundColor: Colors.white,
+        textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
+      ),
+    ),
+
+    appBarTheme: const AppBarTheme(
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      foregroundColor: AppColors.primary,
     ),
   );
 
   static ThemeData darkTheme = ThemeData(
     useMaterial3: true,
     brightness: Brightness.dark,
-    // colorSchemeSeed: Colors.teal,
 
     scaffoldBackgroundColor: AppColors.darkBackground,
 
-    colorScheme: ColorScheme(
-      brightness: Brightness.dark,
-      primary: Colors.blue,
+    colorScheme: const ColorScheme.dark(
+      primary: AppColors.primary,
       onPrimary: Colors.black,
-      secondary: const Color.fromARGB(255, 100, 224, 255),
+      secondary: AppColors.primary,
       onSecondary: Colors.black,
 
       background: AppColors.darkBackground,
@@ -61,7 +75,7 @@ class AppTheme {
       surface: AppColors.darkCard,
       onSurface: AppColors.darkTextPrimary,
 
-      error: Colors.red,
+      error: AppColors.danger,
       onError: Colors.black,
     ),
 
@@ -69,13 +83,31 @@ class AppTheme {
 
     cardTheme: const CardThemeData(
       color: AppColors.darkCard,
-      elevation: 1,
+      elevation: 0,
       margin: EdgeInsets.zero,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(16)),
+      ),
     ),
 
     dividerTheme: const DividerThemeData(
       color: AppColors.darkDivider,
-      thickness: 0.6,
+      thickness: 1,
+    ),
+
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: AppColors.primary,
+        foregroundColor: Colors.white,
+        textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
+      ),
+    ),
+
+    appBarTheme: const AppBarTheme(
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      foregroundColor: Colors.white,
     ),
   );
 }
