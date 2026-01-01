@@ -1,3 +1,4 @@
+import 'package:bl_inshort/data/models/feeds/language_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
@@ -11,11 +12,19 @@ class Region {
   Region({required this.name, required this.svg});
 }
 
-class RegionSelectionScreen extends ConsumerWidget {
-  const RegionSelectionScreen({super.key});
+class RegionSelectionScreen extends ConsumerStatefulWidget {
+  const RegionSelectionScreen({super.key, required this.language});
+  final LanguageEntity language;
 
-  static List<Region> regions = [
-    Region(name: 'Finland', svg: 'assets/finland.svg'),
+  @override
+  ConsumerState<RegionSelectionScreen> createState() =>
+      _RegionSelectionScreenState();
+}
+
+class _RegionSelectionScreenState extends ConsumerState<RegionSelectionScreen> {
+  final Set<String> _selectedRegions = {};
+
+  static final List<Region> regions = [
     Region(name: 'Europe', svg: 'assets/europe.svg'),
     Region(name: 'Africa', svg: 'assets/africa.svg'),
     Region(name: 'India', svg: 'assets/india.svg'),
@@ -23,12 +32,12 @@ class RegionSelectionScreen extends ConsumerWidget {
     Region(name: 'Philippines', svg: 'assets/philippines.svg'),
     Region(name: 'South America', svg: 'assets/southAmerica.svg'),
     Region(name: 'North America', svg: 'assets/northAmerica.svg'),
+    Region(name: 'Finland', svg: 'assets/finland.svg'),
   ];
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final controller = ref.read(settingsControllerProvider.notifier);
-    final state = ref.watch(settingsControllerProvider);
     final theme = Theme.of(context);
 
     return Scaffold(
@@ -40,8 +49,8 @@ class RegionSelectionScreen extends ConsumerWidget {
               alignment: Alignment.centerLeft,
               child: IconButton(
                 icon: const Icon(Icons.arrow_back_ios),
-                color: Colors.red,
-                onPressed: () => Navigator.pop(context),
+                color: theme.colorScheme.primary,
+                onPressed: () => context.go('/'),
               ),
             ),
 
@@ -80,10 +89,18 @@ class RegionSelectionScreen extends ConsumerWidget {
                 ),
                 itemBuilder: (_, index) {
                   final region = regions[index];
-                  final selected = state.selectedRegions.contains(region.name);
+                  final selected = _selectedRegions.contains(region.name);
 
                   return GestureDetector(
-                    onTap: () => controller.toggleRegion(region.name),
+                    onTap: () {
+                      setState(() {
+                        if (selected) {
+                          _selectedRegions.remove(region.name);
+                        } else {
+                          _selectedRegions.add(region.name);
+                        }
+                      });
+                    },
                     child: Card(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16),
@@ -106,11 +123,6 @@ class RegionSelectionScreen extends ConsumerWidget {
                               BlendMode.srcIn,
                             ),
                           ),
-                          // Icon(
-                          //   Icons.public,
-                          //   size: 64,
-                          //   color: theme.colorScheme.primary,
-                          // ),
                           const SizedBox(height: 12),
                           Text(
                             region.name,
@@ -128,15 +140,16 @@ class RegionSelectionScreen extends ConsumerWidget {
 
             /// Next
             Padding(
-              padding: const EdgeInsets.only(bottom: 24),
+              padding: const EdgeInsets.only(bottom: 24, top: 24),
               child: SizedBox(
                 width: 220,
                 height: 52,
                 child: ElevatedButton(
-                  onPressed: state.selectedRegions.isEmpty
+                  onPressed: _selectedRegions.isEmpty
                       ? null
-                      : () {
-                          context.go('/home');
+                      : () async {
+                          await controller.selectLanguage(widget.language);
+                          await controller.setSelectedRegions(_selectedRegions);
                         },
                   child: const Text('Next'),
                 ),

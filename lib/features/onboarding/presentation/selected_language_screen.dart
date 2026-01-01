@@ -1,15 +1,16 @@
+import 'package:bl_inshort/data/models/feeds/language_entity.dart';
 import 'package:bl_inshort/features/onboarding/presentation/region_selection_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:path/path.dart';
-import '../../../theme/app_colors.dart';
+import 'package:bl_inshort/theme/app_colors.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class SelectedLanguageScreen extends StatelessWidget {
+class SelectedLanguageScreen extends ConsumerWidget {
   final String language;
 
   const SelectedLanguageScreen({super.key, required this.language});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final label = language == 'en' ? 'English' : 'العربية';
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
@@ -24,7 +25,7 @@ class SelectedLanguageScreen extends StatelessWidget {
               alignment: Alignment.centerLeft,
               child: IconButton(
                 icon: const Icon(Icons.arrow_back_ios),
-                color: AppColors.danger,
+                color: theme.colorScheme.primary,
                 onPressed: () => Navigator.pop(context),
               ),
             ),
@@ -96,8 +97,15 @@ class SelectedLanguageScreen extends StatelessWidget {
               width: 220,
               height: 52,
               child: ElevatedButton(
-                onPressed: () {
-                  _goNext(context);
+                onPressed: () async {
+                  _goNext(
+                    context,
+                    LanguageEntity(
+                      id: language == 'en' ? 1 : 2,
+                      name: label,
+                      code: language,
+                    ),
+                  );
                 },
                 child: const Text('Next'),
               ),
@@ -110,10 +118,12 @@ class SelectedLanguageScreen extends StatelessWidget {
     );
   }
 
-  void _goNext(BuildContext context) {
+  void _goNext(BuildContext context, LanguageEntity language) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (_) => RegionSelectionScreen()),
+      MaterialPageRoute(
+        builder: (_) => RegionSelectionScreen(language: language),
+      ),
     );
   }
 }

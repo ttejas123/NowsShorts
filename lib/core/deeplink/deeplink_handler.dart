@@ -1,5 +1,6 @@
 import 'package:bl_inshort/core/deeplink/deeplink_registry.dart';
 import 'package:bl_inshort/core/deeplink/deeplink_resolver.dart';
+import 'package:bl_inshort/core/logging/Console.dart';
 import 'package:flutter/material.dart';
 import 'package:bl_inshort/core/deeplink/deeplink.dart';
 import 'package:go_router/go_router.dart';
@@ -24,6 +25,7 @@ class DeepLinkHandler {
     // App already running
     uriLinkStream.listen((uri) {
       if (uri != null) {
+        Console.log("uri ---> $uri");
         handle(context, uri);
       }
     });

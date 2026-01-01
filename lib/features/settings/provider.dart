@@ -4,13 +4,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 
 final settingsRepositoryProvider = Provider<SettingsRepository>(
-  (ref) => InMemorySettingsRepository(),
+  (ref) => SharedPrefsSettingsRepository(),
 );
 
 final settingsControllerProvider =
-    StateNotifierProvider<SettingsController, SettingsState>(
-  (ref) {
-    final repo = ref.read(settingsRepositoryProvider);
-    return SettingsController(repo);
-  },
-);
+    StateNotifierProvider<SettingsController, SettingsState>((ref) {
+      final repo = ref.read(settingsRepositoryProvider);
+      return SettingsController(repo);
+    });

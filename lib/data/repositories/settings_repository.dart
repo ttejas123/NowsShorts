@@ -1,4 +1,7 @@
+import 'package:bl_inshort/data/dto/common/language_dto.dart';
 import 'package:bl_inshort/data/models/feeds/language_entity.dart';
+import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class SettingsRepository {
   Future<LanguageEntity?> getSelectedLanguage();
@@ -12,51 +15,63 @@ abstract class SettingsRepository {
   Future<void> setSelectedRegions(Set<String> regions);
 }
 
-class InMemorySettingsRepository implements SettingsRepository {
-  LanguageEntity? _language;
-  bool _autoplayEnabled = true;
-  bool _hdImagesEnabled = true;
-  Set<String> _regions = {};
+class SharedPrefsSettingsRepository implements SettingsRepository {
+  static const _languageKey = 'selected_language';
+  static const _regionsKey = 'selected_regions';
+  static const _autoplayKey = 'autoplay_enabled';
+  static const _hdImagesKey = 'hd_images_enabled';
+
+  Future<SharedPreferences> get _prefs => SharedPreferences.getInstance();
 
   @override
   Future<LanguageEntity?> getSelectedLanguage() async {
-    return _language;
+    final prefs = await _prefs;
+    final json = prefs.getString(_languageKey);
+    if (json == null) return null;
+    return LanguageEntity.fromDto(
+      LanguageDto.prototype().fromJson(jsonDecode(json)),
+    );
   }
 
   @override
   Future<void> setSelectedLanguage(LanguageEntity language) async {
-    _language = language;
-  }
-
-  @override
-  Future<void> setAutoplay(bool enabled) async {
-    // In-memory implementation does nothing
-    _autoplayEnabled = enabled;
-  }
-
-  @override
-  Future<void> setHdImages(bool enabled) async {
-    // In-memory implementation does nothing
-    _hdImagesEnabled = enabled;
-  }
-
-  @override
-  Future<bool> isAutoplayEnabled() async {
-    return _autoplayEnabled;
-  }
-
-  @override
-  Future<bool> isHdImagesEnabled() async {
-    return _hdImagesEnabled;
+    final prefs = await _prefs;
+    await prefs.setString(_languageKey, jsonEncode(language.toJson()));
   }
 
   @override
   Future<Set<String>> getSelectedRegions() async {
-    return _regions;
+    final prefs = await _prefs;
+    return prefs.getStringList(_regionsKey)?.toSet() ?? {};
   }
 
   @override
   Future<void> setSelectedRegions(Set<String> regions) async {
-    _regions = regions;
+    final prefs = await _prefs;
+    await prefs.setStringList(_regionsKey, regions.toList());
+  }
+
+  @override
+  Future<bool> isAutoplayEnabled() async {
+    final prefs = await _prefs;
+    return prefs.getBool(_autoplayKey) ?? true;
+  }
+
+  @override
+  Future<void> setAutoplay(bool enabled) async {
+    final prefs = await _prefs;
+    await prefs.setBool(_autoplayKey, enabled);
+  }
+
+  @override
+  Future<bool> isHdImagesEnabled() async {
+    final prefs = await _prefs;
+    return prefs.getBool(_hdImagesKey) ?? true;
+  }
+
+  @override
+  Future<void> setHdImages(bool enabled) async {
+    final prefs = await _prefs;
+    await prefs.setBool(_hdImagesKey, enabled);
   }
 }

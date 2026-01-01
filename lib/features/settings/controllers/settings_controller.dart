@@ -9,6 +9,7 @@ class SettingsState {
   final bool autoplayEnabled;
   final bool hdImagesEnabled;
   final Map<String, InterestPreference> interests;
+  final bool isInitialized; // ✅ NEW
 
   /// NEW
   final Set<String> selectedRegions;
@@ -19,6 +20,7 @@ class SettingsState {
     this.hdImagesEnabled = true,
     this.interests = const {},
     this.selectedRegions = const {},
+    this.isInitialized = false,
   });
 
   SettingsState copyWith({
@@ -27,6 +29,7 @@ class SettingsState {
     bool? hdImagesEnabled,
     Map<String, InterestPreference>? interests,
     Set<String>? selectedRegions,
+    bool? isInitialized,
   }) {
     return SettingsState(
       selectedLanguage: selectedLanguage ?? this.selectedLanguage,
@@ -34,6 +37,7 @@ class SettingsState {
       hdImagesEnabled: hdImagesEnabled ?? this.hdImagesEnabled,
       interests: interests ?? this.interests,
       selectedRegions: selectedRegions ?? this.selectedRegions,
+      isInitialized: isInitialized ?? this.isInitialized,
     );
   }
 }
@@ -56,6 +60,7 @@ class SettingsController extends StateNotifier<SettingsState> {
       autoplayEnabled: autoplay,
       hdImagesEnabled: hdImages,
       selectedRegions: regions,
+      isInitialized: true, // ✅
     );
   }
 
@@ -63,6 +68,11 @@ class SettingsController extends StateNotifier<SettingsState> {
   Future<void> selectLanguage(LanguageEntity language) async {
     await repository.setSelectedLanguage(language);
     state = state.copyWith(selectedLanguage: language);
+  }
+
+  Future<void> setSelectedRegions(Set<String> regions) async {
+    await repository.setSelectedRegions(regions);
+    state = state.copyWith(selectedRegions: regions);
   }
 
   // 🔹 Regions
