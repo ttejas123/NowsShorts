@@ -751,7 +751,7 @@ class StandardVisualCard extends StatelessWidget {
     final textTheme = theme.textTheme;
     final isDark = theme.brightness == Brightness.dark;
 
-    const double contentHeight = 440;
+    const double contentHeight = 420;
     const double floatingOffset = -4;
 
     return Container(
@@ -855,7 +855,7 @@ class StandardVisualCard extends StatelessWidget {
 
           /// BOTTOM CTA
           Padding(
-            padding: const EdgeInsets.only(bottom: 20), // 👈 moves CTA upward
+            padding: const EdgeInsets.only(bottom: 40), // 👈 moves CTA upward
             child: (item.resources.length > 1
                 ? RelatedImagesRow(resources: item.resources)
                 : _BottomCTA(
