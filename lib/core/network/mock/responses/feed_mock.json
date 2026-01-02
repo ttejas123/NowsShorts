@@ -110,7 +110,7 @@
       "is_featured": false,
       "engagement_score": 6.2,
       "html": "",
-      "layout": "photoDominant",
+      "layout": "standardCard",
       "web_url": "",
       "author": {
         "id": 2,
@@ -182,7 +182,7 @@
       "is_featured": false,
       "engagement_score": 9.1,
       "html": "",
-      "layout": "gallery",
+      "layout": "standardCard",
       "web_url": "",
       "author": {
         "id": 3,
@@ -346,7 +346,7 @@
       "is_featured": false,
       "engagement_score": 8.9,
       "html": "",
-      "layout": "photoDominant",
+      "layout": "standardCard",
       "web_url": "",
       "author": {
         "id": 5,
@@ -490,7 +490,7 @@
       "is_featured": false,
       "engagement_score": 7.6,
       "html": "",
-      "layout": "browserCard",
+      "layout": "standardCard",
       "web_url": "https://example.com/ev-launch",
       "author": {
         "id": 7,
@@ -562,7 +562,7 @@
       "is_featured": true,
       "engagement_score": 8.1,
       "html": "",
-      "layout": "story",
+      "layout": "standardCard",
       "web_url": "",
       "author": {
         "id": 8,
@@ -654,7 +654,7 @@
       "is_featured": false,
       "engagement_score": 6.9,
       "html": "",
-      "layout": "photoDominant",
+      "layout": "standardCard",
       "web_url": "",
       "author": {
         "id": 9,
@@ -808,7 +808,7 @@
       "is_featured": true,
       "engagement_score": 9.3,
       "html": "",
-      "layout": "story",
+      "layout": "standardCard",
       "web_url": "",
       "author": {
         "id": 11,

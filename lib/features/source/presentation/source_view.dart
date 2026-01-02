@@ -10,13 +10,19 @@ class SourceView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final currentFeedItem = ref.watch(currentFeedItemProvider);
     if (currentFeedItem == null) {
-      return const Center(
-        child: Text("No source available"),
-      );
-    } 
+      return const Center(child: Text("No source available"));
+    }
 
-    return AdvancedWebView(
-            initialUrl: currentFeedItem.source.website,
-      );
+    // TODO: I just want to show devices battery percentage in the app bar so nothing else need not even padding
+    return Scaffold(
+      body: SafeArea(
+        top: true,
+        bottom: false,
+        child: AdvancedWebView(
+          initialUrl: currentFeedItem.source.website,
+          showAppBar: false,
+        ),
+      ),
+    );
   }
 }

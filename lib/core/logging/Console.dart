@@ -1,6 +1,11 @@
+library console;
+
 import 'dart:convert';
 import 'dart:developer' as developer;
 import 'package:flutter/foundation.dart';
+
+/// JS-like global console object
+final console = _Console();
 
 /// Converts any object into JSON-safe structure
 dynamic toEncodable(dynamic value, {Set<Object>? visited}) {
@@ -67,7 +72,7 @@ class LogColors {
 }
 
 class DevLog {
-  static LogEntry log(dynamic? message, {LogType type = LogType.log}) {
+  static LogEntry log(dynamic message, {LogType type = LogType.log}) {
     String colorizeMultiline(String text, String color) {
       const reset = '\x1B[0m';
 
@@ -123,20 +128,20 @@ class LogEntry {
   }
 }
 
-class Console {
-  static void log(dynamic? msg) {
+class _Console {
+  void log(dynamic msg) {
     DevLog.log(msg, type: LogType.log);
   }
 
-  static void info(dynamic? msg) => DevLog.log(msg, type: LogType.info);
+  void info(dynamic msg) => DevLog.log(msg, type: LogType.info);
 
-  static void warn(dynamic? msg) => DevLog.log(msg, type: LogType.warn);
+  void warn(dynamic msg) => DevLog.log(msg, type: LogType.warn);
 
-  static void error(dynamic? msg) => DevLog.log(msg, type: LogType.error);
+  void error(dynamic msg) => DevLog.log(msg, type: LogType.error);
 
-  static void success(dynamic? msg) => DevLog.log(msg, type: LogType.success);
+  void success(dynamic msg) => DevLog.log(msg, type: LogType.success);
 
-  static void debug(dynamic? msg) => DevLog.log(msg, type: LogType.debug);
+  void debug(dynamic msg) => DevLog.log(msg, type: LogType.debug);
 }
 
 String _callerFileLine() {
@@ -144,26 +149,6 @@ String _callerFileLine() {
   final line = lines.length > 4 ? lines[4].trim() : 'unknown';
   final match = RegExp(r'(\w+\.dart:\d+)').firstMatch(line);
   return match?.group(0) ?? 'unknown';
-}
-
-StackTrace _callerOnlyStack() {
-  final lines = StackTrace.current.toString().split('\n');
-  final callerFrame = lines.length > 2 ? lines[2] : lines.last;
-
-  return StackTrace.fromString(callerFrame);
-}
-
-StackTrace _singleFrameStack({int skip = 2}) {
-  final lines = StackTrace.current.toString().split('\n');
-  final caller = lines.length > skip ? lines[skip] : lines.last;
-
-  return StackTrace.fromString(caller);
-}
-
-StackTrace _extractCallerStack({int skip = 3}) {
-  final frames = StackTrace.current.toString().split('\n');
-  final caller = frames.length > skip ? frames[skip] : frames.last;
-  return StackTrace.fromString('#0 $caller');
 }
 
 String? extractPathFromStackTrace({StackTrace? stackTrace, int index = 4}) {

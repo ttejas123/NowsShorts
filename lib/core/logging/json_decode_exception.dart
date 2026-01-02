@@ -56,9 +56,6 @@ T safeFromJson<T>(dynamic json, JsonFactory<T> factory, String dtoName) {
   try {
     return factory(json as Map<String, dynamic>);
   } catch (e, s) {
-    Console.log(
-      JsonDecodeException(dtoName: dtoName, error: e, stack: s, json: json),
-    );
     throw JsonDecodeException(dtoName: dtoName, error: e, stack: s, json: json);
   }
 }

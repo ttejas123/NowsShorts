@@ -25,7 +25,6 @@ class DeepLinkHandler {
     // App already running
     uriLinkStream.listen((uri) {
       if (uri != null) {
-        Console.log("uri ---> $uri");
         handle(context, uri);
       }
     });

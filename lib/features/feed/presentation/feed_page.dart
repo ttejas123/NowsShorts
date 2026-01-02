@@ -50,7 +50,6 @@ class _FeedPageState extends ConsumerState<FeedPage> {
     }
   }
 
-
   @override
   void dispose() {
     _scrollController.dispose();
@@ -61,7 +60,9 @@ class _FeedPageState extends ConsumerState<FeedPage> {
   Widget build(BuildContext context) {
     final adsRuntime = ref.watch(adsRuntimeProvider);
     final state = ref.watch(feedControllerProvider);
-    final bottomNavigationController = ref.read(bottomNavIndexProvider.notifier);
+    final bottomNavigationController = ref.read(
+      bottomNavIndexProvider.notifier,
+    );
     final theme = Theme.of(context);
     final colors = theme.colorScheme;
     final textTheme = theme.textTheme;
@@ -86,70 +87,115 @@ class _FeedPageState extends ConsumerState<FeedPage> {
     }
 
     return Scaffold(
-      extendBodyBehindAppBar: true, // 👈 let body draw behind appbar
-      appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.settings),
-          onPressed: () {
-            bottomNavigationController.state = 0;
-          },
-          color: Colors.grey,
-        ),
-        backgroundColor:
-            Colors.transparent, // 👈 transparent background (no solid bar)
-        elevation: 0,
-        scrolledUnderElevation: 0,
-        surfaceTintColor: Theme.of(context).scaffoldBackgroundColor,
-        title: Text('My Feed', style: textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w700, fontSize: 18)),
-        centerTitle: true,
-        actions: [
-          IconButton(
-            icon: Icon(Icons.search),
-            onPressed: () => context.push('/search'),
-            color: Colors.grey,
+      extendBodyBehindAppBar: true,
+      body: Stack(
+        children: [
+          /// 🔹 FEED (Scrollable)
+          SafeArea(
+            top: true, // respects status bar
+            bottom: false,
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                final itemHeight = constraints.maxHeight;
+
+                return ListView.builder(
+                  controller: _scrollController,
+                  physics: const PageScrollPhysics(),
+                  padding: EdgeInsets.zero,
+                  itemExtent: itemHeight,
+                  cacheExtent: itemHeight * 1.5,
+                  itemCount: state.items.length + (state.isLoadingMore ? 1 : 0),
+                  itemBuilder: (context, index) {
+                    if (index == state.items.length - 2 &&
+                        state.isLoadingMore) {
+                      return const Center(child: CircularProgressIndicator());
+                    }
+
+                    if (index >= state.items.length) {
+                      return const SizedBox.shrink();
+                    }
+
+                    final item = state.items[index];
+
+                    if (item.provider.type == ItemType.Advertisement) {
+                      return AdSlotWidget(
+                        meta: item,
+                        runtime: adsRuntime,
+                        fallback: FeedCard(item: item),
+                      );
+                    }
+
+                    return FeedCard(item: item);
+                  },
+                );
+              },
+            ),
+          ),
+
+          /// 🔹 FLOATING TOP CONTROLS (Overlay)
+          _FeedTopOverlay(
+            onSettingsTap: () {
+              bottomNavigationController.state = 0;
+            },
+            onSearchTap: () {
+              context.push('/search');
+            },
           ),
         ],
       ),
-      body: SafeArea(
-        top: false, // 👈 we’re already handling via AppBar
-        child: LayoutBuilder(
-          builder: (context, constraints) {
-            final itemHeight = constraints.maxHeight; // visible viewport height
+    );
+  }
+}
 
-            return ListView.builder(
-              controller: _scrollController,
-              physics: const PageScrollPhysics(), // snap like PageView
-              padding: EdgeInsets.zero,
-              itemExtent: itemHeight,
-              // how many items to keep offscreen (tune this for memory)
-              cacheExtent: itemHeight * 1.5, // roughly next + previous
-              itemCount: state.items.length + (state.isLoadingMore ? 1 : 0),
-              itemBuilder: (context, index) {
-                // Show loading indicator at end while loading more
-                if (index == state.items.length - 2 && state.isLoadingMore) {
-                  return const Center(child: CircularProgressIndicator());
-                }
+class _FeedTopOverlay extends StatelessWidget {
+  final VoidCallback onSettingsTap;
+  final VoidCallback onSearchTap;
 
-                if (index >= state.items.length) {
-                  return const SizedBox.shrink();
-                }
+  const _FeedTopOverlay({
+    required this.onSettingsTap,
+    required this.onSearchTap,
+  });
 
-                final item = state.items[index];
+  @override
+  Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
 
-                // Advertisement
-                if (item.provider.type == ItemType.Advertisement) {
-                  return AdSlotWidget(
-                    meta: item,
-                    runtime: adsRuntime,
-                    fallback: FeedCard(item: item),
-                  );
-                }
+    return SafeArea(
+      top: true, // 👈 keeps buttons BELOW status bar
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+        child: Row(
+          children: [
+            _OverlayButton(icon: Icons.settings, onTap: onSettingsTap),
+            const Spacer(),
+            _OverlayButton(icon: Icons.search, onTap: onSearchTap),
+          ],
+        ),
+      ),
+    );
+  }
+}
 
-                // News
-                return FeedCard(item: item);
-              },
-            );
-          },
+class _OverlayButton extends StatelessWidget {
+  final IconData icon;
+  final VoidCallback onTap;
+
+  const _OverlayButton({required this.icon, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
+
+    return Material(
+      color: colors.surface.withOpacity(0.7),
+      borderRadius: BorderRadius.circular(20),
+      elevation: 4,
+      child: InkWell(
+        borderRadius: BorderRadius.circular(20),
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: Icon(icon, size: 22, color: colors.onSurface),
         ),
       ),
     );

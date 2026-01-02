@@ -27,15 +27,15 @@ class _AppState extends ConsumerState<App> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    DeepLinkHandler.init(context);
+  }
+
+  @override
   Widget build(BuildContext context) {
     final router = buildRouter(ref);
     final themeController = ref.watch(themeControllerProvider);
-
-    @override
-    void didChangeDependencies() {
-      super.didChangeDependencies();
-      DeepLinkHandler.init(context);
-    }
 
     return MaterialApp.router(
       title: 'BL News',

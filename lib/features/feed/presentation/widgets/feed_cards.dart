@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:bl_inshort/data/dto/feed/feed_dto.dart';
 import 'package:bl_inshort/data/models/feeds/feed_entity.dart';
 import 'package:bl_inshort/data/models/feeds/resource_entity.dart';
@@ -279,16 +281,12 @@ class _GalleryCardState extends State<_GalleryCard> {
                   children: [
                     Text(
                       widget.item.source.name.toUpperCase(),
-                      style: Theme.of(
-                        context,
-                      ).textTheme.labelSmall,
+                      style: Theme.of(context).textTheme.labelSmall,
                     ),
                     const SizedBox(height: 8),
                     Text(
                       widget.item.title,
-                      style: Theme.of(
-                        context,
-                      ).textTheme.titleLarge,
+                      style: Theme.of(context).textTheme.titleLarge,
                     ),
                   ],
                 ),
@@ -742,13 +740,9 @@ class StandardVisualCard extends StatelessWidget {
 
   const StandardVisualCard({super.key, required this.item});
 
-  void shareLink(String url) {
-    Share.share(
-      url,
-      subject: 'Check this out', // optional
-    );
+  void _shareLink() {
+    Share.share('blinshort://feed/${item.slug}', subject: item.title);
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -756,43 +750,35 @@ class StandardVisualCard extends StatelessWidget {
     final colors = theme.colorScheme;
     final textTheme = theme.textTheme;
     final isDark = theme.brightness == Brightness.dark;
+
+    const double contentHeight = 440;
+    const double floatingOffset = -4;
+
     return Container(
-      // margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
       height: 560,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(0),
-        color: colors.surface,
-      ),
-      clipBehavior: Clip.antiAlias,
+      color: colors.surface,
       child: Column(
         children: [
-          // IMAGE + CONTENT
+          /// IMAGE + OVERLAYS
           Expanded(
             child: Stack(
+              clipBehavior: Clip.none,
               children: [
-                // Images (2 split)
-                Row(
-                  children: [
-                    Expanded(
-                      child: CachedNetworkImage(
-                        imageUrl: item.resources.isNotEmpty
-                            ? item.resources[0].url
-                            : "",
-                        fit: BoxFit.cover,
-                        height: 400,
-                        placeholder: (_, __) => Container(
-                          width: 400,
-                          height: 400,
-                          color: Colors.grey.shade300,
-                        ),
-                        errorWidget: (_, __, ___) =>
-                            Icon(Icons.image_not_supported),
-                      ),
-                    ),
-                  ],
+                /// Image
+                Positioned.fill(
+                  child: CachedNetworkImage(
+                    imageUrl: item.resources.isNotEmpty
+                        ? item.resources.first.url
+                        : '',
+                    fit: BoxFit.cover,
+                    placeholder: (_, __) =>
+                        Container(color: Colors.grey.shade300),
+                    errorWidget: (_, __, ___) =>
+                        const Icon(Icons.image_not_supported),
+                  ),
                 ),
 
-                // Dark gradient overlay
+                /// Gradient fade
                 Positioned.fill(
                   child: Container(
                     decoration: BoxDecoration(
@@ -801,193 +787,222 @@ class StandardVisualCard extends StatelessWidget {
                         end: Alignment.bottomCenter,
                         colors: [
                           Colors.transparent,
-                            colors.surface.withOpacity(isDark ? 0.9 : 0.6),
-                            colors.surface,
+                          colors.surface.withOpacity(isDark ? 0.85 : 0.65),
+                          colors.surface,
                         ],
                       ),
                     ),
                   ),
                 ),
 
-                // Content
+                /// CONTENT
                 Positioned(
                   left: 0,
                   right: 0,
-                  bottom: 0,
-                  height: 360,
+                  bottom: 20,
+                  height: contentHeight,
                   child: Container(
-                    padding: const EdgeInsets.fromLTRB(16, 14, 16, 16),
-                    color: colors.surface, // 🔥 SOLID BLACK BACKGROUND
+                    padding: const EdgeInsets.fromLTRB(16, 20, 16, 16),
+                    color: colors.surface,
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // 🔹 Top row: badges
-                        Row(
-                          children: [
-                            Container(
-                              decoration: BoxDecoration(
-                                color: colors.surface.withOpacity(0.85),
-                                borderRadius: BorderRadius.circular(16),
-                              ),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  const Icon(
-                                    Icons.fiber_new_sharp,
-                                    size: 12,
-                                    color: Colors.blueAccent,
-                                  ),
-                                  const SizedBox(width: 6),
-                                  Text(
-                                    "yalla news",
-                                    style: textTheme.displaySmall?.copyWith(
-                                      // color: Colors.white,
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            const Spacer(),
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 10,
-                                vertical: 4,
-                              ),
-                              decoration: BoxDecoration(
-                                // ignore: deprecated_member_use
-                                color: colors.surface.withOpacity(0.85),
-                                borderRadius: BorderRadius.circular(16),
-                              ),
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    Icons.bookmark_border,
-                                    color: colors.onSurfaceVariant,
-                                    size: 16,
-                                  ),
-                                  SizedBox(width: 12),
-                                  InkWell(
-                                    onTap: () {
-                                      shareLink(
-                                        'https://yourapp.com/news/robbery-brazen?id=123',
-                                      );
-                                    },
-                                    child: Icon(
-                                      Icons.share,
-                                      color: colors.onSurfaceVariant,
-                                      size: 16,
-                                    ),
-                                  ),
-                                  
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-
-                        const SizedBox(height: 14),
-
-                        // 🔹 Title
+                        /// Title
                         Text(
                           item.title,
                           maxLines: 3,
                           overflow: TextOverflow.ellipsis,
-                          style: textTheme.displayMedium?.copyWith(
-                            // color: Colors.white,
-                            fontSize: 18,
+                          style: textTheme.titleLarge?.copyWith(
                             fontWeight: FontWeight.w600,
-                            height: 1.25, 
+                            height: 1.25,
                           ),
                         ),
 
                         const SizedBox(height: 10),
 
-                        // 🔹 Body
+                        /// Description
                         Text(
                           item.description,
                           maxLines: 6,
                           overflow: TextOverflow.ellipsis,
-                          style: textTheme.displaySmall?.copyWith(
-                            // color: Colors.white70,
-                            fontSize: 14.5,
-                            height: 1.45,
-                          ),
+                          style: textTheme.bodyMedium?.copyWith(height: 1.45),
                         ),
 
                         const SizedBox(height: 10),
 
-                        // 🔹 Meta
+                        /// Meta
                         Text(
-                          "${item.publishedAt.toUtc().toLocal().toString().split(' ')[0]} | ${item.source.name} | ${item.author.name}",
-                          style: textTheme.displayMedium?.copyWith(
-                            color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
-                            fontSize: 12
-                            
-                            ),
+                          '${item.source.name} • ${item.author.name}',
+                          style: textTheme.bodySmall?.copyWith(
+                            color: colors.onSurface.withOpacity(0.7),
+                          ),
                         ),
                       ],
                     ),
                   ),
                 ),
+
+                /// 🔥 FLOATING ACTION ROW
+                Positioned(
+                  left: 16,
+                  right: 16,
+                  bottom: contentHeight - floatingOffset,
+                  child: _FloatingActionRow(onShare: _shareLink),
+                ),
               ],
             ),
           ),
 
-          // Bottom CTA strip
-          Column(
-            children: [
-              // const SizedBox(height: 8),
-              item.resources.isNotEmpty && item.resources.length > 1
-                  ? RelatedImagesRow(resources: item.resources)
-                  : Container(
-                      height: 56,
-                      alignment: Alignment.centerLeft,
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomRight,
-                          colors: isDark
-                          ? [
-                              Color.fromARGB(255, 40, 33, 48),
-                              Color(0xFF2E3440),
-                              Color(0xFF1B1F27),
-                            ]
-                          : [
-                              Color(0xFFF3F4F7),
-                              Color(0xFFE6E8ED),
-                              Color(0xFFD9DDE6),
-                            ],
-                        ),
-                      ),
-                      child: GestureDetector(
-                                onTap: () async {
-                                  final uri = Uri.parse(
-                                    'https://example.com/robbery-details',
-                                  );
-
-                                  if (await canLaunchUrl(uri)) {
-                                    await launchUrl(
-                                      uri,
-                                      mode: LaunchMode.externalApplication, // opens browser
-                                    );
-                                  }
-                                },
-                                child: Text(
-                                  "Know there current evaluation in NSE/BSE \nTap to know what more they said",
-                                  style: textTheme.titleLarge?.copyWith(
-                                    fontSize: 13,
-                                    height: 1.4,
-                                    // decoration: TextDecoration.underline, // optional UX hint
-                                  ),
-                                ),
-                              ),
-                    ),
-            ],
+          /// BOTTOM CTA
+          Padding(
+            padding: const EdgeInsets.only(bottom: 20), // 👈 moves CTA upward
+            child: (item.resources.length > 1
+                ? RelatedImagesRow(resources: item.resources)
+                : _BottomCTA(
+                    isDark: isDark,
+                    onTap: () async {
+                      final uri = Uri.parse(item.source.website);
+                      if (await canLaunchUrl(uri)) {
+                        launchUrl(uri, mode: LaunchMode.externalApplication);
+                      }
+                    },
+                  )),
           ),
         ],
+      ),
+    );
+  }
+}
+
+/// ─────────────────────────────────────────────
+/// FLOATING ROW
+/// ─────────────────────────────────────────────
+
+class _FloatingActionRow extends StatelessWidget {
+  final VoidCallback onShare;
+
+  const _FloatingActionRow({required this.onShare});
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
+
+    return Row(
+      children: [
+        _GlassPill(
+          child: Row(
+            children: [
+              const Icon(
+                Icons.fiber_new_sharp,
+                size: 12,
+                color: Colors.blueAccent,
+              ),
+              const SizedBox(width: 6),
+              Text(
+                'Yalla News',
+                style: Theme.of(
+                  context,
+                ).textTheme.labelSmall?.copyWith(fontWeight: FontWeight.w600),
+              ),
+            ],
+          ),
+        ),
+        const Spacer(),
+        _GlassPill(
+          child: Row(
+            children: [
+              Icon(
+                Icons.bookmark_border,
+                color: colors.onSurfaceVariant,
+                size: 16,
+              ),
+              const SizedBox(width: 14),
+              InkWell(
+                onTap: onShare,
+                child: Icon(
+                  Icons.share,
+                  color: colors.onSurfaceVariant,
+                  size: 16,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+/// ─────────────────────────────────────────────
+/// GLASS PILL
+/// ─────────────────────────────────────────────
+
+class _GlassPill extends StatelessWidget {
+  final Widget child;
+
+  const _GlassPill({required this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
+
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(18),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+          decoration: BoxDecoration(
+            color: colors.surface.withOpacity(0.7),
+            borderRadius: BorderRadius.circular(18),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.15),
+                blurRadius: 10,
+                offset: const Offset(0, 4),
+              ),
+            ],
+          ),
+          child: child,
+        ),
+      ),
+    );
+  }
+}
+
+/// ─────────────────────────────────────────────
+/// BOTTOM CTA
+/// ─────────────────────────────────────────────
+
+class _BottomCTA extends StatelessWidget {
+  final bool isDark;
+  final VoidCallback onTap;
+
+  const _BottomCTA({required this.isDark, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        height: 56,
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        alignment: Alignment.centerLeft,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomRight,
+            colors: isDark
+                ? const [Color(0xFF2E3440), Color(0xFF1B1F27)]
+                : const [Color(0xFFF3F4F7), Color(0xFFE6E8ED)],
+          ),
+        ),
+        child: Text(
+          'Tap to know more',
+          style: textTheme.titleSmall?.copyWith(height: 1.4),
+        ),
       ),
     );
   }
