@@ -1,6 +1,7 @@
 import 'package:bl_inshort/core/ads/ads_providers.dart';
 import 'package:bl_inshort/core/ads/presentation/ad_slot_widget.dart';
 import 'package:bl_inshort/data/dto/feed/feed_dto.dart';
+import 'package:bl_inshort/features/shell/navigation_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:bl_inshort/features/feed/providers.dart';
@@ -44,6 +45,7 @@ class _FeedPageState extends ConsumerState<FeedPage> {
   Widget build(BuildContext context) {
     final adsRuntime = ref.watch(adsRuntimeProvider);
     final state = ref.watch(feedControllerProvider);
+    final bottomNavigationController = ref.read(bottomNavIndexProvider.notifier);
     final theme = Theme.of(context);
     final colors = theme.colorScheme;
     final textTheme = theme.textTheme;
@@ -71,9 +73,11 @@ class _FeedPageState extends ConsumerState<FeedPage> {
       extendBodyBehindAppBar: true, // 👈 let body draw behind appbar
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () => context.pop(),
-          color: colors.onSurfaceVariant,
+          icon: Icon(Icons.settings),
+          onPressed: () {
+            bottomNavigationController.state = 0;
+          },
+          color: Colors.grey,
         ),
         backgroundColor:
             Colors.transparent, // 👈 transparent background (no solid bar)
@@ -82,6 +86,13 @@ class _FeedPageState extends ConsumerState<FeedPage> {
         surfaceTintColor: Theme.of(context).scaffoldBackgroundColor,
         title: Text('My Feed', style: textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w700, fontSize: 18)),
         centerTitle: true,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () => context.push('/search'),
+            color: Colors.grey,
+          ),
+        ],
       ),
       body: SafeArea(
         top: false, // 👈 we’re already handling via AppBar

@@ -1,14 +1,13 @@
-import 'package:bl_inshort/core/logging/Console.dart';
-import 'package:bl_inshort/data/models/feeds/language_entity.dart';
 import 'package:bl_inshort/features/discover/presentation/discover_page.dart';
 import 'package:bl_inshort/features/feed/presentation/feed_page.dart';
 import 'package:bl_inshort/features/feedback/presentation/feedback_page.dart';
 import 'package:bl_inshort/features/feedback/presentation/widgets/feed_feedback_page.dart';
+import 'package:bl_inshort/features/notifications/presentation/notifications_page.dart';
 import 'package:bl_inshort/features/onboarding/presentation/language_selection_screen.dart';
-import 'package:bl_inshort/features/onboarding/presentation/region_selection_screen.dart';
 import 'package:bl_inshort/features/preferences/presentation/preferences_page.dart';
 import 'package:bl_inshort/features/settings/presentation/settings_page.dart';
 import 'package:bl_inshort/features/settings/provider.dart';
+import 'package:bl_inshort/features/webview/presentation/webview_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -22,10 +21,6 @@ GoRouter buildRouter(WidgetRef ref) {
       GoRoute(
         path: '/',
         builder: (context, state) {
-          Console.log(
-            "settings init=${settings.isInitialized}, lang=${settings.selectedLanguage}, regions=${settings.selectedRegions}",
-          );
-
           // 🔄 Still loading → show splash / loader
           if (!settings.isInitialized) {
             return const SizedBox(); // or SplashScreen
@@ -46,9 +41,7 @@ GoRouter buildRouter(WidgetRef ref) {
       ),
       GoRoute(
         path: '/notifications',
-        builder: (context, state) => RegionSelectionScreen(
-          language: LanguageEntity(id: 1, name: 'English', code: 'en'),
-        ),
+        builder: (context, state) => NotificationsPage(),
       ),
       GoRoute(
         path: '/settings',
@@ -65,7 +58,7 @@ GoRouter buildRouter(WidgetRef ref) {
       ),
       GoRoute(path: '/feed', builder: (_, _) => const FeedPage()),
       GoRoute(path: '/search', builder: (_, _) => const SearchPage()),
-
+ 
       // later: add story/detail routes here
       // GoRoute(
       //   path: '/story/:id',

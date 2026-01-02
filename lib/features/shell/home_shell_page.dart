@@ -1,9 +1,9 @@
 import 'package:bl_inshort/features/profile/presentation/profile_page.dart';
+import 'package:bl_inshort/features/settings/presentation/settings_page.dart';
+import 'package:bl_inshort/features/source/presentation/source_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import 'navigation_providers.dart';
-import 'package:bl_inshort/features/discover/presentation/discover_page.dart';
 import 'package:bl_inshort/features/feed/presentation/feed_page.dart';
 
 class HomeShellPage extends ConsumerStatefulWidget {
@@ -31,50 +31,30 @@ class _HomeShellPageState extends ConsumerState<HomeShellPage> {
 
   @override
   Widget build(BuildContext context) {
-    final currentIndex = ref.watch(bottomNavIndexProvider);
     final controller = ref.read(bottomNavIndexProvider.notifier);
+
+    // ✅ LISTEN HERE (correct place)
+    ref.listen<int>(bottomNavIndexProvider, (previous, next) {
+      if (_pageController.hasClients &&
+          _pageController.page?.round() != next) {
+        _pageController.animateToPage(
+          next,
+          duration: const Duration(milliseconds: 250),
+          curve: Curves.easeOut,
+        );
+      }
+    });
 
     return Scaffold(
       body: PageView(
         controller: _pageController,
-        physics: const NeverScrollableScrollPhysics(), // 👈 disables swipe
         onPageChanged: (index) {
-          // update bottom nav when user swipes
           controller.state = index;
         },
         children: const [
-          DiscoverPage(),
+          SettingsPage(),
           FeedPage(),
-          ProfilePage(),
-        ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: currentIndex,
-        type: BottomNavigationBarType.fixed,
-        onTap: (index) {
-          controller.state = index;
-          _pageController.animateToPage(
-            index,
-            duration: const Duration(milliseconds: 250),
-            curve: Curves.easeOut,
-          );
-        },
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined),
-            activeIcon: Icon(Icons.home, color: Colors.blue),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.article_outlined),
-            activeIcon: Icon(Icons.article, color: Colors.blue),
-            label: 'Feed',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person_outline),
-            activeIcon: Icon(Icons.person, color: Colors.blue),
-            label: 'Profile',
-          ),
+          SourceView(),
         ],
       ),
     );
