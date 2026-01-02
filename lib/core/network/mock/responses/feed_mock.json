@@ -29,7 +29,7 @@
       "source": {
         "id": 1,
         "name": "Business Daily",
-        "website": ""
+        "website": "https://timesofindia.indiatimes.com/city/mumbai/maha-govt-announces-incentives-new-policy-to-promote-gems-jewellery-industry/articleshow/125279549.cms#:~:text=In%20a%20Govt%20Resolution%20(GR,estimated%20at%20Rs%2012%2C184%20crore."
       },
       "category": {
         "id": 1,
@@ -121,7 +121,7 @@
       "source": {
         "id": 2,
         "name": "City News",
-        "website": ""
+        "website": "https://timesofindia.indiatimes.com/india/mumbai-rains-heavy-showers-flood-roads-railway-tracks-bring-city-to-standstill-video/articleshow/123362740.cms"
       },
       "category": {
         "id": 2,
@@ -193,7 +193,7 @@
       "source": {
         "id": 3,
         "name": "Space Today",
-        "website": ""
+        "website": "https://www.bbc.com/news/articles/cn8vk373gd5o"
       },
       "category": {
         "id": 3,
@@ -285,7 +285,7 @@
       "source": {
         "id": 4,
         "name": "TechWire",
-        "website": ""
+        "website": "https://finance.yahoo.com/news/automation-software-stocks-q3-teardown-033700202.html?guccounter=1&guce_referrer=aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS8&guce_referrer_sig=AQAAAAR2O8U-5FbeIqZHPLivpIgMrosU6Qm2yXhv1fhW75Rc_K2yQy5Q4kAr2-8g8j9iFIXAVWwE-6kMZItqf4Tn11JXiML5rDpEYQpsSiO7qcC8twuJPS5_i2ZrcyfNiNobNp7regwahAni3N3VQLoauSp80ar4QN3lIZWCf0F-zYMY"
       },
       "category": {
         "id": 4,
@@ -357,7 +357,7 @@
       "source": {
         "id": 5,
         "name": "Sports Arena",
-        "website": ""
+        "website": "https://www.newindianexpress.com/health/2025/Nov/13/diabetes-surges-among-young-indians-need-for-early-screening-experts"
       },
       "category": {
         "id": 5,
@@ -429,7 +429,7 @@
       "source": {
         "id": 6,
         "name": "HealthLine",
-        "website": ""
+        "website": "https://www.newindianexpress.com/health/2025/Nov/13/diabetes-surges-among-young-indians-need-for-early-screening-experts"
       },
       "category": {
         "id": 6,
@@ -501,7 +501,7 @@
       "source": {
         "id": 7,
         "name": "AutoWorld",
-        "website": ""
+        "website": "https://timesofindia.indiatimes.com/auto/cars/mahindra-xev-9s-jack-of-all-trades-for-the-electric-age/articleshow/126228958.cms"
       },
       "category": {
         "id": 7,
@@ -573,7 +573,7 @@
       "source": {
         "id": 8,
         "name": "National Herald",
-        "website": ""
+        "website": "https://www.news18.com/politics/media-blackout-after-campaign-ends-maharashtra-state-election-commission-on-jan-15-civic-polls-9790995.html"
       },
       "category": {
         "id": 8,

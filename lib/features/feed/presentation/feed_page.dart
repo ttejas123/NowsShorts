@@ -22,18 +22,34 @@ class _FeedPageState extends ConsumerState<FeedPage> {
   void initState() {
     super.initState();
     // Load initial batch
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
       ref.read(feedControllerProvider.notifier).loadInitial();
+
+      // 🔥 restore position
+      final index = ref.read(currentFeedIndexProvider);
+      if (_scrollController.hasClients) {
+        final viewportHeight = _scrollController.position.viewportDimension;
+        _scrollController.jumpTo(index * viewportHeight);
+      }
     });
 
     // Infinite scroll trigger (we’ll keep this, but it now works with snapping too)
-    _scrollController.addListener(() {
-      final position = _scrollController.position;
-      if (position.pixels >= position.maxScrollExtent - 200) {
-        ref.read(feedControllerProvider.notifier).loadMore();
-      }
-    });
+    _scrollController.addListener(_onScroll);
   }
+
+  void _onScroll() {
+    final position = _scrollController.position;
+    final viewportHeight = position.viewportDimension;
+    if (viewportHeight == 0) return;
+
+    final index = (position.pixels / viewportHeight).round();
+    ref.read(currentFeedIndexProvider.notifier).state = index;
+
+    if (position.pixels >= position.maxScrollExtent - 200) {
+      ref.read(feedControllerProvider.notifier).loadMore();
+    }
+  }
+
 
   @override
   void dispose() {

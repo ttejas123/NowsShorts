@@ -1,13 +1,22 @@
+import 'package:bl_inshort/features/feed/providers.dart';
 import 'package:bl_inshort/features/webview/presentation/webview_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class SourceView extends StatelessWidget {
+class SourceView extends ConsumerWidget {
   const SourceView({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final currentFeedItem = ref.watch(currentFeedItemProvider);
+    if (currentFeedItem == null) {
+      return const Center(
+        child: Text("No source available"),
+      );
+    } 
+
     return AdvancedWebView(
-            initialUrl: "https://www.google.com",
+            initialUrl: currentFeedItem.source.website,
       );
   }
 }
