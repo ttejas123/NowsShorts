@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 
-enum AppThemeMode {
-  system,
-  light,
-  dark,
-}
+enum AppThemeMode { system, light, dark }
 
 ThemeMode toThemeMode(AppThemeMode mode) {
   switch (mode) {

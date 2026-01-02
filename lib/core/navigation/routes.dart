@@ -5,7 +5,6 @@ import 'package:bl_inshort/features/feed/presentation/feed_page.dart';
 import 'package:bl_inshort/features/feedback/presentation/feedback_page.dart';
 import 'package:bl_inshort/features/feedback/presentation/widgets/feed_feedback_page.dart';
 import 'package:bl_inshort/features/onboarding/presentation/language_selection_screen.dart';
-import 'package:bl_inshort/features/notifications/presentation/notifications_page.dart';
 import 'package:bl_inshort/features/onboarding/presentation/region_selection_screen.dart';
 import 'package:bl_inshort/features/preferences/presentation/preferences_page.dart';
 import 'package:bl_inshort/features/settings/presentation/settings_page.dart';
@@ -35,10 +34,7 @@ GoRouter buildRouter(WidgetRef ref) {
           // ✅ Onboarded
           if (settings.selectedLanguage != null &&
               settings.selectedRegions.isNotEmpty) {
-            // return const HomeShellPage();
-            return RegionSelectionScreen(
-              language: LanguageEntity(id: 1, name: 'English', code: 'en'),
-            );
+            return const HomeShellPage();
           }
 
           return const LanguageSelectionScreen();
